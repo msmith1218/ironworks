@@ -1,0 +1,55 @@
+.headers {
+    display: flex;
+  
+    li {
+      list-style-type: none;
+      padding: 7px 5;
+
+      border: 1px solid;
+      border-right: none;
+      border-color: grey;
+      cursor: pointer;
+      margin-bottom: -1px;
+      .count {
+        margin-left: 10px;
+        height: 22px;
+        width: 22px;
+        background-color: blue;
+        border-radius: 100px;
+        display: inline-block;
+        text-align: center;
+        color: white;
+        line-height: 22px;
+      }
+    }
+  
+    li:first-child {
+      border-radius: 5 0 0;
+    }
+  
+    li:last-child {
+      border-right: 1px solid;
+      border-color:grey;
+      border-radius: 0 5 0 0;
+    }
+  
+    .header {
+      background-color:grey;
+      color: grey;
+    }
+  
+    .active {
+      background-color: white;
+      color: green;
+      border-bottom: none;
+      cursor: default;
+    }
+  }
+  
+  .panels {
+    background-color: white;
+    border: 1px solid grey;
+    border-radius: 0 5 5;
+    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.2);
+  }
+  
