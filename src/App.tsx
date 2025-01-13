@@ -3,6 +3,8 @@ import styles from "./App.module.scss";
 import { Box, Tab, Tabs } from "@mui/material";
 import { useState } from "react";
 import Income from "./components/income/income";
+import Budget from "./components/budget/budget";
+import Payoff from "./components/payoff/payoff";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -49,6 +51,7 @@ function App() {
               <Tab label="Bills" {...a11yProps(0)} />
               <Tab label="Income" {...a11yProps(1)} />
               <Tab label="Budgets" {...a11yProps(2)} />
+              <Tab label="Payoff Calc" {...a11yProps(3)} />
             </Tabs>
           </Box>
           <CustomTabPanel value={value} index={0}>
@@ -58,7 +61,10 @@ function App() {
             <Income />
           </CustomTabPanel>
           <CustomTabPanel value={value} index={2}>
-            <Bills />
+            <Budget />
+          </CustomTabPanel>
+          <CustomTabPanel value={value} index={3}>
+            <Payoff />
           </CustomTabPanel>
         </Box>
       </div>

@@ -50,6 +50,32 @@
   }
 }
 
+.totalFooter2 {
+  margin-top: 2%;
+
+  float: right;
+  width: 100%;
+  .total {
+    float: right;
+    width: 50%;
+    background-color: rgba(218, 221, 218, 0.815);
+    font-size: large;
+    font-weight: bold;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    vertical-align: center;
+    .totalText {
+      font-size: xx-large;
+    }
+    .totalAmount {
+      max-width: 50%;
+      font-size: xx-large;
+      padding-left: 10px;
+      padding-right: 10px;
+    }
+  }
+}
 .totalFooter {
   margin-top: 2%;
   border-radius: 10px;

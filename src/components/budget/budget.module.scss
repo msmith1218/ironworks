@@ -1,7 +1,11 @@
 .billsHeader {
   padding: 10px;
   //border-bottom: 1px solid #ccc;
+  font-size: large;
+  font-weight: bold;
   display: flex;
+  isplay: flex;
+  flex-direction: column;
 }
 .addIcon {
   width: 100%;
@@ -73,6 +77,8 @@
 }
 
 .billsHeader1 {
+  font-size: large;
+  font-weight: bold;
   display: flex;
   flex-direction: column;
 }
