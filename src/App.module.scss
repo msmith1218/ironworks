@@ -1,8 +1,14 @@
 .app {
   background-color: rgb(255, 255, 255);
-  position: fixed;
-  top: 0;
-  right: 0;
-  height: 100%;
-  width: 100%;
+  ::-webkit-scrollbar {
+    display: none;
+  }
+  .scrollable {
+    ::-webkit-scrollbar {
+      display: none;
+    }
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: 100%;
+  }
 }

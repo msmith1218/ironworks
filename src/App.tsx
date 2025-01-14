@@ -17,6 +17,7 @@ function CustomTabPanel(props: TabPanelProps) {
 
   return (
     <div
+      className={styles.scrollable}
       role="tabpanel"
       hidden={value !== index}
       id={`simple-tabpanel-${index}`}
@@ -46,7 +47,16 @@ function App() {
     <>
       <div className={styles.app}>
         <Box sx={{ width: "100%" }}>
-          <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+          <Box
+            sx={{
+              borderBottom: 1,
+              borderColor: "divider",
+              position: "sticky",
+              top: 0,
+              zIndex: 5,
+              bgcolor: "background.paper",
+            }}
+          >
             <Tabs value={value} onChange={handleChange} aria-label="main tabs">
               <Tab label="Bills" {...a11yProps(0)} />
               <Tab label="Income" {...a11yProps(1)} />
