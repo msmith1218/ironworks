@@ -8,7 +8,7 @@ export default defineConfig({
     sourcemap: true,
     minify: "esbuild",
   },
-  base: "/msmith1218.github.io/",
+  base: "/PersonalFinanceApp/",
   plugins: [react()],
   server: {
     port: 3000,
