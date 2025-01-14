@@ -8,7 +8,7 @@ export default defineConfig({
     sourcemap: true,
     minify: "esbuild",
   },
-  base: "/",
+  base: process.env.NODE_ENV === "production" ? "https://msmith1218.github.io/" : "/",
   plugins: [react()],
   server: {
     port: 3000,
