@@ -102,6 +102,7 @@ const Bills = (): JSX.Element => {
         {bills &&
           bills.map((column, index) => (
             <InputRow
+              key={index}
               index={index}
               column={column}
               rowAmountOnChange={addBillAmount}

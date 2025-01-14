@@ -109,6 +109,7 @@ const Budget = (): JSX.Element => {
           budgetLines.map((column, index) => (
             <InputRow
               index={index}
+              key={index}
               column={column}
               rowAmountOnChange={addBillAmount}
               removeRow={() => removeRow(index)}
