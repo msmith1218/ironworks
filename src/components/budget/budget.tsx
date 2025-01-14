@@ -1,28 +1,34 @@
 import { useEffect, useState } from "react";
-import styles from "./bills.module.scss";
+import styles from "./budget.module.scss";
 import InputRow from "../../common/input-row";
 import Button from "@mui/joy/Button";
 import { Fab, Skeleton, TextField } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
-import { BillModel } from "./bill-model";
 import { useBillsStorage } from "../../common/state-management/bills-storage";
 import currency from "currency.js";
-const Bills = (): JSX.Element => {
-  const bills = useBillsStorage((state) => state.bills);
+import { BillModel } from "../../components/bills/bill-model";
+const Budget = (): JSX.Element => {
+  const incomeLines = useBillsStorage((state) => state.incomeLines);
+  const budgetLines = useBillsStorage((state) => state.budgetLines);
   const setState = useBillsStorage((state) => state.setState);
-
+  const bills = useBillsStorage((state) => state.bills);
   const [inputValue, setInputValue] = useState<string>("");
   const [showInput, setShowInput] = useState<boolean>(false);
-  const [runningTotal, setRunningTotal] = useState<number>(0);
+  const [incomeTotal, setIncomeTotal] = useState<number>(0);
+  const [billsTotal, setBillsTotal] = useState<number>(0);
 
   useEffect(() => {
-    setRunningTotal((bills ?? []).reduce((acc, curr) => acc + (curr.billAmount || 0), 0));
+    setIncomeTotal((incomeLines ?? []).reduce((acc, curr) => acc + (curr.billAmount || 0), 0));
+  }, [incomeLines]);
+
+  useEffect(() => {
+    setBillsTotal((bills ?? []).reduce((acc, curr) => acc + (curr.billAmount || 0), 0));
   }, [bills]);
 
   const addBill = () => {
     if (inputValue.trim() !== "") {
       setState((state) => {
-        state.bills = [...(bills ?? []), { billName: inputValue } as BillModel];
+        state.budgetLines = [...(budgetLines ?? []), { billName: inputValue } as BillModel];
       });
 
       setInputValue("");
@@ -30,18 +36,18 @@ const Bills = (): JSX.Element => {
   };
 
   const addBillAmount = (amount: number, index: number) => {
-    const updatedColumns = bills
-      ? bills.map((column, i) => (i === index ? { ...column, billAmount: amount } : column))
+    const updatedColumns = budgetLines
+      ? budgetLines.map((column, i) => (i === index ? { ...column, billAmount: amount } : column))
       : [{ billAmount: amount } as BillModel];
 
     setState((state) => {
-      state.bills = updatedColumns;
+      state.budgetLines = updatedColumns;
     });
   };
 
   const removeRow = (index: number) => {
     setState((state) => {
-      state.bills = bills.filter((_, i) => i !== index);
+      state.budgetLines = budgetLines.filter((_, i) => i !== index);
     });
   };
 
@@ -69,7 +75,7 @@ const Bills = (): JSX.Element => {
                   value={inputValue}
                   onChange={(e) => setInputValue(e.target.value)}
                   id="standard-basic"
-                  label="Enter Bill Name"
+                  label="Enter Budget Area"
                   variant="standard"
                 />
               </div>
@@ -90,7 +96,7 @@ const Bills = (): JSX.Element => {
       </div>
 
       <div className={styles.grid}>
-        {(!bills || bills.length === 0) && (
+        {(!budgetLines || budgetLines.length === 0) && (
           <Skeleton
             variant="rectangular"
             width={"100%"}
@@ -99,25 +105,34 @@ const Bills = (): JSX.Element => {
           />
         )}
 
-        {bills &&
-          bills.map((column, index) => (
+        {budgetLines &&
+          budgetLines.map((column, index) => (
             <InputRow
-              key={index}
               index={index}
+              key={index}
               column={column}
               rowAmountOnChange={addBillAmount}
               removeRow={() => removeRow(index)}
             />
           ))}
       </div>
-      <div className={styles.totalFooter}>
-        <div className={styles.total}>
-          <div className={styles.totalText}>Total</div>
-          <div className={styles.totalAmount}>{currency(runningTotal).format()}</div>
+      <div className={styles.billsHeader}>
+        <div>Available</div>
+        <div>{currency(incomeTotal).subtract(billsTotal).format()}</div>
+      </div>
+      <div className={styles.billsHeader}>
+        <div>
+          <div>After Budgets</div>
+          <div>
+            {currency(incomeTotal)
+              .subtract(billsTotal)
+              .subtract(budgetLines.reduce((acc, curr) => acc + (curr.billAmount || 0), 0))
+              .format()}
+          </div>
         </div>
       </div>
     </div>
   );
 };
 
-export default Bills;
+export default Budget;
