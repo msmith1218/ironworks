@@ -53,11 +53,18 @@ function App() {
               borderColor: "divider",
               position: "sticky",
               top: 0,
-              zIndex: 5,
+              zIndex: 1000,
               bgcolor: "background.paper",
             }}
           >
-            <Tabs value={value} onChange={handleChange} aria-label="main tabs">
+            <Tabs
+              sx={{
+                bgcolor: "background.paper",
+              }}
+              value={value}
+              onChange={handleChange}
+              aria-label="main tabs"
+            >
               <Tab label="Bills" {...a11yProps(0)} />
               <Tab label="Income" {...a11yProps(1)} />
               <Tab label="Budgets" {...a11yProps(2)} />

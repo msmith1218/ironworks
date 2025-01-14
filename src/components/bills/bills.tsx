@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import styles from "./bills.module.scss";
 import InputRow from "../../common/input-row";
 import Button from "@mui/joy/Button";
-import { Fab, Skeleton, TextField } from "@mui/material";
+import { Fab, List, Skeleton, TextField } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import { BillModel } from "./bill-model";
 import { useBillsStorage } from "../../common/state-management/bills-storage";
@@ -99,16 +99,18 @@ const Bills = (): JSX.Element => {
           />
         )}
 
-        {bills &&
-          bills.map((column, index) => (
-            <InputRow
-              key={index}
-              index={index}
-              column={column}
-              rowAmountOnChange={addBillAmount}
-              removeRow={() => removeRow(index)}
-            />
-          ))}
+        <List sx={{ width: "100%", bgcolor: "background.paper" }}>
+          {bills &&
+            bills.map((column, index) => (
+              <InputRow
+                key={index}
+                index={index}
+                column={column}
+                rowAmountOnChange={addBillAmount}
+                removeRow={() => removeRow(index)}
+              />
+            ))}
+        </List>
       </div>
       <div className={styles.totalFooter}>
         <div className={styles.total}>
