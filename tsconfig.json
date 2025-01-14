@@ -74,5 +74,5 @@
     "forceConsistentCasingInFileNames": true /* Disallow inconsistently-cased references to the same file. */,
     "sourceMap": true
   },
-  "include": ["src", "service-worker.js"]
+  "include": ["src"]
 }
