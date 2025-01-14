@@ -2,8 +2,8 @@
     "name": "Finance App",
     "short_name": "Finance",
     "description": "A simple finance app",
-    "start_url": "/",
-    "display": "standalone",
+    "start_url": "index.html?fullscreen=true",
+    "display": "fullscreen",
     "theme_color": "#000000",
     "background_color": "#ffffff",
     "icons": [{
