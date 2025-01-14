@@ -51,7 +51,7 @@ function App() {
               <Tab label="Bills" {...a11yProps(0)} />
               <Tab label="Income" {...a11yProps(1)} />
               <Tab label="Budgets" {...a11yProps(2)} />
-              <Tab label="Payoff Calc" {...a11yProps(3)} />
+              <Tab label="Payoff" {...a11yProps(3)} />
             </Tabs>
           </Box>
           <CustomTabPanel value={value} index={0}>
