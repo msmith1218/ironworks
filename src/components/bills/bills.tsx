@@ -113,11 +113,20 @@ const Bills = (): JSX.Element => {
       {!showInput && (
         <div className={styles.cardsContainer}>
           <div className={styles.cardsGrid}>
-            <Grid container spacing={1} sx={{ flexGrow: 1, width: "100%" }}>
+            <Grid
+              container
+              spacing={1}
+              sx={{ flexGrow: 1, display: "flex", justifyContent: "center" }}
+            >
               {bills &&
                 bills.map((column, index) => (
-                  <Grid>
-                    <DisplayCard key={index} index={index} bill={column} budgetSum={runningTotal} />
+                  <Grid key={`${index}-grid`}>
+                    <DisplayCard
+                      key={`${index}-card`}
+                      index={index}
+                      bill={column}
+                      budgetSum={runningTotal}
+                    />
                   </Grid>
                 ))}
             </Grid>

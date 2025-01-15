@@ -115,7 +115,11 @@ const Budget = (): JSX.Element => {
       {!showInput && (
         <div className={styles.cardsContainer}>
           <div className={styles.cardsGrid}>
-            <Grid container spacing={1} sx={{ flexGrow: 1, width: "100%" }}>
+            <Grid
+              container
+              spacing={1}
+              sx={{ flexGrow: 1, display: "flex", justifyContent: "center" }}
+            >
               {budgetLines &&
                 budgetLines.map((column, index) => (
                   <Grid>

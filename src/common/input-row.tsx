@@ -60,7 +60,7 @@ const InputRow = (props: InputRowProps) => {
         </div>
         <div className={styles.textContainer}>
           <TextField
-            value={column.billAmount === 0 ? undefined : column.billAmount}
+            value={column.billAmount}
             onClick={(e) => e.stopPropagation()}
             onChange={(e) => {
               e.stopPropagation();
