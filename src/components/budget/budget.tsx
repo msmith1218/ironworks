@@ -9,8 +9,9 @@ import currency from "currency.js";
 import { BillModel } from "../../components/bills/bill-model";
 
 import BudgetTransactionGroup from "./budget-transaction-group";
-import { AccordionGroup } from "@mui/joy";
+import { AccordionGroup, Grid } from "@mui/joy";
 import { BudgetModel } from "./budget-model";
+import DisplayCard from "../../common/display-card";
 
 const Budget = (): JSX.Element => {
   const incomeLines = useBillsStorage((state) => state.incomeLines);
@@ -111,30 +112,52 @@ const Budget = (): JSX.Element => {
         )}
       </div>
 
-      <div className={styles.grid}>
-        {(!budgetLines || budgetLines.length === 0) && (
-          <Skeleton
-            variant="rectangular"
-            width={"100%"}
-            height={80}
-            sx={{ borderRadius: "10px" }}
-          />
-        )}
+      {!showInput && (
+        <div className={styles.cardsContainer}>
+          <div className={styles.cardsGrid}>
+            <Grid container spacing={1} sx={{ flexGrow: 1, width: "100%" }}>
+              {budgetLines &&
+                budgetLines.map((column, index) => (
+                  <Grid>
+                    <DisplayCard
+                      key={index}
+                      index={index}
+                      bill={column}
+                      budgetSum={budgetLines.reduce((acc, curr) => acc + (curr.billAmount || 0), 0)}
+                    />
+                  </Grid>
+                ))}
+            </Grid>
+          </div>
+        </div>
+      )}
 
-        {budgetLines &&
-          budgetLines.map((column, index) => (
-            <InputRow
-              index={index}
-              key={index}
-              column={column}
-              rowAmountOnChange={addBillAmount}
-              removeRow={() => removeRow(index)}
-              editRow={(name) => {
-                updateRowName(name, index);
-              }}
+      {showInput && (
+        <div className={styles.grid}>
+          {(!budgetLines || budgetLines.length === 0) && (
+            <Skeleton
+              variant="rectangular"
+              width={"100%"}
+              height={80}
+              sx={{ borderRadius: "10px" }}
             />
-          ))}
-      </div>
+          )}
+
+          {budgetLines &&
+            budgetLines.map((column, index) => (
+              <InputRow
+                index={index}
+                key={index}
+                column={column}
+                rowAmountOnChange={addBillAmount}
+                removeRow={() => removeRow(index)}
+                editRow={(name) => {
+                  updateRowName(name, index);
+                }}
+              />
+            ))}
+        </div>
+      )}
       <div className={styles.lowerDisplay}>
         <div className={styles.billsHeader}>
           <div>Available</div>
