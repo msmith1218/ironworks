@@ -26,6 +26,15 @@
   padding-top: 10px;
 }
 
+.cardsContainer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  .cardsGrid {
+    padding-top: 10px;
+  }
+}
+
 .plus {
   color: rgb(123, 212, 123);
   display: flex;

@@ -21,6 +21,7 @@ const Budget = (): JSX.Element => {
   const [showInput, setShowInput] = useState<boolean>(false);
   const [incomeTotal, setIncomeTotal] = useState<number>(0);
   const [billsTotal, setBillsTotal] = useState<number>(0);
+  const [expandedTransactionIndex, setExpandedTransactionIndex] = useState<number | null>();
 
   useEffect(() => {
     setIncomeTotal((incomeLines ?? []).reduce((acc, curr) => acc + (curr.billAmount || 0), 0));
@@ -153,12 +154,14 @@ const Budget = (): JSX.Element => {
       </div>
 
       <div className={styles.transactionsLayout}>
-        <AccordionGroup sx={{ width: "100%" }}>
+        <AccordionGroup variant="outlined" sx={{ width: "100%" }}>
           {budgetLines &&
             budgetLines.map((column, index) => (
               <BudgetTransactionGroup
                 index={index}
                 key={index}
+                isExpanded={expandedTransactionIndex === index}
+                expand={(i) => setExpandedTransactionIndex(i)}
                 column={column}
                 editRow={() => {
                   console.log("nothing");

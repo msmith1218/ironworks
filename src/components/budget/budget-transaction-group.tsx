@@ -12,11 +12,13 @@ import { Accordion, AccordionDetails, AccordionSummary, Typography } from "@mui/
 type InputRowProps = {
   index: number;
   column: BudgetModel;
+  isExpanded: boolean;
   editRow: (name: string) => void;
+  expand: (index: number | null) => void;
 };
 
 const BudgetTransactionGroup = (props: InputRowProps): JSX.Element => {
-  const { index, editRow, column } = props;
+  const { index, isExpanded, column, expand } = props;
 
   const [editableTransactions, setEditableTransactions] = useState<TransactionLine[]>([]);
 
@@ -24,15 +26,41 @@ const BudgetTransactionGroup = (props: InputRowProps): JSX.Element => {
     setEditableTransactions([...editableTransactions, { name: "" } as TransactionLine]);
   };
 
-  const rowAmountOnChange = (name: string, index: number) => {
+  const removeTransaction = () => {
+    setEditableTransactions(
+      editableTransactions.filter((_, i) => i !== editableTransactions.length - 1)
+    );
+  };
+
+  const rowAmountOnChange = (amount: number, index: number) => {
+    const updatedColumns = editableTransactions
+      ? editableTransactions.map((column, i) =>
+          i === index ? { ...column, amount: amount } : column
+        )
+      : [{ amount: amount } as TransactionLine];
+
+    setEditableTransactions(updatedColumns);
+  };
+
+  const rowNameOnChange = (name: string, index: number) => {
     const updatedColumns = editableTransactions
       ? editableTransactions.map((column, i) => (i === index ? { ...column, name: name } : column))
       : [{ name: name } as TransactionLine];
 
     setEditableTransactions(updatedColumns);
   };
+
   return (
-    <Accordion>
+    <Accordion
+      expanded={isExpanded}
+      onChange={() => {
+        if (isExpanded) {
+          expand(null);
+        } else {
+          expand(index);
+        }
+      }}
+    >
       <AccordionSummary
         aria-controls="panel1-content"
         id="panel1-header"
@@ -44,7 +72,7 @@ const BudgetTransactionGroup = (props: InputRowProps): JSX.Element => {
       >
         <div className={styles.accordionHeader}>
           <Typography component="span">{column.billName}</Typography>
-          {editableTransactions && editableTransactions.length > 0 && (
+          {editableTransactions && editableTransactions.length > 0 && isExpanded && (
             <div className={styles.addHeader}>
               <div className={styles.addHeaderWithin}>
                 <Fab
@@ -84,7 +112,7 @@ const BudgetTransactionGroup = (props: InputRowProps): JSX.Element => {
                       <TextField
                         value={column.name}
                         onChange={(e) => {
-                          rowAmountOnChange(e.target.value, index);
+                          rowNameOnChange(e.target.value, index);
                         }}
                         id="standard-basic"
                         type="string"
@@ -96,7 +124,7 @@ const BudgetTransactionGroup = (props: InputRowProps): JSX.Element => {
                         sx={{ marginLeft: "10px" }}
                         value={column.amount}
                         onChange={(e) => {
-                          rowAmountOnChange(e.target.value, index);
+                          rowAmountOnChange(Number(e.target.value), index);
                         }}
                         id="standard-basic"
                         type="number"
@@ -106,8 +134,9 @@ const BudgetTransactionGroup = (props: InputRowProps): JSX.Element => {
                       />
                     </div>
                   </div>
-
-                  <DeleteIcon sx={{ verticalAlign: "middle", marginLeft: "5%" }} />
+                  <div className={styles.deleteButton} onClick={() => removeTransaction()}>
+                    <DeleteIcon sx={{ verticalAlign: "middle" }} />
+                  </div>
                 </ListItem>
               ))}
           </List>

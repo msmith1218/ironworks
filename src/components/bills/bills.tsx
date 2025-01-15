@@ -8,6 +8,9 @@ import { BillModel } from "./bill-model";
 import { useBillsStorage } from "../../common/state-management/bills-storage";
 import currency from "currency.js";
 import { Typography } from "@mui/joy";
+import DisplayCard from "../../common/display-card";
+import Grid from "@mui/joy/Grid";
+
 const Bills = (): JSX.Element => {
   const bills = useBillsStorage((state) => state.bills);
   const setState = useBillsStorage((state) => state.setState);
@@ -107,32 +110,48 @@ const Bills = (): JSX.Element => {
         )}
       </div>
 
-      <div className={styles.grid}>
-        {(!bills || bills.length === 0) && (
-          <Skeleton
-            variant="rectangular"
-            width={"100%"}
-            height={80}
-            sx={{ borderRadius: "10px" }}
-          />
-        )}
+      {!showInput && (
+        <div className={styles.cardsContainer}>
+          <div className={styles.cardsGrid}>
+            <Grid container spacing={1} sx={{ flexGrow: 1, width: "100%" }}>
+              {bills &&
+                bills.map((column, index) => (
+                  <Grid>
+                    <DisplayCard key={index} index={index} bill={column} budgetSum={runningTotal} />
+                  </Grid>
+                ))}
+            </Grid>
+          </div>
+        </div>
+      )}
+      {showInput && (
+        <div className={styles.grid}>
+          {(!bills || bills.length === 0) && (
+            <Skeleton
+              variant="rectangular"
+              width={"100%"}
+              height={80}
+              sx={{ borderRadius: "10px" }}
+            />
+          )}
 
-        <List sx={{ width: "100%" }}>
-          {bills &&
-            bills.map((column, index) => (
-              <InputRow
-                key={index}
-                index={index}
-                column={column}
-                rowAmountOnChange={addBillAmount}
-                removeRow={() => removeRow(index)}
-                editRow={(name) => {
-                  updateRowName(name, index);
-                }}
-              />
-            ))}
-        </List>
-      </div>
+          <List sx={{ width: "100%" }}>
+            {bills &&
+              bills.map((column, index) => (
+                <InputRow
+                  key={index}
+                  index={index}
+                  column={column}
+                  rowAmountOnChange={addBillAmount}
+                  removeRow={() => removeRow(index)}
+                  editRow={(name) => {
+                    updateRowName(name, index);
+                  }}
+                />
+              ))}
+          </List>
+        </div>
+      )}
       <div className={styles.totalFooter}>
         <div className={styles.total}>
           <div className={styles.totalText}>Total</div>
