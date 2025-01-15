@@ -54,7 +54,6 @@ function App() {
               position: "sticky",
               top: 0,
               zIndex: 1000,
-              bgcolor: "background.paper",
             }}
           >
             <Tabs
@@ -65,10 +64,38 @@ function App() {
               onChange={handleChange}
               aria-label="main tabs"
             >
-              <Tab label="Bills" {...a11yProps(0)} />
-              <Tab label="Income" {...a11yProps(1)} />
-              <Tab label="Budgets" {...a11yProps(2)} />
-              <Tab label="Payoff" {...a11yProps(3)} />
+              <Tab
+                sx={{
+                  fontFamily: "helvetica",
+                  fontWeight: "900",
+                }}
+                label="Bills"
+                {...a11yProps(0)}
+              />
+              <Tab
+                sx={{
+                  fontFamily: "helvetica",
+                  fontWeight: "900",
+                }}
+                label="Income"
+                {...a11yProps(1)}
+              />
+              <Tab
+                sx={{
+                  fontFamily: "helvetica",
+                  fontWeight: "900",
+                }}
+                label="Budgets"
+                {...a11yProps(2)}
+              />
+              <Tab
+                sx={{
+                  fontFamily: "helvetica",
+                  fontWeight: "900",
+                }}
+                label="Payoff"
+                {...a11yProps(3)}
+              />
             </Tabs>
           </Box>
           <CustomTabPanel value={value} index={0}>

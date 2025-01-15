@@ -3,6 +3,9 @@
   //border-bottom: 1px solid #ccc;
   display: flex;
 }
+
+.billsLayout {
+}
 .addIcon {
   width: 100%;
   z-index: 0;
@@ -36,9 +39,11 @@
 .billdescript {
   display: flex;
   min-width: 70%;
-
-  font-size: 1.2em;
+  color: rgb(48, 48, 48);
+  font-size: 2em;
+  font-weight: 800;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
 }
 
 .allContainer {

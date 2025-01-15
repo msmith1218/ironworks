@@ -93,6 +93,7 @@ const Bills = (): JSX.Element => {
                   size="lg"
                   variant="soft"
                   color="primary"
+                  sx={{ backgroundColor: "rgb(237, 179, 240)" }}
                 >
                   Add
                 </Button>
@@ -112,7 +113,7 @@ const Bills = (): JSX.Element => {
           />
         )}
 
-        <List sx={{ width: "100%", bgcolor: "background.paper" }}>
+        <List sx={{ width: "100%" }}>
           {bills &&
             bills.map((column, index) => (
               <InputRow

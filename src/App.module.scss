@@ -1,5 +1,6 @@
 .app {
-  background-color: rgb(255, 255, 255);
+  background-image: linear-gradient(to bottom right, rgb(154, 119, 154), rgb(44, 44, 44));
+
   ::-webkit-scrollbar {
     display: none;
   }
@@ -11,4 +12,8 @@
     overflow-x: hidden;
     height: 100%;
   }
+}
+
+body {
+  margin: 0;
 }

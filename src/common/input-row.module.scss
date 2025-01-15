@@ -4,6 +4,7 @@
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 15px;
+  background-color: rgb(155, 128, 225);
 }
 
 .spacer {
@@ -12,9 +13,10 @@
 .gridColumn {
   display: flex;
   flex-direction: column;
-
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
   padding: 10px;
   font-size: 1.2em;
+  font-weight: 800;
   max-width: 35%;
 }
 
@@ -32,6 +34,6 @@
 }
 
 .showRemoveIcon {
-  background-color: rgb(213, 213, 213);
+  background-color: rgb(237, 179, 240);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
 }
