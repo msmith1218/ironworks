@@ -2,9 +2,13 @@
   display: flex;
   justify-content: space-between;
   padding: 10px;
-  border-bottom: 1px solid #ccc;
+  border: 1px solid #ccc;
+  border-radius: 15px;
 }
 
+.spacer {
+  padding-top: 10px;
+}
 .gridColumn {
   display: flex;
   flex-direction: column;
@@ -28,5 +32,6 @@
 }
 
 .showRemoveIcon {
-  background-color: rgb(18, 70, 123);
+  background-color: rgb(213, 213, 213);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
 }

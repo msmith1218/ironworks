@@ -33,6 +33,14 @@
   padding-left: 10px;
 }
 
+.billdescript {
+  display: flex;
+  min-width: 70%;
+
+  font-size: 1.2em;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
 .allContainer {
   display: flex;
 

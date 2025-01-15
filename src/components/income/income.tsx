@@ -50,6 +50,16 @@ const Income = (): JSX.Element => {
     });
   };
 
+  const updateRowName = (name: string, index: number) => {
+    const updatedColumns = bills
+      ? bills.map((column, i) => (i === index ? { ...column, billName: name } : column))
+      : [{ billName: name } as BillModel];
+
+    setState((state) => {
+      state.bills = updatedColumns;
+    });
+  };
+
   return (
     <div className={styles.billsLayout}>
       <div className={styles.billsHeader}>
@@ -112,6 +122,9 @@ const Income = (): JSX.Element => {
               column={column}
               rowAmountOnChange={addBillAmount}
               removeRow={() => removeRow(index)}
+              editRow={(name) => {
+                updateRowName(name, index);
+              }}
             />
           ))}
       </div>
