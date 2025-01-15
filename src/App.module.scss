@@ -1,6 +1,8 @@
 .app {
   background-image: linear-gradient(to bottom right, rgb(154, 119, 154), rgb(44, 44, 44));
-
+  height: 100%;
+  display: flex;
+  flex-direction: column;
   ::-webkit-scrollbar {
     display: none;
   }
@@ -16,4 +18,13 @@
 
 body {
   margin: 0;
+  height: 100%;
+}
+
+html,
+body,
+#app,
+#root,
+#app > div {
+  height: 100%;
 }
