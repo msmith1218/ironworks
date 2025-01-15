@@ -4,8 +4,6 @@
   display: flex;
 }
 
-.billsLayout {
-}
 .addIcon {
   width: 100%;
   z-index: 0;
@@ -41,8 +39,7 @@
   min-width: 70%;
   color: rgb(48, 48, 48);
   font-size: 2em;
-  font-weight: 800;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  font-weight: 500;
   font-family: "Roboto", "Helvetica", "Arial", sans-serif;
 }
 
@@ -67,7 +64,7 @@
 .totalFooter {
   margin-top: 2%;
   border-radius: 10px;
-  background-color: rgba(218, 221, 218, 0.815);
+  background-color: rgba(218, 221, 218, 0.615);
 
   .total {
     font-size: large;

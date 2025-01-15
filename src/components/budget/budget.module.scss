@@ -17,6 +17,10 @@
   border-bottom: 1px solid #ccc;
 }
 
+.billsLayout {
+  background-color: rgb(243, 243, 243);
+}
+
 .billHeader {
   font-weight: bold;
   font-size: 2.2em;
@@ -76,9 +80,19 @@
   }
 }
 
+.transactionsLayout {
+  background-color: white;
+  border-radius: 5px;
+}
+
 .billsHeader1 {
   font-size: large;
   font-weight: bold;
   display: flex;
   flex-direction: column;
+}
+
+.lowerDisplay {
+  display: flex;
+  justify-content: space-between;
 }

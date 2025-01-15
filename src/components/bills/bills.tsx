@@ -7,6 +7,7 @@ import AddIcon from "@mui/icons-material/Add";
 import { BillModel } from "./bill-model";
 import { useBillsStorage } from "../../common/state-management/bills-storage";
 import currency from "currency.js";
+import { Typography } from "@mui/joy";
 const Bills = (): JSX.Element => {
   const bills = useBillsStorage((state) => state.bills);
   const setState = useBillsStorage((state) => state.setState);
@@ -60,7 +61,10 @@ const Bills = (): JSX.Element => {
       <div className={styles.billsHeader}>
         {!showInput && (
           <>
-            <div className={styles.billdescript}>Enter Reccuring Bills</div>
+            <Typography level={"h4"} sx={{ width: "75%" }} component="span">
+              Enter Reccuring Bills
+            </Typography>
+
             <div className={styles.addIcon}>
               <Fab
                 onClick={() => setShowInput(!showInput)}

@@ -2,10 +2,11 @@ import { create } from "zustand";
 import { BillModel } from "components/bills/bill-model";
 import { produce } from "immer";
 import { persist } from "zustand/middleware";
+import { BudgetModel } from "components/budget/budget-model";
 type BillsStorageModel = {
   bills: BillModel[];
   incomeLines: BillModel[];
-  budgetLines: BillModel[];
+  budgetLines: BudgetModel[];
   setState: (recipe: (state: BillsStorageModel) => void) => void;
 };
 

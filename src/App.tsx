@@ -24,7 +24,7 @@ function CustomTabPanel(props: TabPanelProps) {
       aria-labelledby={`simple-tab-${index}`}
       {...other}
     >
-      {value === index && <Box sx={{ p: 3 }}>{children}</Box>}
+      {value === index && <Box sx={{ padding: "0px" }}>{children}</Box>}
     </div>
   );
 }
@@ -46,12 +46,13 @@ function App() {
   return (
     <>
       <div className={styles.app}>
-        <Box sx={{ width: "100%" }}>
+        <Box padding={"0"} sx={{ width: "100%" }}>
           <Box
             sx={{
               borderBottom: 1,
               borderColor: "divider",
               position: "sticky",
+              padding: "0px",
               top: 0,
               zIndex: 1000,
             }}

@@ -7,6 +7,11 @@ import AddIcon from "@mui/icons-material/Add";
 import { useBillsStorage } from "../../common/state-management/bills-storage";
 import currency from "currency.js";
 import { BillModel } from "../../components/bills/bill-model";
+
+import BudgetTransactionGroup from "./budget-transaction-group";
+import { AccordionGroup } from "@mui/joy";
+import { BudgetModel } from "./budget-model";
+
 const Budget = (): JSX.Element => {
   const incomeLines = useBillsStorage((state) => state.incomeLines);
   const budgetLines = useBillsStorage((state) => state.budgetLines);
@@ -28,7 +33,7 @@ const Budget = (): JSX.Element => {
   const addBill = () => {
     if (inputValue.trim() !== "") {
       setState((state) => {
-        state.budgetLines = [...(budgetLines ?? []), { billName: inputValue } as BillModel];
+        state.budgetLines = [...(budgetLines ?? []), { billName: inputValue } as BudgetModel];
       });
 
       setInputValue("");
@@ -38,7 +43,7 @@ const Budget = (): JSX.Element => {
   const addBillAmount = (amount: number, index: number) => {
     const updatedColumns = budgetLines
       ? budgetLines.map((column, i) => (i === index ? { ...column, billAmount: amount } : column))
-      : [{ billAmount: amount } as BillModel];
+      : [{ billAmount: amount } as BudgetModel];
 
     setState((state) => {
       state.budgetLines = updatedColumns;
@@ -129,20 +134,38 @@ const Budget = (): JSX.Element => {
             />
           ))}
       </div>
-      <div className={styles.billsHeader}>
-        <div>Available</div>
-        <div>{currency(incomeTotal).subtract(billsTotal).format()}</div>
-      </div>
-      <div className={styles.billsHeader}>
-        <div>
-          <div>After Budgets</div>
+      <div className={styles.lowerDisplay}>
+        <div className={styles.billsHeader}>
+          <div>Available</div>
+          <div>{currency(incomeTotal).subtract(billsTotal).format()}</div>
+        </div>
+        <div className={styles.billsHeader}>
           <div>
-            {currency(incomeTotal)
-              .subtract(billsTotal)
-              .subtract(budgetLines.reduce((acc, curr) => acc + (curr.billAmount || 0), 0))
-              .format()}
+            <div>After Budgets</div>
+            <div>
+              {currency(incomeTotal)
+                .subtract(billsTotal)
+                .subtract(budgetLines.reduce((acc, curr) => acc + (curr.billAmount || 0), 0))
+                .format()}
+            </div>
           </div>
         </div>
+      </div>
+
+      <div className={styles.transactionsLayout}>
+        <AccordionGroup sx={{ width: "100%" }}>
+          {budgetLines &&
+            budgetLines.map((column, index) => (
+              <BudgetTransactionGroup
+                index={index}
+                key={index}
+                column={column}
+                editRow={() => {
+                  console.log("nothing");
+                }}
+              />
+            ))}
+        </AccordionGroup>
       </div>
     </div>
   );

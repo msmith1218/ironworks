@@ -4,6 +4,7 @@ import RemoveIcon from "@mui/icons-material/Remove";
 import { BillModel } from "components/bills/bill-model";
 import { useState } from "react";
 import { Edit } from "@mui/icons-material";
+import { Typography } from "@mui/joy";
 
 type InputRowProps = {
   index: number;
@@ -52,7 +53,9 @@ const InputRow = (props: InputRowProps) => {
               />
             </div>
           ) : (
-            column.billName
+            <Typography level={"h4"} component="span">
+              {column.billName}
+            </Typography>
           )}
         </div>
         <div className={styles.textContainer}>
