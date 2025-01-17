@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import styles from "./income.module.scss";
 import InputRow from "../../common/input-row";
-import Button from "@mui/joy/Button";
-import { Fab, Skeleton, TextField } from "@mui/material";
-import AddIcon from "@mui/icons-material/Add";
+
+import { Skeleton } from "@mui/material";
+
 import { useBillsStorage } from "../../common/state-management/bills-storage";
 import currency from "currency.js";
 import { BillModel } from "../../components/bills/bill-model";
+import HeaderInput from "../../common/header-input/header-input";
 const Income = (): JSX.Element => {
   const incomeLines = useBillsStorage((state) => state.incomeLines);
   const setState = useBillsStorage((state) => state.setState);
@@ -62,47 +63,15 @@ const Income = (): JSX.Element => {
 
   return (
     <div className={styles.billsLayout}>
-      <div className={styles.billsHeader}>
-        {!showInput && (
-          <div className={styles.addIcon}>
-            <Fab
-              onClick={() => setShowInput(!showInput)}
-              color="primary"
-              size="small"
-              aria-label="add"
-              sx={{ float: "right", backgroundColor: "green" }}
-            >
-              <AddIcon />
-            </Fab>
-          </div>
-        )}
-        {showInput && (
-          <>
-            <div className={styles.allContainer}>
-              <div className={styles.textContainer}>
-                <TextField
-                  value={inputValue}
-                  onChange={(e) => setInputValue(e.target.value)}
-                  id="standard-basic"
-                  label="Enter Income Source"
-                  variant="standard"
-                />
-              </div>
-              <div className={styles.addContainer}>
-                <Button
-                  className={styles.addBtn}
-                  onClick={addBill}
-                  size="lg"
-                  variant="soft"
-                  color="primary"
-                >
-                  Add
-                </Button>
-              </div>
-            </div>
-          </>
-        )}
-      </div>
+      <HeaderInput
+        inputValue={inputValue}
+        setInputValue={setInputValue}
+        addRow={addBill}
+        showInput={showInput}
+        setShowInput={setShowInput}
+        textInputName="Enter Income Source"
+        headerText=""
+      />
 
       <div className={styles.grid}>
         {(!incomeLines || incomeLines.length === 0) && (

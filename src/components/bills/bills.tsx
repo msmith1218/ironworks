@@ -1,15 +1,16 @@
 import { useEffect, useState } from "react";
 import styles from "./bills.module.scss";
 import InputRow from "../../common/input-row";
-import Button from "@mui/joy/Button";
-import { Fab, List, Skeleton, TextField } from "@mui/material";
-import AddIcon from "@mui/icons-material/Add";
+
+import { List, Skeleton } from "@mui/material";
+
 import { BillModel } from "./bill-model";
 import { useBillsStorage } from "../../common/state-management/bills-storage";
 import currency from "currency.js";
-import { Typography } from "@mui/joy";
+
 import DisplayCard from "../../common/display-card";
 import Grid from "@mui/joy/Grid";
+import HeaderInput from "../../common/header-input/header-input";
 
 const Bills = (): JSX.Element => {
   const bills = useBillsStorage((state) => state.bills);
@@ -61,54 +62,15 @@ const Bills = (): JSX.Element => {
 
   return (
     <div className={styles.billsLayout}>
-      <div className={styles.billsHeader}>
-        {!showInput && (
-          <>
-            <Typography level={"h4"} sx={{ width: "75%" }} component="span">
-              Enter Reccuring Bills
-            </Typography>
-
-            <div className={styles.addIcon}>
-              <Fab
-                onClick={() => setShowInput(!showInput)}
-                color="primary"
-                size="small"
-                aria-label="add"
-                sx={{ float: "right", backgroundColor: "green" }}
-              >
-                <AddIcon />
-              </Fab>
-            </div>
-          </>
-        )}
-        {showInput && (
-          <>
-            <div className={styles.allContainer}>
-              <div className={styles.textContainer}>
-                <TextField
-                  value={inputValue}
-                  onChange={(e) => setInputValue(e.target.value)}
-                  id="standard-basic"
-                  label="Enter Bill Name"
-                  variant="standard"
-                />
-              </div>
-              <div className={styles.addContainer}>
-                <Button
-                  className={styles.addBtn}
-                  onClick={addBill}
-                  size="lg"
-                  variant="soft"
-                  color="primary"
-                  sx={{ backgroundColor: "rgb(237, 179, 240)" }}
-                >
-                  Add
-                </Button>
-              </div>
-            </div>
-          </>
-        )}
-      </div>
+      <HeaderInput
+        inputValue={inputValue}
+        setInputValue={setInputValue}
+        addRow={addBill}
+        showInput={showInput}
+        setShowInput={setShowInput}
+        textInputName="Bill Name"
+        headerText="Enter Recurring Bills"
+      />
 
       {!showInput && (
         <div className={styles.cardsContainer}>
@@ -133,17 +95,11 @@ const Bills = (): JSX.Element => {
           </div>
         </div>
       )}
+      {(!bills || bills.length === 0) && (
+        <Skeleton variant="rectangular" width={"100%"} height={80} sx={{ borderRadius: "10px" }} />
+      )}
       {showInput && (
         <div className={styles.grid}>
-          {(!bills || bills.length === 0) && (
-            <Skeleton
-              variant="rectangular"
-              width={"100%"}
-              height={80}
-              sx={{ borderRadius: "10px" }}
-            />
-          )}
-
           <List sx={{ width: "100%" }}>
             {bills &&
               bills.map((column, index) => (

@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import styles from "./budget.module.scss";
 import InputRow from "../../common/input-row";
-import Button from "@mui/joy/Button";
-import { Fab, Skeleton, TextField } from "@mui/material";
-import AddIcon from "@mui/icons-material/Add";
+
+import { Skeleton } from "@mui/material";
+
 import { useBillsStorage } from "../../common/state-management/bills-storage";
 import currency from "currency.js";
 import { BillModel } from "../../components/bills/bill-model";
@@ -12,6 +12,7 @@ import BudgetTransactionGroup from "./budget-transaction-group";
 import { AccordionGroup, Grid } from "@mui/joy";
 import { BudgetModel } from "./budget-model";
 import DisplayCard from "../../common/display-card";
+import HeaderInput from "../../common/header-input/header-input";
 
 const Budget = (): JSX.Element => {
   const incomeLines = useBillsStorage((state) => state.incomeLines);
@@ -70,47 +71,15 @@ const Budget = (): JSX.Element => {
 
   return (
     <div className={styles.billsLayout}>
-      <div className={styles.billsHeader}>
-        {!showInput && (
-          <div className={styles.addIcon}>
-            <Fab
-              onClick={() => setShowInput(!showInput)}
-              color="primary"
-              size="small"
-              aria-label="add"
-              sx={{ float: "right", backgroundColor: "green" }}
-            >
-              <AddIcon />
-            </Fab>
-          </div>
-        )}
-        {showInput && (
-          <>
-            <div className={styles.allContainer}>
-              <div className={styles.textContainer}>
-                <TextField
-                  value={inputValue}
-                  onChange={(e) => setInputValue(e.target.value)}
-                  id="standard-basic"
-                  label="Enter Budget Area"
-                  variant="standard"
-                />
-              </div>
-              <div className={styles.addContainer}>
-                <Button
-                  className={styles.addBtn}
-                  onClick={addBill}
-                  size="lg"
-                  variant="soft"
-                  color="primary"
-                >
-                  Add
-                </Button>
-              </div>
-            </div>
-          </>
-        )}
-      </div>
+      <HeaderInput
+        inputValue={inputValue}
+        setInputValue={setInputValue}
+        addRow={addBill}
+        showInput={showInput}
+        setShowInput={setShowInput}
+        textInputName="Enter Budget Area"
+        headerText=""
+      />
 
       {!showInput && (
         <div className={styles.cardsContainer}>

@@ -13,7 +13,9 @@ type InputRowProps = {
 const DisplayCard = (props: InputRowProps) => {
   const { bill, budgetSum } = props;
 
-  const percentage = currency(bill.billAmount).divide(budgetSum).multiply(100).value;
+  const percentage = currency(bill.billAmount ?? 0)
+    .divide(budgetSum)
+    .multiply(100).value;
 
   return (
     <Card size="sm">
