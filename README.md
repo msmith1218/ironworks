@@ -1,5 +1,5 @@
 # React + TypeScript + Vite
-**Minimum version of node:** 20.14.0. (Last modified Oct-2024)
+**Minimum version of node:** 20.14.0. (Last modified Jan-2025)
 
 
 
