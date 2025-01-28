@@ -26,3 +26,11 @@ dist
 *.njsproj
 *.sln
 *.sw?
+
+# auto-generated files
+**/build
+**/dist
+**/coverage
+**/testResults.json
+npm-debug.log
+*.tsbuildinfo
