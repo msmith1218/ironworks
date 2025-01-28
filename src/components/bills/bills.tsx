@@ -1,16 +1,16 @@
 import { useEffect, useState } from "react";
-import styles from "./bills.module.scss";
-import InputRow from "../../common/input-row";
+import styles from "components/bills/bills.module.scss";
+import InputRow from "common/input-row";
 
 import { List, Skeleton } from "@mui/material";
 
-import { BillModel } from "./bill-model";
-import { useBillsStorage } from "../../common/state-management/bills-storage";
+import { BillModel } from "components/bills/bill-model";
+import { useBillsStorage } from "common/state-management/bills-storage";
 import currency from "currency.js";
 
-import DisplayCard from "../../common/display-card";
+import DisplayCard from "common/display-card";
 import Grid from "@mui/joy/Grid";
-import HeaderInput from "../../common/header-input/header-input";
+import HeaderInput from "common/header-input/header-input";
 
 const Bills = (): JSX.Element => {
   const bills = useBillsStorage((state) => state.bills);

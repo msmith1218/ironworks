@@ -14,11 +14,11 @@ const DisplayCard = (props: InputRowProps) => {
   const { bill, budgetSum } = props;
 
   const percentage = currency(bill.billAmount ?? 0)
-    .divide(budgetSum)
+    .divide(budgetSum ?? 1)
     .multiply(100).value;
 
   return (
-    <Card size="sm">
+    <Card size="sm" sx={{ boxShadow: "0 4px 8px rgba(0, 0, 0, 0.5)" }}>
       <div>
         <Typography level={"title-sm"} component="span">
           {bill.billName}

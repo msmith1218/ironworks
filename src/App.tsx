@@ -1,10 +1,10 @@
-import Bills from "./components/bills/bills";
+import Bills from "components/bills/bills";
 import styles from "./App.module.scss";
 import { Box, Tab, Tabs } from "@mui/material";
 import { useState } from "react";
-import Income from "./components/income/income";
-import Budget from "./components/budget/budget";
-import Payoff from "./components/payoff/payoff";
+import Income from "components/income/income";
+import Budget from "components/budget/budget";
+import Payoff from "components/payoff/payoff";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -82,6 +82,7 @@ function App() {
                 {...a11yProps(1)}
               />
               <Tab
+                data-qa={"budget-tab"}
                 sx={{
                   fontFamily: "helvetica",
                   fontWeight: "900",

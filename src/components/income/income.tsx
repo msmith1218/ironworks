@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
-import styles from "./income.module.scss";
-import InputRow from "../../common/input-row";
+import styles from "components/income/income.module.scss";
+import InputRow from "common/input-row";
 
 import { Skeleton } from "@mui/material";
 
-import { useBillsStorage } from "../../common/state-management/bills-storage";
+import { useBillsStorage } from "common/state-management/bills-storage";
 import currency from "currency.js";
-import { BillModel } from "../../components/bills/bill-model";
-import HeaderInput from "../../common/header-input/header-input";
+import { BillModel } from "components/bills/bill-model";
+import HeaderInput from "common/header-input/header-input";
 const Income = (): JSX.Element => {
   const incomeLines = useBillsStorage((state) => state.incomeLines);
   const setState = useBillsStorage((state) => state.setState);

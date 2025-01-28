@@ -1,12 +1,13 @@
 .billsHeader {
   padding: 10px;
   //border-bottom: 1px solid #ccc;
+
   display: flex;
 }
 
 .addIcon {
-  width: 100%;
   z-index: 0;
+  width: 60%;
 }
 .billRow {
   display: flex;
@@ -36,7 +37,7 @@
 
 .allContainer {
   display: flex;
-
+  width: 50%;
   .textContainer {
   }
   .addContainer {

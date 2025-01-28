@@ -1,18 +1,18 @@
 import { useEffect, useState } from "react";
-import styles from "./budget.module.scss";
-import InputRow from "../../common/input-row";
+import styles from "components/budget/budget.module.scss";
 
 import { Skeleton } from "@mui/material";
 
-import { useBillsStorage } from "../../common/state-management/bills-storage";
 import currency from "currency.js";
-import { BillModel } from "../../components/bills/bill-model";
+import { BillModel } from "components/bills/bill-model";
 
-import BudgetTransactionGroup from "./budget-transaction-group";
 import { AccordionGroup, Grid } from "@mui/joy";
-import { BudgetModel } from "./budget-model";
-import DisplayCard from "../../common/display-card";
-import HeaderInput from "../../common/header-input/header-input";
+import { BudgetModel } from "components/budget/budget-model";
+import DisplayCard from "common/display-card";
+import HeaderInput from "common/header-input/header-input";
+import InputRow from "common/input-row";
+import { useBillsStorage } from "common/state-management/bills-storage";
+import BudgetTransactionGroup from "components/budget/budget-transaction-group";
 
 const Budget = (): JSX.Element => {
   const incomeLines = useBillsStorage((state) => state.incomeLines);
@@ -70,7 +70,7 @@ const Budget = (): JSX.Element => {
   };
 
   return (
-    <div className={styles.billsLayout}>
+    <div className={styles.billsLayout} data-qa={"budgets-layout"}>
       <HeaderInput
         inputValue={inputValue}
         setInputValue={setInputValue}
@@ -104,18 +104,11 @@ const Budget = (): JSX.Element => {
           </div>
         </div>
       )}
-
+      {(!budgetLines || budgetLines.length === 0) && (
+        <Skeleton variant="rectangular" width={"100%"} height={80} sx={{ borderRadius: "10px" }} />
+      )}
       {showInput && (
         <div className={styles.grid}>
-          {(!budgetLines || budgetLines.length === 0) && (
-            <Skeleton
-              variant="rectangular"
-              width={"100%"}
-              height={80}
-              sx={{ borderRadius: "10px" }}
-            />
-          )}
-
           {budgetLines &&
             budgetLines.map((column, index) => (
               <InputRow
