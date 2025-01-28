@@ -90,14 +90,14 @@ function App() {
                 label="Budgets"
                 {...a11yProps(2)}
               />
-              <Tab
+              {/* <Tab
                 sx={{
                   fontFamily: "helvetica",
                   fontWeight: "900",
                 }}
                 label="Payoff"
                 {...a11yProps(3)}
-              />
+              /> */}
             </Tabs>
           </Box>
           <CustomTabPanel value={value} index={0}>
