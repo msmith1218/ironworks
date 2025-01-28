@@ -1,77 +1,68 @@
 import { useEffect, useState } from "react";
 import styles from "components/income/income.module.scss";
-import InputRow from "common/input-row";
 
 import { Skeleton } from "@mui/material";
 
-import { useBillsStorage } from "common/state-management/bills-storage";
 import currency from "currency.js";
 import { BillModel } from "components/bills/bill-model";
 import HeaderInput from "common/header-input/header-input";
+import CreateCardModal from "common/card/create-card-modal";
+import { Grid } from "@mui/joy";
+import DisplayCard from "common/card/display-card";
+import { useIncomeService } from "common/services/income-service";
+import { useBillService } from "common/services/bill-service";
+import EditCardModal from "common/card/edit-card-modal";
 const Income = (): JSX.Element => {
-  const incomeLines = useBillsStorage((state) => state.incomeLines);
-  const setState = useBillsStorage((state) => state.setState);
-  const bills = useBillsStorage((state) => state.bills);
-  const [inputValue, setInputValue] = useState<string>("");
-  const [showInput, setShowInput] = useState<boolean>(false);
+  const { bills } = useBillService();
+
+  const { incomeLines, createIncome, editIncome, removeIncome } = useIncomeService();
+  const [editingIncome, setEditingIncome] = useState<BillModel>();
+
   const [runningTotal, setRunningTotal] = useState<number>(0);
   const [billsTotal, setBillsTotal] = useState<number>(0);
-
+  const [openCreateCardModal, setOpenCreateCardModal] = useState<boolean>(false);
   useEffect(() => {
-    setRunningTotal((incomeLines ?? []).reduce((acc, curr) => acc + (curr.billAmount || 0), 0));
+    setRunningTotal((incomeLines ?? []).reduce((acc, curr) => acc + (curr.amount || 0), 0));
   }, [incomeLines]);
 
   useEffect(() => {
-    setBillsTotal((bills ?? []).reduce((acc, curr) => acc + (curr.billAmount || 0), 0));
+    setBillsTotal((bills ?? []).reduce((acc, curr) => acc + (curr.amount || 0), 0));
   }, [bills]);
 
-  const addBill = () => {
-    if (inputValue.trim() !== "") {
-      setState((state) => {
-        state.incomeLines = [...(incomeLines ?? []), { billName: inputValue } as BillModel];
-      });
+  const SaveCardEdit = (newBill: BillModel) => {
+    editIncome(newBill);
 
-      setInputValue("");
-    }
-  };
-
-  const addBillAmount = (amount: number, index: number) => {
-    const updatedColumns = incomeLines
-      ? incomeLines.map((column, i) => (i === index ? { ...column, billAmount: amount } : column))
-      : [{ billAmount: amount } as BillModel];
-
-    setState((state) => {
-      state.incomeLines = updatedColumns;
-    });
-  };
-
-  const removeRow = (index: number) => {
-    setState((state) => {
-      state.incomeLines = incomeLines.filter((_, i) => i !== index);
-    });
-  };
-
-  const updateRowName = (name: string, index: number) => {
-    const updatedColumns = bills
-      ? bills.map((column, i) => (i === index ? { ...column, billName: name } : column))
-      : [{ billName: name } as BillModel];
-
-    setState((state) => {
-      state.bills = updatedColumns;
-    });
+    setEditingIncome(undefined);
   };
 
   return (
     <div className={styles.billsLayout}>
       <HeaderInput
-        inputValue={inputValue}
-        setInputValue={setInputValue}
-        addRow={addBill}
-        showInput={showInput}
-        setShowInput={setShowInput}
-        textInputName="Enter Income Source"
-        headerText=""
+        openAddModal={() => setOpenCreateCardModal(true)}
+        headerText="Enter Income Sources"
       />
+
+      <div className={styles.cardsContainer}>
+        <div className={styles.cardsGrid}>
+          <Grid
+            container
+            spacing={1}
+            sx={{ flexGrow: 1, display: "flex", justifyContent: "center" }}
+          >
+            {incomeLines &&
+              incomeLines.map((column, index) => (
+                <Grid>
+                  <DisplayCard
+                    editCard={() => setEditingIncome(column)}
+                    key={index}
+                    bill={column}
+                    budgetSum={incomeLines.reduce((acc, curr) => acc + (curr.amount || 0), 0)}
+                  />
+                </Grid>
+              ))}
+          </Grid>
+        </div>
+      </div>
 
       <div className={styles.grid}>
         {(!incomeLines || incomeLines.length === 0) && (
@@ -82,20 +73,6 @@ const Income = (): JSX.Element => {
             sx={{ borderRadius: "10px" }}
           />
         )}
-
-        {incomeLines &&
-          incomeLines.map((column, index) => (
-            <InputRow
-              index={index}
-              key={index}
-              column={column}
-              rowAmountOnChange={addBillAmount}
-              removeRow={() => removeRow(index)}
-              editRow={(name) => {
-                updateRowName(name, index);
-              }}
-            />
-          ))}
       </div>
       <div className={styles.totalFooter}>
         <div className={styles.total}>
@@ -109,6 +86,26 @@ const Income = (): JSX.Element => {
           </div>
         </div>
       </div>
+      {openCreateCardModal && (
+        <CreateCardModal
+          modalHeaderDialog="Add New Income"
+          open={openCreateCardModal}
+          onClose={() => setOpenCreateCardModal(false)}
+          create={createIncome}
+        />
+      )}
+      {!!editingIncome && (
+        <EditCardModal
+          bill={editingIncome}
+          modalHeaderDialog="Edit Bill"
+          open={!!editingIncome}
+          deleteCard={() => removeIncome(editingIncome.id)}
+          onClose={() => {
+            setEditingIncome(undefined);
+          }}
+          save={SaveCardEdit}
+        />
+      )}
     </div>
   );
 };

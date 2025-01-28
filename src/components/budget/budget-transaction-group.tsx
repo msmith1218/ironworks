@@ -71,7 +71,7 @@ const BudgetTransactionGroup = (props: InputRowProps): JSX.Element => {
         }}
       >
         <div className={styles.accordionHeader}>
-          <Typography component="span">{column.billName}</Typography>
+          <Typography component="span">{column.name}</Typography>
           {editableTransactions && editableTransactions.length > 0 && isExpanded && (
             <div className={styles.addHeader}>
               <div className={styles.addHeaderWithin}>
