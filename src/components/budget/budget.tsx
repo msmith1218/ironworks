@@ -122,7 +122,7 @@ const Budget = (): JSX.Element => {
       {!!editingBudget && (
         <EditCardModal
           bill={editingBudget}
-          modalHeaderDialog="Edit Bill"
+          modalHeaderDialog="Edit Budget"
           open={!!editingBudget}
           deleteCard={() => removeRow(editingBudget.id)}
           onClose={() => {
