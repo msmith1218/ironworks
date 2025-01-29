@@ -60,7 +60,7 @@ export const mockBudgets = [
   },
   {
     id: 2,
-    name: "Random spending",
+    name: "Random",
     amount: 500,
   },
   {
