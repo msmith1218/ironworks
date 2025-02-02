@@ -16,6 +16,7 @@ import EditCardModal from "common/card/edit-card-modal";
 import { useBudgetsService } from "common/services/budgets-service";
 import { useIncomeService } from "common/services/income-service";
 import { BudgetModel } from "./budget-model";
+import { useTransactionService } from "common/services/transaction-service";
 
 const Budget = (): JSX.Element => {
   const bills = useBillsStorage((state) => state.bills);
@@ -46,6 +47,19 @@ const Budget = (): JSX.Element => {
     setEditingBudget(undefined);
   };
 
+  const { transactionLines } = useTransactionService();
+  const afterBudgetAmount = currency(incomeTotal)
+    .subtract(billsTotal)
+    .subtract(budgetLines.reduce((acc, curr) => acc + (curr.amount || 0), 0));
+
+  const budgetAvailable = currency(incomeTotal).subtract(billsTotal);
+
+  const getAfterBudgetClass = () => {
+    if (afterBudgetAmount.value < 0) return styles.inTheRed;
+    if (afterBudgetAmount.value < 100) return styles.runningLow;
+    return styles.greenUsage;
+  };
+
   return (
     <div className={styles.billsLayout} data-qa={"budgets-layout"}>
       <HeaderInput openAddModal={() => setOpenCreateCardModal(true)} headerText="Enter Budgets" />
@@ -62,6 +76,19 @@ const Budget = (): JSX.Element => {
                 <Grid key={`${column.id}-grid`}>
                   <DisplayCard
                     editCard={() => setEditingBudget(column)}
+                    percentageDescription={"Remaining Budget"}
+                    displayPercentage={
+                      currency(column.amount)
+                        .subtract(
+                          currency(
+                            transactionLines
+                              .filter((x) => x.budgetId === column.id)
+                              .reduce((acc, curr) => acc + (curr.amount || 0), 0)
+                          )
+                        )
+                        .divide(column.amount ?? 1)
+                        .multiply(100).value
+                    }
                     key={`${column.id}-card`}
                     bill={column}
                     budgetSum={budgetLines.reduce((acc, curr) => acc + (curr.amount || 0), 0)}
@@ -77,19 +104,14 @@ const Budget = (): JSX.Element => {
       )}
 
       <div className={styles.lowerDisplay}>
-        <div className={styles.billsHeader}>
-          <div>Available</div>
-          <div>{currency(incomeTotal).subtract(billsTotal).format()}</div>
+        <div className={`${styles.billsHeader} ${styles.greenUsage}`}>
+          <div className={styles.availableDisplay}>Available</div>
+          <div>{budgetAvailable.format()}</div>
         </div>
-        <div className={styles.billsHeader}>
+        <div className={`${styles.billsHeader} ${getAfterBudgetClass()}`}>
           <div>
             <div>After Budgets</div>
-            <div>
-              {currency(incomeTotal)
-                .subtract(billsTotal)
-                .subtract(budgetLines.reduce((acc, curr) => acc + (curr.amount || 0), 0))
-                .format()}
-            </div>
+            <div>{afterBudgetAmount.format()}</div>
           </div>
         </div>
       </div>

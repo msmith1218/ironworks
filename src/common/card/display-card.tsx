@@ -10,16 +10,26 @@ import Button from "@mui/joy/Button";
 type DisplayCardProps = {
   bill: BillModel;
   budgetSum: number;
+  percentageDescription?: string;
+  displayPercentage?: number;
   editCard: () => void;
 };
 
 const DisplayCard = (props: DisplayCardProps) => {
-  const { bill, budgetSum, editCard } = props;
+  const { bill, budgetSum, editCard, percentageDescription, displayPercentage } = props;
   const [showEditButton, setShowEditButton] = useState<boolean>(false);
 
   const percentage = currency(bill.amount ?? 0)
     .divide(budgetSum ?? 1)
     .multiply(100).value;
+
+  const getColor = (): "success" | "primary" | "danger" | "warning" => {
+    if (displayPercentage && displayPercentage < 5) return "danger";
+    if (displayPercentage && displayPercentage < 25) return "warning";
+    if (displayPercentage) return "success";
+
+    return "primary";
+  };
 
   return (
     <Card size="sm" sx={{ boxShadow: "0 4px 8px rgba(0, 0, 0, 0.5)" }}>
@@ -59,10 +69,15 @@ const DisplayCard = (props: DisplayCardProps) => {
         </div>
         <CardContent orientation="horizontal">
           <div>
-            <Typography level="body-xs">Percent total:</Typography>
+            <Typography level="body-xs">{percentageDescription ?? "Percent Total"}:</Typography>
           </div>
-          <CircularProgress size="lg" determinate value={percentage}>
-            {percentage}%
+          <CircularProgress
+            color={getColor()}
+            size="lg"
+            determinate
+            value={displayPercentage ?? percentage}
+          >
+            {displayPercentage ?? percentage}%
           </CircularProgress>
         </CardContent>
       </div>

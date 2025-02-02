@@ -2,16 +2,13 @@ import { useBillsStorage } from "common/state-management/bills-storage";
 
 import { TransactionLine } from "components/budget/transaction-line";
 
-const useTransactionService = (
-  budgetId: number
-): {
-  budgetTransactionLines: TransactionLine[];
+const useTransactionService = (): {
+  transactionLines: TransactionLine[];
   addNewTransaction: (budgetId: number) => void;
   removeTransaction: (id: number) => void;
   editTransaction: (transaction: TransactionLine) => void;
 } => {
   const transactionLines = useBillsStorage((state) => state.transactionLines);
-  const budgetTransactionLines = transactionLines.filter((t) => t.budgetId === budgetId);
 
   const transactionlinesPk = useBillsStorage((state) => state.transactionlinesPk);
   const setState = useBillsStorage((state) => state.setState);
@@ -31,7 +28,10 @@ const useTransactionService = (
   const editTransaction = (transaction: TransactionLine) => {
     setState((state) => {
       state.transactionLines = transactionLines.map((t) => {
-        if (t.transactionLineId === transaction.transactionLineId && t.budgetId === budgetId) {
+        if (
+          t.transactionLineId === transaction.transactionLineId &&
+          t.budgetId === transaction.budgetId
+        ) {
           return transaction;
         }
         return t;
@@ -47,7 +47,7 @@ const useTransactionService = (
     });
   };
 
-  return { budgetTransactionLines, addNewTransaction, editTransaction, removeTransaction };
+  return { transactionLines, addNewTransaction, editTransaction, removeTransaction };
 };
 
 export { useTransactionService };

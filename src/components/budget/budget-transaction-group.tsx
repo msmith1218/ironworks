@@ -18,8 +18,10 @@ type InputRowProps = {
 
 const BudgetTransactionGroup = (props: InputRowProps): JSX.Element => {
   const { index, isExpanded, column, expand } = props;
-  const { addNewTransaction, editTransaction, budgetTransactionLines, removeTransaction } =
-    useTransactionService(index);
+  const { addNewTransaction, editTransaction, transactionLines, removeTransaction } =
+    useTransactionService();
+
+  const budgetTransactionLines = transactionLines.filter((x) => x.budgetId === column.id);
 
   const addTransaction = () => {
     addNewTransaction(column.id);

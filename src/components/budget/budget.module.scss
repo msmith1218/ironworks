@@ -7,6 +7,22 @@
 
   flex-direction: column;
 }
+
+.greenUsage {
+  background-color: rgba(141, 238, 141, 0.5);
+  border-radius: 6px;
+}
+
+.runningLow {
+  background-color: rgba(250, 247, 91, 0.5);
+  border-radius: 6px;
+}
+
+.inTheRed {
+  background-color: rgba(240, 117, 117, 0.5);
+  border-radius: 6px;
+}
+
 .addIcon {
   width: 100%;
 }
