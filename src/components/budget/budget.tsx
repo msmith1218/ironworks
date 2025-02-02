@@ -56,7 +56,7 @@ const Budget = (): JSX.Element => {
 
   const getAfterBudgetClass = () => {
     if (afterBudgetAmount.value < 0) return styles.inTheRed;
-    if (afterBudgetAmount.value < 100) return styles.runningLow;
+    if (afterBudgetAmount.value < 20) return styles.runningLow;
     return styles.greenUsage;
   };
 

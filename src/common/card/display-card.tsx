@@ -24,7 +24,7 @@ const DisplayCard = (props: DisplayCardProps) => {
     .multiply(100).value;
 
   const getColor = (): "success" | "primary" | "danger" | "warning" => {
-    if (displayPercentage && displayPercentage < 5) return "danger";
+    if (displayPercentage && displayPercentage < 0) return "danger";
     if (displayPercentage && displayPercentage < 25) return "warning";
     if (displayPercentage) return "success";
 
