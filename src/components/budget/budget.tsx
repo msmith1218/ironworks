@@ -76,7 +76,7 @@ const Budget = (): JSX.Element => {
                 <Grid key={`${column.id}-grid`}>
                   <DisplayCard
                     editCard={() => setEditingBudget(column)}
-                    percentageDescription={"Remaining Budget"}
+                    percentageDescription={"Remaining"}
                     displayPercentage={
                       currency(column.amount)
                         .subtract(
