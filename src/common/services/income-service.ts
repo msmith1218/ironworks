@@ -9,6 +9,7 @@ const useIncomeService = (): {
 } => {
   const incomeLines = useBillsStorage((state) => state.incomeLines);
   const setState = useBillsStorage((state) => state.setState);
+  const incomeLinesPk = useBillsStorage((state) => state.incomeLinesPk);
 
   const createIncome = (name: string, amount: number) => {
     setState((state) => {
@@ -17,9 +18,10 @@ const useIncomeService = (): {
         {
           name: name,
           amount: amount,
-          id: incomeLines.length === 0 ? 0 : incomeLines.length,
+          id: incomeLinesPk,
         } as BillModel,
       ];
+      state.incomeLinesPk++;
     });
   };
 

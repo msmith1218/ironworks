@@ -97,11 +97,11 @@ const Budget = (): JSX.Element => {
       <div className={styles.transactionsLayout}>
         <AccordionGroup variant="outlined" sx={{ width: "100%" }}>
           {budgetLines &&
-            budgetLines.map((column, index) => (
+            budgetLines.map((column) => (
               <BudgetTransactionGroup
-                index={index}
-                key={index}
-                isExpanded={expandedTransactionIndex === index}
+                index={column.id}
+                key={column.id}
+                isExpanded={expandedTransactionIndex === column.id}
                 expand={(i) => setExpandedTransactionIndex(i)}
                 column={column}
                 editRow={() => {

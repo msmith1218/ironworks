@@ -8,14 +8,13 @@ const useBillService = (): {
   editBill: (bill: BillModel) => void;
 } => {
   const bills = useBillsStorage((state) => state.bills);
+  const billPk = useBillsStorage((state) => state.billPk);
   const setState = useBillsStorage((state) => state.setState);
 
   const createBill = (name: string, amount: number) => {
     setState((state) => {
-      state.bills = [
-        ...(bills ?? []),
-        { name: name, amount: amount, id: bills.length === 0 ? 0 : bills.length } as BillModel,
-      ];
+      state.bills = [...(bills ?? []), { name: name, amount: amount, id: billPk } as BillModel];
+      state.billPk++;
     });
   };
 

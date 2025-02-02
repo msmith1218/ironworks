@@ -3,11 +3,10 @@ import { Fab, List, ListItem, TextField } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import styles from "./budget-transaction-group.module.scss";
 import { BudgetModel } from "./budget-model";
-import { TransactionLine } from "./transaction-line";
-import { useState } from "react";
-
 import DeleteIcon from "@mui/icons-material/Delete";
 import { Accordion, AccordionDetails, AccordionSummary, Typography } from "@mui/joy";
+import { useTransactionService } from "common/services/transaction-service";
+import { TransactionLine } from "./transaction-line";
 
 type InputRowProps = {
   index: number;
@@ -19,35 +18,19 @@ type InputRowProps = {
 
 const BudgetTransactionGroup = (props: InputRowProps): JSX.Element => {
   const { index, isExpanded, column, expand } = props;
-
-  const [editableTransactions, setEditableTransactions] = useState<TransactionLine[]>([]);
+  const { addNewTransaction, editTransaction, budgetTransactionLines, removeTransaction } =
+    useTransactionService(index);
 
   const addTransaction = () => {
-    setEditableTransactions([...editableTransactions, { name: "" } as TransactionLine]);
+    addNewTransaction(column.id);
   };
 
-  const removeTransaction = () => {
-    setEditableTransactions(
-      editableTransactions.filter((_, i) => i !== editableTransactions.length - 1)
-    );
+  const rowAmountOnChange = (amount: number, line: TransactionLine) => {
+    editTransaction({ ...line, amount: amount });
   };
 
-  const rowAmountOnChange = (amount: number, index: number) => {
-    const updatedColumns = editableTransactions
-      ? editableTransactions.map((column, i) =>
-          i === index ? { ...column, amount: amount } : column
-        )
-      : [{ amount: amount } as TransactionLine];
-
-    setEditableTransactions(updatedColumns);
-  };
-
-  const rowNameOnChange = (name: string, index: number) => {
-    const updatedColumns = editableTransactions
-      ? editableTransactions.map((column, i) => (i === index ? { ...column, name: name } : column))
-      : [{ name: name } as TransactionLine];
-
-    setEditableTransactions(updatedColumns);
+  const rowNameOnChange = (name: string, line: TransactionLine) => {
+    editTransaction({ ...line, name: name });
   };
 
   return (
@@ -72,7 +55,7 @@ const BudgetTransactionGroup = (props: InputRowProps): JSX.Element => {
       >
         <div className={styles.accordionHeader}>
           <Typography component="span">{column.name}</Typography>
-          {editableTransactions && editableTransactions.length > 0 && isExpanded && (
+          {budgetTransactionLines && budgetTransactionLines.length > 0 && isExpanded && (
             <div className={styles.addHeader}>
               <div className={styles.addHeaderWithin}>
                 <Fab
@@ -91,18 +74,18 @@ const BudgetTransactionGroup = (props: InputRowProps): JSX.Element => {
         </div>
       </AccordionSummary>
       <AccordionDetails sx={{ padding: "0" }}>
-        {(!editableTransactions || editableTransactions.length < 1) && (
+        {(!budgetTransactionLines || budgetTransactionLines.length < 1) && (
           <div className={styles.accordionDetails}>
             <Fab onClick={() => addTransaction()} size="small" aria-label="add">
               <AddIcon />
             </Fab>
           </div>
         )}
-        {editableTransactions && editableTransactions.length > 0 && (
+        {budgetTransactionLines && budgetTransactionLines.length > 0 && (
           <List dense={true}>
-            {editableTransactions &&
-              editableTransactions.map((column, index) => (
-                <ListItem sx={{ width: "100%" }} key={index}>
+            {budgetTransactionLines &&
+              budgetTransactionLines.map((column) => (
+                <ListItem sx={{ width: "100%" }} key={column.transactionLineId}>
                   <div className={styles.listMainDisplay}>
                     <div className={styles.listHeaders}>
                       <Typography level={"body-md"}>Transaction Name</Typography>
@@ -110,9 +93,9 @@ const BudgetTransactionGroup = (props: InputRowProps): JSX.Element => {
                     </div>
                     <div className={styles.listInnerDisplay}>
                       <TextField
-                        value={column.name}
+                        value={column.name ?? ""}
                         onChange={(e) => {
-                          rowNameOnChange(e.target.value, index);
+                          rowNameOnChange(e.target.value, column);
                         }}
                         id="standard-basic"
                         type="string"
@@ -122,9 +105,9 @@ const BudgetTransactionGroup = (props: InputRowProps): JSX.Element => {
                       />
                       <TextField
                         sx={{ marginLeft: "10px" }}
-                        value={column.amount}
+                        value={column.amount ?? ""}
                         onChange={(e) => {
-                          rowAmountOnChange(Number(e.target.value), index);
+                          rowAmountOnChange(Number(e.target.value), column);
                         }}
                         id="standard-basic"
                         type="number"
@@ -134,7 +117,10 @@ const BudgetTransactionGroup = (props: InputRowProps): JSX.Element => {
                       />
                     </div>
                   </div>
-                  <div className={styles.deleteButton} onClick={() => removeTransaction()}>
+                  <div
+                    className={styles.deleteButton}
+                    onClick={() => removeTransaction(column.transactionLineId)}
+                  >
                     <DeleteIcon sx={{ verticalAlign: "middle" }} />
                   </div>
                 </ListItem>

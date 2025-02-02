@@ -1,14 +1,17 @@
 import { useBillsStorage } from "common/state-management/bills-storage";
 
 import { BudgetModel } from "components/budget/budget-model";
+import { TransactionLine } from "components/budget/transaction-line";
 
 const useBudgetsService = (): {
   budgetLines: BudgetModel[];
   createBudget: (name: string, amount: number) => void;
   removeBudget: (id: number) => void;
   editBudget: (bill: BudgetModel) => void;
+  addNewTransaction: (budgetId: number) => void;
 } => {
   const budgetLines = useBillsStorage((state) => state.budgetLines);
+  const budgetLinesPk = useBillsStorage((state) => state.budgetLinesPk);
   const setState = useBillsStorage((state) => state.setState);
 
   const createBudget = (name: string, amount: number) => {
@@ -18,9 +21,32 @@ const useBudgetsService = (): {
         {
           name: name,
           amount: amount,
-          id: budgetLines.length === 0 ? 0 : budgetLines.length,
+          id: budgetLinesPk,
         } as BudgetModel,
       ];
+      state.budgetLinesPk++;
+    });
+  };
+
+  const addNewTransaction = (budgetId: number) => {
+    const updatedBudgetLines = budgetLines.map((budget) => {
+      if (budget.id === budgetId) {
+        return {
+          ...budget,
+          transactionLines: [
+            ...(budget.transactionLines || []),
+            {
+              transactionLineId:
+                budget.transactionLines.length === 0 ? 0 : budget.transactionLines.length,
+            } as TransactionLine,
+          ],
+        };
+      }
+      return budget;
+    });
+
+    setState((state) => {
+      state.budgetLines = updatedBudgetLines;
     });
   };
 
@@ -36,7 +62,7 @@ const useBudgetsService = (): {
     });
   };
 
-  return { budgetLines, createBudget, removeBudget, editBudget };
+  return { budgetLines, createBudget, removeBudget, editBudget, addNewTransaction };
 };
 
 export { useBudgetsService };
