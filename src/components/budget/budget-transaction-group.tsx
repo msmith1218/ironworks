@@ -4,9 +4,16 @@ import AddIcon from "@mui/icons-material/Add";
 import styles from "./budget-transaction-group.module.scss";
 import { BudgetModel } from "./budget-model";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { Accordion, AccordionDetails, AccordionSummary, Typography } from "@mui/joy";
+import {
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
+  LinearProgress,
+  Typography,
+} from "@mui/joy";
 import { useTransactionService } from "common/services/transaction-service";
 import { TransactionLine } from "./transaction-line";
+import currency from "currency.js";
 
 type InputRowProps = {
   index: number;
@@ -35,6 +42,19 @@ const BudgetTransactionGroup = (props: InputRowProps): JSX.Element => {
     editTransaction({ ...line, name: name });
   };
 
+  const amountRemaining = currency(column.amount).subtract(
+    currency(
+      transactionLines
+        .filter((x) => x.budgetId === column.id)
+        .reduce((acc, curr) => acc + (curr.amount || 0), 0)
+    )
+  );
+
+  const percentageUsed = amountRemaining.divide(column.amount ?? 1).multiply(100).value;
+
+  const getProgressBarColor =
+    percentageUsed < 51 ? (percentageUsed < 10 ? "danger" : "warning") : "success";
+
   return (
     <Accordion
       expanded={isExpanded}
@@ -56,7 +76,23 @@ const BudgetTransactionGroup = (props: InputRowProps): JSX.Element => {
         }}
       >
         <div className={styles.accordionHeader}>
-          <Typography component="span">{column.name}</Typography>
+          <div className={styles.headerDisplay}>
+            <Typography>{column.name}</Typography>
+            <Typography sx={{ paddingBottom: "5px" }} level="body-xs" component="span">
+              {`Remaining: ${amountRemaining.format()}`}
+            </Typography>
+            <div className={styles.progress}>
+              <LinearProgress
+                sx={{ backgroundColor: "lightGrey" }}
+                determinate
+                variant={getProgressBarColor === "danger" ? "outlined" : "soft"}
+                size="lg"
+                color={getProgressBarColor}
+                value={percentageUsed}
+              ></LinearProgress>
+            </div>
+          </div>
+
           {budgetTransactionLines && budgetTransactionLines.length > 0 && isExpanded && (
             <div className={styles.addHeader}>
               <div className={styles.addHeaderWithin}>
