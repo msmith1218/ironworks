@@ -18,6 +18,19 @@
   border-radius: 6px;
 }
 
+.transactionSumDisplay{
+  display: flex;
+  justify-content: center;
+  padding-top: 10px;
+}
+
+
+.remainingDisplay{
+  margin-left:10px;
+  padding-bottom:10px;
+
+}
+
 .inTheRed {
   background-color: rgba(240, 117, 117, 0.5);
   border-radius: 6px;
@@ -111,7 +124,7 @@
 }
 
 .chartHolder {
-  padding-top: 20px;
+  padding-top: 10px;
   padding-bottom: 20px;
   display: flex;
   justify-content: center;

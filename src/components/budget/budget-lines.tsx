@@ -18,22 +18,19 @@ import { BudgetModel } from "./budget-model";
 import { useTransactionService } from "common/services/transaction-service";
 
 const BudgetLines = (): JSX.Element => {
-  const bills = useBillsStorage((state) => state.bills);
-  const [incomeTotal, setIncomeTotal] = useState<number>(0);
-  const [billsTotal, setBillsTotal] = useState<number>(0);
+  
+
   const [openCreateCardModal, setOpenCreateCardModal] = useState<boolean>(false);
 
   const { incomeLines } = useIncomeService();
+  const bills = useBillsStorage((state) => state.bills);
   const { budgetLines, createBudget, editBudget, removeBudget } = useBudgetsService();
   const [editingBudget, setEditingBudget] = useState<BudgetModel>();
 
-  useEffect(() => {
-    setIncomeTotal((incomeLines ?? []).reduce((acc, curr) => acc + (curr.amount || 0), 0));
-  }, [incomeLines]);
+  const incomeTotal = (incomeLines ?? []).reduce((acc, curr) => acc + (curr.amount || 0), 0)
+  const billsTotal = (bills ?? []).reduce((acc, curr) => acc + (curr.amount || 0), 0);
+  const budgetAvailable = currency(incomeTotal).subtract(billsTotal);
 
-  useEffect(() => {
-    setBillsTotal((bills ?? []).reduce((acc, curr) => acc + (curr.amount || 0), 0));
-  }, [bills]);
 
   const removeRow = (id: number) => {
     removeBudget(id);
@@ -50,7 +47,7 @@ const BudgetLines = (): JSX.Element => {
     .subtract(billsTotal)
     .subtract(budgetLines.reduce((acc, curr) => acc + (curr.amount || 0), 0));
 
-  const budgetAvailable = currency(incomeTotal).subtract(billsTotal);
+  
 
   const getAfterBudgetClass = () => {
     if (afterBudgetAmount.value < 0) return styles.inTheRed;
