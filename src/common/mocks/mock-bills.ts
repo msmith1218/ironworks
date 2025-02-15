@@ -97,12 +97,12 @@ export const mockTransactions = [{
   amount: 125.12,
   name: "example gas payment"
 },{
-  transactionLineId: 4,
-  budgetId: 3,
-  amount: 125.12,
-  name: "example gas payment"
-},{
   transactionLineId: 5,
+  budgetId: 2,
+  amount: 135.12,
+  name: "example random"
+},{
+  transactionLineId: 6,
   budgetId: 4,
   amount: 400,
   name: "example savings deposit"

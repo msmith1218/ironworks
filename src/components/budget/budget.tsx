@@ -1,8 +1,6 @@
 import { useState } from "react";
 import styles from "components/budget/budget.module.scss";
-
 import { Box, Radio, Typography } from "@mui/joy";
-
 import BudgetLines from "./budget-lines";
 import BudgetTransactions from "./budget-transactions";
 
