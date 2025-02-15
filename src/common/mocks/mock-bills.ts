@@ -1,5 +1,6 @@
 import { BillModel } from "components/bills/bill-model";
 import { BudgetModel } from "components/budget/budget-model";
+import { TransactionLine } from "components/budget/transaction-line";
 
 export const mockBills = [
   {
@@ -37,12 +38,12 @@ export const mockBills = [
 export const mockIncomeLines = [
   {
     id: 0,
-    name: "Check 1",
+    name: "Test Check 1",
     amount: 2500,
   },
   {
     id: 1,
-    name: "Check 2",
+    name: "Test Check 2",
     amount: 3000,
   },
 ] as BillModel[];
@@ -74,3 +75,35 @@ export const mockBudgets = [
     amount: 500,
   },
 ] as BudgetModel[];
+
+export const mockTransactions = [{
+  transactionLineId: 1,
+  budgetId: 0,
+  amount: 100,
+  name: "example "
+},{
+  transactionLineId: 2,
+  budgetId: 0,
+  amount: 150,
+  name: "example 2"
+},{
+  transactionLineId: 3,
+  budgetId: 0,
+  amount: 55.12,
+  name: "example 3"
+},{
+  transactionLineId: 4,
+  budgetId: 3,
+  amount: 125.12,
+  name: "example gas payment"
+},{
+  transactionLineId: 4,
+  budgetId: 3,
+  amount: 125.12,
+  name: "example gas payment"
+},{
+  transactionLineId: 5,
+  budgetId: 4,
+  amount: 400,
+  name: "example savings deposit"
+}] as TransactionLine[];

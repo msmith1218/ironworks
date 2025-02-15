@@ -3,7 +3,7 @@ import { BillModel } from "components/bills/bill-model";
 import { produce } from "immer";
 import { persist } from "zustand/middleware";
 import { BudgetModel } from "components/budget/budget-model";
-import { mockBills, mockBudgets, mockIncomeLines } from "common/mocks/mock-bills";
+import { mockBills, mockBudgets, mockIncomeLines, mockTransactions } from "common/mocks/mock-bills";
 import { TransactionLine } from "components/budget/transaction-line";
 type BillsStorageModel = {
   bills: BillModel[];
@@ -23,7 +23,7 @@ export const useBillsStorage = create<BillsStorageModel>()(
       bills: mockBills,
       incomeLines: mockIncomeLines,
       budgetLines: mockBudgets,
-      transactionLines: [],
+      transactionLines: mockTransactions,
       billPk: mockBills.length,
       incomeLinesPk: mockIncomeLines.length,
       budgetLinesPk: mockBudgets.length,
