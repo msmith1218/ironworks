@@ -70,7 +70,7 @@ function App() {
                   fontFamily: "helvetica",
                   fontWeight: "900",
                 }}
-                label="Bills"
+                label="Budgets"
                 {...a11yProps(0)}
               />
               <Tab
@@ -87,7 +87,7 @@ function App() {
                   fontFamily: "helvetica",
                   fontWeight: "900",
                 }}
-                label="Budgets"
+                label="Bills"
                 {...a11yProps(2)}
               />
               {/* <Tab
@@ -101,13 +101,13 @@ function App() {
             </Tabs>
           </Box>
           <CustomTabPanel value={value} index={0}>
-            <Bills />
+            <Budget />
           </CustomTabPanel>
           <CustomTabPanel value={value} index={1}>
             <Income />
           </CustomTabPanel>
           <CustomTabPanel value={value} index={2}>
-            <Budget />
+          <Bills />
           </CustomTabPanel>
           <CustomTabPanel value={value} index={3}>
             <Payoff />

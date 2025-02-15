@@ -38,7 +38,7 @@ const CreateCardModal = (props: ModalProps) => {
         />
         <DialogContent>Amount</DialogContent>
         <TextField
-          value={amount ?? ""}
+          value={(amount || amount=== 0) ?? ""}
           onChange={(e) => {
             setAmount(Number(e.target.value));
           }}

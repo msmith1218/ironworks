@@ -143,7 +143,7 @@ const BudgetTransactionGroup = (props: InputRowProps): JSX.Element => {
                       />
                       <TextField
                         sx={{ marginLeft: "10px" }}
-                        value={column.amount ?? ""}
+                        value={(column.amount || column.amount === 0) ?? ""}
                         onChange={(e) => {
                           rowAmountOnChange(Number(e.target.value), column);
                         }}

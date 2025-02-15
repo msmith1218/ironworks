@@ -19,7 +19,7 @@ const Budget = (): JSX.Element => {
       setSelectedValue(SelectedDisplay.transactions);
     }
   };
-  const [selectedValue, setSelectedValue] = useState<SelectedDisplay>(SelectedDisplay.budgets);
+  const [selectedValue, setSelectedValue] = useState<SelectedDisplay>(SelectedDisplay.transactions);
 
   return (
     <>
