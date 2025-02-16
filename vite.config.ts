@@ -4,7 +4,7 @@ import { VitePWA } from "vite-plugin-pwa";
 import path from "path";
 // https://vite.dev/config/
 export default defineConfig({
-  base: "/PersonalFinanceApp/",
+  base: "/PersonalFinanceApp",
   resolve: {
     alias: {
       common: `${path.resolve(__dirname, "./src/common/")}`,
