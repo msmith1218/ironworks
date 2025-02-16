@@ -17,26 +17,32 @@ const BudgetTransactions = (): JSX.Element => {
   const { incomeLines } = useIncomeService();
   const bills = useBillsStorage((state) => state.bills);
 
-
-
-  const incomeTotal = (incomeLines ?? []).reduce((acc, curr) => acc + (curr.amount || 0), 0)
+  const incomeTotal = (incomeLines ?? []).reduce((acc, curr) => acc + (curr.amount || 0), 0);
   const billsTotal = (bills ?? []).reduce((acc, curr) => acc + (curr.amount || 0), 0);
   const budgetAvailable = currency(incomeTotal).subtract(billsTotal);
 
-
   const { budgetLines } = useBudgetsService();
-  const {transactionLines} = useTransactionService();
-  const transactionTotal = currency(transactionLines.reduce((acc, curr) => currency(acc).add(curr.amount || 0).value, 0));
+  const { transactionLines } = useTransactionService();
+  const transactionTotal = currency(
+    transactionLines.reduce((acc, curr) => currency(acc).add(curr.amount || 0).value, 0)
+  );
   const remainingMonthly = budgetAvailable.subtract(transactionTotal);
 
-
-  const transactionGroups = budgetLines.map((b) => {
-    return {
-      id: b.id,
-      value: transactionLines.filter((x) => {return x.budgetId === b.id}).reduce((acc, curr) => currency(acc).add(curr.amount || 0).value, 0),
-      label: b.name,
-    };
-  }).filter((x) => {return x.value > 0});
+  const transactionGroups = budgetLines
+    .map((b) => {
+      return {
+        id: b.id,
+        value: transactionLines
+          .filter((x) => {
+            return x.budgetId === b.id;
+          })
+          .reduce((acc, curr) => currency(acc).add(curr.amount || 0).value, 0),
+        label: b.name,
+      };
+    })
+    .filter((x) => {
+      return x.value > 0;
+    });
 
   const StyledText = styled("text")(({ theme }) => ({
     fill: theme.palette.text.primary,
@@ -61,7 +67,7 @@ const BudgetTransactions = (): JSX.Element => {
   return (
     <>
       <div className={styles.transactionSumDisplay}>
-        <div  className={styles.displayHeader}>
+        <div className={styles.displayHeader}>
           <DialogTitle>Usage Breakdown</DialogTitle>
         </div>
       </div>
@@ -79,15 +85,14 @@ const BudgetTransactions = (): JSX.Element => {
             margin={{ top: 0, right: 0, bottom: 0, left: 0 }}
             slotProps={{ legend: { hidden: true } }}
           >
-            <PieCenterLabel>
-              {transactionTotal.format()}
-            </PieCenterLabel>
+            <PieCenterLabel>{transactionTotal.format()}</PieCenterLabel>
           </PieChart>
         </div>
       </div>
-      <div  className={styles.remainingDisplay}>
-      <DialogTitle>Remaining: {remainingMonthly.format()} from total: {budgetAvailable.format()}</DialogTitle>
-        
+      <div className={styles.remainingDisplay}>
+        <DialogTitle>
+          Remaining: {remainingMonthly.format()} from total: {budgetAvailable.format()}
+        </DialogTitle>
       </div>
       <div className={styles.transactionDisplay}>
         <div className={styles.transactionsLayout}>

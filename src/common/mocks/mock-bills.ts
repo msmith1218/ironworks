@@ -76,34 +76,41 @@ export const mockBudgets = [
   },
 ] as BudgetModel[];
 
-export const mockTransactions = [{
-  transactionLineId: 1,
-  budgetId: 0,
-  amount: 100,
-  name: "example "
-},{
-  transactionLineId: 2,
-  budgetId: 0,
-  amount: 150,
-  name: "example 2"
-},{
-  transactionLineId: 3,
-  budgetId: 0,
-  amount: 55.12,
-  name: "example 3"
-},{
-  transactionLineId: 4,
-  budgetId: 3,
-  amount: 125.12,
-  name: "example gas payment"
-},{
-  transactionLineId: 5,
-  budgetId: 2,
-  amount: 135.12,
-  name: "example random"
-},{
-  transactionLineId: 6,
-  budgetId: 4,
-  amount: 400,
-  name: "example savings deposit"
-}] as TransactionLine[];
+export const mockTransactions = [
+  {
+    transactionLineId: 1,
+    budgetId: 0,
+    amount: 100,
+    name: "example ",
+  },
+  {
+    transactionLineId: 2,
+    budgetId: 0,
+    amount: 150,
+    name: "example 2",
+  },
+  {
+    transactionLineId: 3,
+    budgetId: 0,
+    amount: 55.12,
+    name: "example 3",
+  },
+  {
+    transactionLineId: 4,
+    budgetId: 3,
+    amount: 125.12,
+    name: "example gas payment",
+  },
+  {
+    transactionLineId: 5,
+    budgetId: 2,
+    amount: 135.12,
+    name: "example random",
+  },
+  {
+    transactionLineId: 6,
+    budgetId: 4,
+    amount: 400,
+    name: "example savings deposit",
+  },
+] as TransactionLine[];

@@ -13,7 +13,6 @@ interface TabPanelProps {
   value: number;
 }
 
-
 function a11yProps(index: number) {
   return {
     id: `simple-tab-${index}`,
@@ -31,13 +30,12 @@ function App() {
     if (location.pathname === "/budget") setValue(0);
     if (location.pathname === "/income") setValue(1);
     if (location.pathname === "/bills") setValue(2);
-
   }, [location.pathname]);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-    if(newValue === 0) navigate("/budget");
-    if(newValue === 1) navigate("/income");
-    if(newValue === 2) navigate("/bills");
+    if (newValue === 0) navigate("/budget");
+    if (newValue === 1) navigate("/income");
+    if (newValue === 2) navigate("/bills");
     setValue(newValue);
   };
 
@@ -98,7 +96,7 @@ function App() {
               /> */}
             </Tabs>
           </Box>
-          <Outlet/>
+          <Outlet />
         </Box>
       </div>
     </>

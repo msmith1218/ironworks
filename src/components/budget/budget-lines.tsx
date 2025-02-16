@@ -18,8 +18,6 @@ import { BudgetModel } from "./budget-model";
 import { useTransactionService } from "common/services/transaction-service";
 
 const BudgetLines = (): JSX.Element => {
-  
-
   const [openCreateCardModal, setOpenCreateCardModal] = useState<boolean>(false);
 
   const { incomeLines } = useIncomeService();
@@ -27,10 +25,9 @@ const BudgetLines = (): JSX.Element => {
   const { budgetLines, createBudget, editBudget, removeBudget } = useBudgetsService();
   const [editingBudget, setEditingBudget] = useState<BudgetModel>();
 
-  const incomeTotal = (incomeLines ?? []).reduce((acc, curr) => acc + (curr.amount || 0), 0)
+  const incomeTotal = (incomeLines ?? []).reduce((acc, curr) => acc + (curr.amount || 0), 0);
   const billsTotal = (bills ?? []).reduce((acc, curr) => acc + (curr.amount || 0), 0);
   const budgetAvailable = currency(incomeTotal).subtract(billsTotal);
-
 
   const removeRow = (id: number) => {
     removeBudget(id);
@@ -46,8 +43,6 @@ const BudgetLines = (): JSX.Element => {
   const afterBudgetAmount = currency(incomeTotal)
     .subtract(billsTotal)
     .subtract(budgetLines.reduce((acc, curr) => acc + (curr.amount || 0), 0));
-
-  
 
   const getAfterBudgetClass = () => {
     if (afterBudgetAmount.value < 0) return styles.inTheRed;
