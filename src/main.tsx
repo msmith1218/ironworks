@@ -14,7 +14,7 @@ createRoot(document.getElementById("root")!).render(
           <Route path="budget" index element={<Budget />} />
           <Route path="bills" element={<Bills />} />
           <Route path="income" element={<Income />} />
-          <Route path="" index element={<Budget />} />
+          <Route path="*" index element={<Budget />} />
         </Route>
       </Routes>
     </BrowserRouter>
