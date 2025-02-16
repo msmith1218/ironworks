@@ -1,17 +1,7 @@
-import Bills from "components/bills/bills";
 import styles from "./App.module.scss";
 import { Box, Tab, Tabs } from "@mui/material";
 import { useEffect, useState } from "react";
-import Income from "components/income/income";
-import Budget from "components/budget/budget";
-import Payoff from "components/payoff/payoff";
 import { Outlet, useLocation, useNavigate } from "react-router";
-
-interface TabPanelProps {
-  children?: React.ReactNode;
-  index: number;
-  value: number;
-}
 
 function a11yProps(index: number) {
   return {
