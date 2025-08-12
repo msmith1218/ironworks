@@ -3,6 +3,4 @@
 
 
 
-React PWA application
-
-Simple budgeting app using MUI library for display elements. Showcasing react abilities as well as state management and design. 
+React web page for Ironworks-Investigations
