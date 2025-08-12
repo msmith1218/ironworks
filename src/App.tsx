@@ -8,6 +8,7 @@ import { Button } from "@mui/joy";
 function App() {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [currentPage, setCurrentPage] = useState("Home");
+  const [isNavigatingToContact, setIsNavigatingToContact] = useState(false);
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -17,6 +18,60 @@ function App() {
     if (location.pathname === "/services") setCurrentPage("Services");
     if (location.pathname === "/about") setCurrentPage("About");
   }, [location.pathname]);
+
+  // Scroll to top on route change (but not when navigating to contact)
+  useEffect(() => {
+    // Skip scroll to top if we're navigating to contact
+    if (isNavigatingToContact) {
+      setIsNavigatingToContact(false);
+      return;
+    }
+
+    const scrollToTop = () => {
+      // Try multiple scroll targets and methods
+      try {
+        // Method 1: Standard window scroll
+        window.scrollTo({
+          top: 0,
+          left: 0,
+          behavior: 'auto'
+        });
+        
+        // Method 2: Document element scroll
+        if (document.documentElement) {
+          document.documentElement.scrollTop = 0;
+          document.documentElement.scrollLeft = 0;
+        }
+        
+        // Method 3: Body scroll
+        if (document.body) {
+          document.body.scrollTop = 0;
+          document.body.scrollLeft = 0;
+        }
+        
+        // Method 4: Try to find scrollable containers
+        const scrollableElements = document.querySelectorAll('[data-scroll-container], .scrollable, main');
+        scrollableElements.forEach(element => {
+          if (element instanceof HTMLElement) {
+            element.scrollTop = 0;
+            element.scrollLeft = 0;
+          }
+        });
+      } catch (error) {
+        console.log('Scroll error:', error);
+      }
+    };
+
+    // Immediate scroll
+    scrollToTop();
+    
+    // Also try after component renders
+    const timeoutId = setTimeout(scrollToTop, 50);
+    
+    return () => clearTimeout(timeoutId);
+  }, [location.pathname, isNavigatingToContact]);
+
+
 
   const handleMenuClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -29,11 +84,12 @@ function App() {
   const handleContactClick = () => {
     // First navigate to home if not already there
     if (location.pathname !== "/" && location.pathname !== "/home") {
+      setIsNavigatingToContact(true); // Set flag to prevent scroll to top
       navigate("/home");
       // Wait for navigation to complete, then scroll
       setTimeout(() => {
         scrollToContact();
-      }, 100);
+      }, 150); // Increased timeout to ensure navigation completes
     } else {
       scrollToContact();
     }
@@ -57,7 +113,7 @@ function App() {
 
   return (
     <>
-      <div className={styles.app}>
+      <div className={styles.app} data-scroll-container>
         <Box padding={"0"} sx={{ width: "100%" }}>
           <Box
             sx={{

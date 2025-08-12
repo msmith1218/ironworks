@@ -9,6 +9,7 @@ import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
 import InsuranceIcon from '@mui/icons-material/Security';
 
 const Services = (): JSX.Element => {
+  
   const services = [
     {
       title: "Background Investigations",

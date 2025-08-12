@@ -5,6 +5,7 @@ import { Card, CardContent } from "@mui/joy";
 import SearchIcon from '@mui/icons-material/Search';
 import BusinessIcon from '@mui/icons-material/Business';
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import { useNavigate } from "react-router";
 
 const Home = (): JSX.Element => {
   const [currentService, setCurrentService] = useState(0);
@@ -156,6 +157,10 @@ const Home = (): JSX.Element => {
     alert('Thank you for your inquiry. We will contact you within 24 hours.');
     setFormData({ name: '', email: '', phone: '', message: '' });
   };
+const navigate = useNavigate();
+  const handleServicesClick = () => {
+    navigate("/services");
+  };
 
   return (
     <div className={styles.homeContainer}>
@@ -293,6 +298,7 @@ const Home = (): JSX.Element => {
             />
           ))}
         </div>
+        <div><Button onClick={handleServicesClick}>Services</Button></div>
       </section>
 
       {/* Contact Section */}
