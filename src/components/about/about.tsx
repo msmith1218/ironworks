@@ -166,50 +166,59 @@ const About = (): JSX.Element => {
         >
           Our Experience
         </Typography>
-        <Grid container spacing={3}>
+        <Box sx={{ 
+          display: 'flex', 
+          flexWrap: 'wrap', 
+          gap: 3, 
+          justifyContent: 'center',
+          maxWidth: '1200px',
+          margin: '0 auto'
+        }}>
           {experience.map((exp, index) => (
-            <Grid item xs={12} md={4} key={index}>
-              <Card
-                sx={{
-                  background: 'rgba(255, 255, 255, 0.1)',
-                  backdropFilter: 'blur(10px)',
-                  border: '1px solid rgba(255, 255, 255, 0.2)',
-                  boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3)',
-                  color: '#ffffff',
-                  height: '100%',
-                  transition: 'transform 0.3s ease',
-                  '&:hover': {
-                    transform: 'translateY(-5px)',
-                  }
-                }}
-              >
-                <CardContent sx={{ padding: 3, textAlign: 'center' }}>
-                  <Box sx={{ marginBottom: 2 }}>
-                    <WorkIcon sx={{ fontSize: 48, color: '#64b5f6' }} />
-                  </Box>
-                  <Typography
-                    variant="h6"
-                    sx={{ fontWeight: 'bold', marginBottom: 1, color: '#64b5f6' }}
-                  >
-                    {exp.title}
-                  </Typography>
-                  <Typography
-                    variant="h5"
-                    sx={{ fontWeight: 'bold', marginBottom: 2, color: '#ffffff' }}
-                  >
-                    {exp.years}
-                  </Typography>
-                  <Typography
-                    variant="body2"
-                    sx={{ color: '#bbdefb', lineHeight: 1.6 }}
-                  >
-                    {exp.description}
-                  </Typography>
-                </CardContent>
-              </Card>
-            </Grid>
+            <Card
+              key={index}
+              className={styles.experienceCard}
+              sx={{
+                background: 'rgba(255, 255, 255, 0.1)',
+                backdropFilter: 'blur(10px)',
+                border: '1px solid rgba(255, 255, 255, 0.2)',
+                boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3)',
+                color: '#ffffff',
+                flex: '1 1 300px',
+                maxWidth: '350px',
+                minWidth: '280px',
+                transition: 'transform 0.3s ease',
+                '&:hover': {
+                  transform: 'translateY(-5px)',
+                }
+              }}
+            >
+              <CardContent sx={{ padding: 3, textAlign: 'center' }}>
+                <Box sx={{ marginBottom: 2 }}>
+                  <WorkIcon sx={{ fontSize: 48, color: '#64b5f6' }} />
+                </Box>
+                <Typography
+                  variant="h6"
+                  sx={{ fontWeight: 'bold', marginBottom: 1, color: '#64b5f6' }}
+                >
+                  {exp.title}
+                </Typography>
+                <Typography
+                  variant="h5"
+                  sx={{ fontWeight: 'bold', marginBottom: 2, color: '#ffffff' }}
+                >
+                  {exp.years}
+                </Typography>
+                <Typography
+                  variant="body2"
+                  sx={{ color: '#bbdefb', lineHeight: 1.6 }}
+                >
+                  {exp.description}
+                </Typography>
+              </CardContent>
+            </Card>
           ))}
-        </Grid>
+        </Box>
       </Box>
 
       {/* Credentials */}
@@ -260,44 +269,53 @@ const About = (): JSX.Element => {
         >
           Our Core Values
         </Typography>
-        <Grid container spacing={3}>
+        <Box sx={{ 
+          display: 'flex', 
+          flexWrap: 'wrap', 
+          gap: 3, 
+          justifyContent: 'center',
+          maxWidth: '1200px',
+          margin: '0 auto'
+        }}>
           {values.map((value, index) => (
-            <Grid item xs={12} md={4} key={index}>
-              <Card
-                sx={{
-                  background: 'rgba(255, 255, 255, 0.1)',
-                  backdropFilter: 'blur(10px)',
-                  border: '1px solid rgba(255, 255, 255, 0.2)',
-                  boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3)',
-                  color: '#ffffff',
-                  height: '100%',
-                  transition: 'transform 0.3s ease',
-                  '&:hover': {
-                    transform: 'translateY(-5px)',
-                  }
-                }}
-              >
-                <CardContent sx={{ padding: 3, textAlign: 'center' }}>
-                  <Box sx={{ marginBottom: 2 }}>
-                    {value.icon}
-                  </Box>
-                  <Typography
-                    variant="h5"
-                    sx={{ fontWeight: 'bold', marginBottom: 2, color: '#ffffff' }}
-                  >
-                    {value.title}
-                  </Typography>
-                  <Typography
-                    variant="body1"
-                    sx={{ color: '#bbdefb', lineHeight: 1.6 }}
-                  >
-                    {value.description}
-                  </Typography>
-                </CardContent>
-              </Card>
-            </Grid>
+            <Card
+              key={index}
+              className={styles.valueCard}
+              sx={{
+                background: 'rgba(255, 255, 255, 0.1)',
+                backdropFilter: 'blur(10px)',
+                border: '1px solid rgba(255, 255, 255, 0.2)',
+                boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3)',
+                color: '#ffffff',
+                flex: '1 1 300px',
+                maxWidth: '350px',
+                minWidth: '280px',
+                transition: 'transform 0.3s ease',
+                '&:hover': {
+                  transform: 'translateY(-5px)',
+                }
+              }}
+            >
+              <CardContent sx={{ padding: 3, textAlign: 'center' }}>
+                <Box sx={{ marginBottom: 2 }}>
+                  {value.icon}
+                </Box>
+                <Typography
+                  variant="h5"
+                  sx={{ fontWeight: 'bold', marginBottom: 2, color: '#ffffff' }}
+                >
+                  {value.title}
+                </Typography>
+                <Typography
+                  variant="body1"
+                  sx={{ color: '#bbdefb', lineHeight: 1.6 }}
+                >
+                  {value.description}
+                </Typography>
+              </CardContent>
+            </Card>
           ))}
-        </Grid>
+        </Box>
       </Box>
 
       {/* Contact CTA */}

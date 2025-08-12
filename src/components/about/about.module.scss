@@ -3,13 +3,25 @@
   padding-bottom: 2rem;
 }
 
+.experienceCard,
+.valueCard {
+  transition: all 0.3s ease;
+  
+  &:hover {
+    transform: translateY(-5px) !important;
+  }
+}
+
 @media (max-width: 768px) {
   .aboutContainer {
     padding: 1rem 0;
-    
-    .experienceCard,
-    .valueCard {
-      margin-bottom: 1rem;
-    }
+  }
+  
+  .experienceCard,
+  .valueCard {
+    flex: 1 1 100% !important;
+    max-width: none !important;
+    min-width: auto !important;
+    margin-bottom: 1rem;
   }
 }

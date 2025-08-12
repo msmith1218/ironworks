@@ -1,14 +1,14 @@
-.servicesContainer {
-  min-height: 100vh;
-  padding-bottom: 2rem;
-}
-
 .serviceCard {
   transition: all 0.3s ease;
   
   &:hover {
     transform: translateY(-8px) !important;
   }
+}
+
+.servicesContainer {
+  min-height: 100vh;
+  padding-bottom: 2rem;
 }
 
 .featureList {
@@ -38,5 +38,8 @@
   
   .serviceCard {
     margin-bottom: 1rem;
+    flex: 1 1 100% !important;
+    max-width: none !important;
+    min-width: auto !important;
   }
 }

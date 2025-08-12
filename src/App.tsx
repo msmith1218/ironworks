@@ -1,32 +1,58 @@
 import styles from "./App.module.scss";
-import { Box, Tab, Tabs } from "@mui/material";
+import { Box, IconButton, Menu, MenuItem, Typography } from "@mui/material";
+import { Menu as MenuIcon } from "@mui/icons-material";
 import { useEffect, useState } from "react";
 import { Outlet, useLocation, useNavigate } from "react-router";
-
-function a11yProps(index: number) {
-  return {
-    id: `simple-tab-${index}`,
-    "aria-controls": `simple-tabpanel-${index}`,
-  };
-}
+import { Button } from "@mui/joy";
 
 function App() {
-  const [value, setValue] = useState(0);
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const [currentPage, setCurrentPage] = useState("Home");
 
   const location = useLocation();
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (location.pathname === "/" || location.pathname === "/home") setValue(0);
-    if (location.pathname === "/services") setValue(1);
-    if (location.pathname === "/about") setValue(2);
+    if (location.pathname === "/" || location.pathname === "/home") setCurrentPage("Home");
+    if (location.pathname === "/services") setCurrentPage("Services");
+    if (location.pathname === "/about") setCurrentPage("About");
   }, [location.pathname]);
 
-  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-    if (newValue === 0) navigate("/home");
-    if (newValue === 1) navigate("/services");
-    if (newValue === 2) navigate("/about");
-    setValue(newValue);
+  const handleMenuClick = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+  };
+
+  const handleContactClick = () => {
+    // First navigate to home if not already there
+    if (location.pathname !== "/" && location.pathname !== "/home") {
+      navigate("/home");
+      // Wait for navigation to complete, then scroll
+      setTimeout(() => {
+        scrollToContact();
+      }, 100);
+    } else {
+      scrollToContact();
+    }
+  };
+
+  const scrollToContact = () => {
+    const contactSection = document.querySelector('[data-contact-section]');
+    if (contactSection) {
+      contactSection.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start',
+      });
+    }
+  };
+
+  const handleMenuItemClick = (page: string, path: string) => {
+    setCurrentPage(page);
+    navigate(path);
+    handleMenuClose();
   };
 
   return (
@@ -38,56 +64,73 @@ function App() {
               borderBottom: 1,
               borderColor: "rgba(255, 255, 255, 0.2)",
               position: "sticky",
-              padding: "0px",
               top: 0,
               zIndex: 1000,
               background: "rgba(26, 26, 46, 0.9)",
               backdropFilter: "blur(10px)",
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
             }}
           >
-            <Tabs
+            <Button
+              onClick={handleContactClick}
               sx={{
-                bgcolor: "transparent",
-                '& .MuiTab-root': {
+                marginLeft: "0.7rem",
+                fontSize: "0.7rem",
+                minHeight: "24px",
+                minWidth: "auto"
+              }}
+            >
+              Contact
+            </Button>
+
+            <Box sx={{ display: "flex", alignItems: "center", gap: 2, paddingRight: '10px' }}>
+
+              <IconButton
+                onClick={handleMenuClick}
+                sx={{
                   color: 'rgba(255, 255, 255, 0.7)',
-                  '&.Mui-selected': {
+                  '&:hover': {
+                    color: '#64b5f6',
+                  },
+                }}
+              >
+                <MenuIcon />
+              </IconButton>
+            </Box>
+
+            <Menu
+              anchorEl={anchorEl}
+              open={Boolean(anchorEl)}
+              onClose={handleMenuClose}
+              sx={{
+                '& .MuiPaper-root': {
+                  backgroundColor: 'rgba(26, 26, 46, 0.95)',
+                  backdropFilter: 'blur(10px)',
+                  border: '1px solid rgba(255, 255, 255, 0.1)',
+                },
+                '& .MuiMenuItem-root': {
+                  color: 'rgba(255, 255, 255, 0.7)',
+                  fontFamily: 'helvetica',
+                  fontWeight: '900',
+                  '&:hover': {
+                    backgroundColor: 'rgba(100, 181, 246, 0.1)',
                     color: '#64b5f6',
                   },
                 },
-                '& .MuiTabs-indicator': {
-                  backgroundColor: '#64b5f6',
-                },
               }}
-              value={value}
-              onChange={handleChange}
-              aria-label="main tabs"
             >
-              <Tab
-                sx={{
-                  fontFamily: "helvetica",
-                  fontWeight: "900",
-                }}
-                label="Home"
-                {...a11yProps(0)}
-              />
-              <Tab
-                sx={{
-                  fontFamily: "helvetica",
-                  fontWeight: "900",
-                }}
-                label="Services"
-                {...a11yProps(1)}
-              />
-              <Tab
-                data-qa={"about-tab"}
-                sx={{
-                  fontFamily: "helvetica",
-                  fontWeight: "900",
-                }}
-                label="About"
-                {...a11yProps(2)}
-              />
-            </Tabs>
+              <MenuItem onClick={() => handleMenuItemClick("Home", "/home")}>
+                Home
+              </MenuItem>
+              <MenuItem onClick={() => handleMenuItemClick("Services", "/services")}>
+                Services
+              </MenuItem>
+              <MenuItem onClick={() => handleMenuItemClick("About", "/about")}>
+                About
+              </MenuItem>
+            </Menu>
           </Box>
           <Outlet />
         </Box>

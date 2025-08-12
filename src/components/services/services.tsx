@@ -115,79 +115,88 @@ const Services = (): JSX.Element => {
         </Typography>
       </Box>
 
-      <Grid container spacing={4} sx={{ padding: '0 2rem 2rem 2rem' }}>
+      <Box sx={{ 
+        display: 'flex', 
+        flexWrap: 'wrap', 
+        gap: 3, 
+        padding: '0 2rem 2rem 2rem',
+        justifyContent: 'center',
+        maxWidth: '1200px',
+        margin: '0 auto'
+      }}>
         {services.map((service, index) => (
-          <Grid item xs={12} md={6} lg={4} key={index}>
-            <Card
-              className={styles.serviceCard}
-              sx={{
-                background: 'rgba(255, 255, 255, 0.1)',
-                backdropFilter: 'blur(10px)',
-                border: '1px solid rgba(255, 255, 255, 0.2)',
-                boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3)',
-                color: '#ffffff',
-                height: '100%',
-                transition: 'transform 0.3s ease, box-shadow 0.3s ease',
-                cursor: 'pointer',
-                '&:hover': {
-                  transform: 'translateY(-8px)',
-                  boxShadow: '0 12px 40px rgba(0, 0, 0, 0.4)',
-                }
-              }}
-            >
-              <CardContent sx={{ padding: 3, height: '100%', display: 'flex', flexDirection: 'column' }}>
-                <Box sx={{ textAlign: 'center', marginBottom: 2 }}>
-                  {service.icon}
-                </Box>
-                <Typography
-                  variant="h5"
-                  component="h3"
-                  sx={{ 
-                    marginBottom: 2, 
-                    fontWeight: 'bold',
-                    textAlign: 'center',
-                    color: '#ffffff'
-                  }}
-                >
-                  {service.title}
-                </Typography>
+          <Card
+            key={index}
+            className={styles.serviceCard}
+            sx={{
+              background: 'rgba(255, 255, 255, 0.1)',
+              backdropFilter: 'blur(10px)',
+              border: '1px solid rgba(255, 255, 255, 0.2)',
+              boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3)',
+              color: '#ffffff',
+              flex: '1 1 300px',
+              maxWidth: '350px',
+              minWidth: '280px',
+              transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+              cursor: 'pointer',
+              '&:hover': {
+                transform: 'translateY(-8px)',
+                boxShadow: '0 12px 40px rgba(0, 0, 0, 0.4)',
+              }
+            }}
+          >
+            <CardContent sx={{ padding: 3, height: '100%', display: 'flex', flexDirection: 'column' }}>
+              <Box sx={{ textAlign: 'center', marginBottom: 2 }}>
+                {service.icon}
+              </Box>
+              <Typography
+                variant="h5"
+                component="h3"
+                sx={{ 
+                  marginBottom: 2, 
+                  fontWeight: 'bold',
+                  textAlign: 'center',
+                  color: '#ffffff'
+                }}
+              >
+                {service.title}
+              </Typography>
+              <Typography 
+                variant="body1" 
+                sx={{ 
+                  marginBottom: 2, 
+                  lineHeight: 1.6,
+                  color: '#e3f2fd',
+                  flexGrow: 1
+                }}
+              >
+                {service.description}
+              </Typography>
+              <Box>
                 <Typography 
-                  variant="body1" 
+                  variant="subtitle2" 
                   sx={{ 
-                    marginBottom: 2, 
-                    lineHeight: 1.6,
-                    color: '#e3f2fd',
-                    flexGrow: 1
+                    fontWeight: 'bold', 
+                    marginBottom: 1,
+                    color: '#64b5f6'
                   }}
                 >
-                  {service.description}
+                  Key Services:
                 </Typography>
-                <Box>
-                  <Typography 
-                    variant="subtitle2" 
-                    sx={{ 
-                      fontWeight: 'bold', 
-                      marginBottom: 1,
-                      color: '#64b5f6'
-                    }}
-                  >
-                    Key Services:
-                  </Typography>
-                  <ul className={styles.featureList}>
-                    {service.features.map((feature, featureIndex) => (
-                      <li key={featureIndex}>
-                        <Typography variant="body2" sx={{ color: '#bbdefb' }}>
-                          {feature}
-                        </Typography>
-                      </li>
-                    ))}
-                  </ul>
-                </Box>
-              </CardContent>
-            </Card>
-          </Grid>
+                <ul className={styles.featureList}>
+                  {service.features.map((feature, featureIndex) => (
+                    <li key={featureIndex}>
+                      <Typography variant="body2" sx={{ color: '#bbdefb' }}>
+                        {feature}
+                      </Typography>
+                    </li>
+                  ))}
+                </ul>
+              </Box>
+            </CardContent>
+          </Card>
         ))}
-      </Grid>
+      </Box>
 
       <Box sx={{ padding: '2rem', textAlign: 'center', marginTop: '2rem' }}>
         <Typography
@@ -203,11 +212,14 @@ const Services = (): JSX.Element => {
         </Typography>
         <Grid 
           container 
-          spacing={3} 
+          spacing={4} 
           sx={{ 
             marginTop: 2, 
             justifyContent: 'center',
-            alignItems: 'stretch'
+            alignItems: 'stretch',
+            '& .MuiGrid-item': {
+              marginBottom: { xs: 3, sm: 4 }
+            }
           }}
         >
           <Grid item xs={12} sm={6} md={4}>

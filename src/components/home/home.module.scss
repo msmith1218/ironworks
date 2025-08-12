@@ -63,44 +63,56 @@
 }
 
 .carouselContainer {
+  position: relative;
+  margin: 2rem auto;
+  max-width: 90vw;
+  width: 100%;
+  padding: 0 2rem;
+  box-sizing: border-box;
+  overflow: hidden;
+  border-radius: 12px;
+
+  @media (min-width: 1200px) {
+    max-width: 1000px;
+  }
+
+  @media (min-width: 768px) and (max-width: 1199px) {
+    max-width: 80vw;
+    padding: 0 1.5rem;
+  }
+}
+
+.carouselTrack {
+  display: flex;
+  width: 100%;
+  will-change: transform;
+  touch-action: pan-y;
+}
+
+.carouselSlide {
+  flex: 0 0 100%;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 1rem;
-  margin: 2rem 0;
-  max-width: 100%;
-  width: 100%;
   padding: 0 1rem;
   box-sizing: border-box;
 }
 
-.carouselButton {
-  background: rgba(255, 255, 255, 0.1) !important;
-  color: #ffffff !important;
-  border: 1px solid rgba(255, 255, 255, 0.2) !important;
-  border-radius: 50% !important;
-  min-width: 40px !important;
-  width: 40px !important;
-  height: 40px !important;
-  backdrop-filter: blur(10px);
-  transition: all 0.3s ease !important;
-  flex-shrink: 0;
-  
-  &:hover {
-    background: rgba(255, 255, 255, 0.2) !important;
-    transform: scale(1.1);
-  }
-}
-
 .serviceCard {
-  flex: 1;
-  max-width: 100%;
-  min-width: 0;
-  transition: transform 0.3s ease;
   width: 100%;
+  max-width: 100%;
+  transition: box-shadow 0.3s ease;
   
   &:hover {
-    transform: translateY(-5px);
+    // Enhanced hover effects for different card types - removed translateY
+    &:nth-child(odd) {
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4) !important;
+    }
+    
+    &:nth-child(even) {
+      box-shadow: 0 12px 40px rgba(76, 175, 80, 0.3) !important;
+    }
   }
 }
 
@@ -188,28 +200,21 @@
   }
 
   .carouselContainer {
-    flex-direction: column;
-    gap: 1rem;
-    padding: 0 0.5rem;
-    margin: 1rem 0;
+    padding: 0 1rem;
+    margin: 1rem auto;
+    max-width: 95vw;
   }
-  
-  .carouselButton {
-    min-width: 40px !important;
-    width: 40px !important;
-    height: 40px !important;
-    
-    &:first-child {
-      order: 1;
-    }
-    
-    &:last-child {
-      order: 3;
-    }
+
+  .carouselTrack {
+    width: 100%;
+  }
+
+  .carouselSlide {
+    flex: 0 0 100%;
+    padding: 0 0.75rem;
   }
   
   .serviceCard {
-    order: 2;
     width: 100%;
     max-width: 100%;
     margin: 0;
@@ -247,14 +252,22 @@
   }
 
   .carouselContainer {
-    padding: 0;
-    gap: 0.5rem;
+    padding: 0 0.5rem;
+    margin: 1rem auto;
+    max-width: 98vw;
   }
 
-  .carouselButton {
-    min-width: 35px !important;
-    width: 35px !important;
-    height: 35px !important;
+  .carouselTrack {
+    width: 100%;
+  }
+
+  .carouselSlide {
+    flex: 0 0 100%;
+    padding: 0 0.5rem;
+  }
+
+  .serviceCard {
+    margin: 0;
   }
 
   .contactForm {

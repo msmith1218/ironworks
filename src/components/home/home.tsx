@@ -1,15 +1,20 @@
-import { useState } from "react";
+import { useState, useRef, useCallback } from "react";
 import styles from "./home.module.scss";
 import { Box, Typography, Button, TextField, Grid } from "@mui/material";
 import { Card, CardContent } from "@mui/joy";
-import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import SearchIcon from '@mui/icons-material/Search';
 import BusinessIcon from '@mui/icons-material/Business';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 
 const Home = (): JSX.Element => {
   const [currentService, setCurrentService] = useState(0);
+  const [dragData, setDragData] = useState({
+    isDragging: false,
+    startX: 0,
+    currentX: 0,
+    translate: 0
+  });
+  const containerRef = useRef<HTMLDivElement>(null);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -24,7 +29,7 @@ const Home = (): JSX.Element => {
       icon: <SearchIcon sx={{ fontSize: 40, color: '#64b5f6' }} />
     },
     {
-      title: "Business Investigation",
+      title: "Business Investigation", 
       description: "Corporate investigations including due diligence, fraud detection, asset verification, and competitive intelligence to protect your business interests.",
       icon: <BusinessIcon sx={{ fontSize: 40, color: '#81c784' }} />
     },
@@ -35,13 +40,110 @@ const Home = (): JSX.Element => {
     }
   ];
 
-  const nextService = () => {
-    setCurrentService((prev) => (prev + 1) % services.length);
-  };
+  const goToSlide = useCallback((index: number) => {
+    setCurrentService(index);
+    setDragData(prev => ({ ...prev, translate: 0 }));
+  }, []);
 
-  const prevService = () => {
-    setCurrentService((prev) => (prev - 1 + services.length) % services.length);
-  };
+  const nextSlide = useCallback(() => {
+    const next = currentService === services.length - 1 ? 0 : currentService + 1;
+    goToSlide(next);
+  }, [currentService, services.length, goToSlide]);
+
+  const prevSlide = useCallback(() => {
+    const prev = currentService === 0 ? services.length - 1 : currentService - 1;
+    goToSlide(prev);
+  }, [currentService, services.length, goToSlide]);
+
+  // Mouse events
+  const handleMouseDown = useCallback((e: React.MouseEvent) => {
+    e.preventDefault();
+    setDragData({
+      isDragging: true,
+      startX: e.clientX,
+      currentX: e.clientX,
+      translate: 0
+    });
+  }, []);
+
+  const handleMouseMove = useCallback((e: React.MouseEvent) => {
+    if (!dragData.isDragging) return;
+    e.preventDefault();
+    
+    const currentX = e.clientX;
+    const diff = dragData.startX - currentX;
+    const translate = -diff;
+    
+    setDragData(prev => ({
+      ...prev,
+      currentX,
+      translate
+    }));
+  }, [dragData.isDragging, dragData.startX]);
+
+  const handleMouseUp = useCallback(() => {
+    if (!dragData.isDragging) return;
+    
+    const diff = dragData.startX - dragData.currentX;
+    const threshold = 100; // minimum distance to trigger slide change
+    
+    if (Math.abs(diff) > threshold) {
+      if (diff > 0) {
+        nextSlide();
+      } else {
+        prevSlide();
+      }
+    } else {
+      setDragData(prev => ({ ...prev, translate: 0 }));
+    }
+    
+    setDragData(prev => ({ ...prev, isDragging: false }));
+  }, [dragData.isDragging, dragData.startX, dragData.currentX, nextSlide, prevSlide]);
+
+  // Touch events
+  const handleTouchStart = useCallback((e: React.TouchEvent) => {
+    const touch = e.touches[0];
+    setDragData({
+      isDragging: true,
+      startX: touch.clientX,
+      currentX: touch.clientX,
+      translate: 0
+    });
+  }, []);
+
+  const handleTouchMove = useCallback((e: React.TouchEvent) => {
+    if (!dragData.isDragging) return;
+    
+    const touch = e.touches[0];
+    const currentX = touch.clientX;
+    const diff = dragData.startX - currentX;
+    const translate = -diff;
+    
+    setDragData(prev => ({
+      ...prev,
+      currentX,
+      translate
+    }));
+  }, [dragData.isDragging, dragData.startX]);
+
+  const handleTouchEnd = useCallback(() => {
+    if (!dragData.isDragging) return;
+    
+    const diff = dragData.startX - dragData.currentX;
+    const threshold = 50; // smaller threshold for touch
+    
+    if (Math.abs(diff) > threshold) {
+      if (diff > 0) {
+        nextSlide();
+      } else {
+        prevSlide();
+      }
+    } else {
+      setDragData(prev => ({ ...prev, translate: 0 }));
+    }
+    
+    setDragData(prev => ({ ...prev, isDragging: false }));
+  }, [dragData.isDragging, dragData.startX, dragData.currentX, nextSlide, prevSlide]);
 
   const handleInputChange = (field: string, value: string) => {
     setFormData(prev => ({ ...prev, [field]: value }));
@@ -116,52 +218,68 @@ const Home = (): JSX.Element => {
         </Typography>
         
         <div className={styles.carouselContainer}>
-          <Button
-            onClick={prevService}
-            className={styles.carouselButton}
-            sx={{ minWidth: '50px' }}
-          >
-            <ArrowBackIosIcon />
-          </Button>
-          
-          <Card
-            className={styles.serviceCard}
-            sx={{
-              background: 'rgba(255, 255, 255, 0.1)',
-              backdropFilter: 'blur(10px)',
-              border: '1px solid rgba(255, 255, 255, 0.2)',
-              boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3)',
-              color: '#ffffff',
-              minHeight: '300px',
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'center'
+          <div 
+            className={styles.carouselTrack}
+            ref={containerRef}
+            onMouseDown={handleMouseDown}
+            onMouseMove={handleMouseMove}
+            onMouseUp={handleMouseUp}
+            onMouseLeave={handleMouseUp}
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
+            style={{
+              transform: `translateX(calc(-${currentService * 100}% + ${dragData.translate}px))`,
+              transition: dragData.isDragging ? 'none' : 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+              cursor: dragData.isDragging ? 'grabbing' : 'grab',
+              userSelect: 'none',
+              WebkitUserSelect: 'none'
             }}
           >
-            <CardContent sx={{ textAlign: 'center', padding: 4 }}>
-              <Box sx={{ marginBottom: 2 }}>
-                {services[currentService].icon}
-              </Box>
-              <Typography
-                variant="h5"
-                component="h3"
-                sx={{ marginBottom: 2, fontWeight: 'bold' }}
-              >
-                {services[currentService].title}
-              </Typography>
-              <Typography variant="body1" sx={{ lineHeight: 1.6 }}>
-                {services[currentService].description}
-              </Typography>
-            </CardContent>
-          </Card>
-          
-          <Button
-            onClick={nextService}
-            className={styles.carouselButton}
-            sx={{ minWidth: '50px' }}
-          >
-            <ArrowForwardIosIcon />
-          </Button>
+            {services.map((service, index) => (
+              <div key={index} className={styles.carouselSlide}>
+                <Card
+                  className={styles.serviceCard}
+                  sx={{
+                    background: index % 2 === 0 
+                      ? 'rgba(255, 255, 255, 0.1)' 
+                      : 'linear-gradient(135deg, rgba(76, 175, 80, 0.5) 0%, rgba(56, 142, 60, 0.5) 100%)',
+                    backdropFilter: 'blur(10px)',
+                    border: index % 2 === 0 
+                      ? '1px solid rgba(255, 255, 255, 0.2)' 
+                      : '1px solid rgba(76, 175, 80, 0.3)',
+                    boxShadow: index % 2 === 0 
+                      ? '0 8px 32px rgba(0, 0, 0, 0.3)' 
+                      : '0 8px 32px rgba(76, 175, 80, 0.2)',
+                    color: '#ffffff',
+                    minHeight: '300px',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'center',
+                    width: '100%',
+                    margin: 0,
+                    transition: 'all 0.3s ease'
+                  }}
+                >
+                  <CardContent sx={{ textAlign: 'center', padding: 4 }}>
+                    <Box sx={{ marginBottom: 2, pointerEvents: 'none' }}>
+                      {service.icon}
+                    </Box>
+                    <Typography
+                      variant="h5"
+                      component="h3"
+                      sx={{ marginBottom: 2, fontWeight: 'bold', pointerEvents: 'none' }}
+                    >
+                      {service.title}
+                    </Typography>
+                    <Typography variant="body1" sx={{ lineHeight: 1.6, pointerEvents: 'none' }}>
+                      {service.description}
+                    </Typography>
+                  </CardContent>
+                </Card>
+              </div>
+            ))}
+          </div>
         </div>
 
         <div className={styles.carouselIndicators}>
@@ -171,14 +289,14 @@ const Home = (): JSX.Element => {
               className={`${styles.indicator} ${
                 index === currentService ? styles.active : ''
               }`}
-              onClick={() => setCurrentService(index)}
+              onClick={() => goToSlide(index)}
             />
           ))}
         </div>
       </section>
 
       {/* Contact Section */}
-      <section className={styles.contactSection}>
+      <section className={styles.contactSection} data-contact-section>
         <Typography
           variant="h4"
           component="h2"
