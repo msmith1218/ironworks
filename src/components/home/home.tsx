@@ -37,7 +37,7 @@ const Home = (): JSX.Element => {
     {
       title: "Infidelity Investigation",
       description: "Discreet marital investigations providing clarity in personal relationships. Professional surveillance and evidence gathering with complete confidentiality.",
-      icon: <FavoriteIcon sx={{ fontSize: 40, color: '#f06292' }} />
+      icon: <SearchIcon sx={{ fontSize: 40, color: '#64b5f6' }} />
     }
   ];
 
