@@ -98,9 +98,18 @@ function App() {
   const scrollToContact = () => {
     const contactSection = document.querySelector('[data-contact-section]');
     if (contactSection) {
-      contactSection.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start',
+      // Calculate header height to offset scroll position
+      const header = document.querySelector('[data-sticky-header]');
+      const headerHeight = header ? header.getBoundingClientRect().height : 60;
+      
+      // Get the contact section position
+      const rect = contactSection.getBoundingClientRect();
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      const targetPosition = rect.top + scrollTop - headerHeight - 20; // Extra 20px buffer
+      
+      window.scrollTo({
+        top: targetPosition,
+        behavior: 'smooth'
       });
     }
   };
@@ -116,6 +125,7 @@ function App() {
       <div className={styles.app} data-scroll-container>
         <Box padding={"0"} sx={{ width: "100%" }}>
           <Box
+            data-sticky-header
             sx={{
               borderBottom: 1,
               borderColor: "rgba(255, 255, 255, 0.2)",
@@ -127,6 +137,7 @@ function App() {
               display: "flex",
               justifyContent: "space-between",
               alignItems: "center",
+              height: '60px', // Fixed height for consistent calculations
             }}
           >
             <Button

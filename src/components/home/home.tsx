@@ -255,7 +255,7 @@ const navigate = useNavigate();
                       : '1px solid rgba(76, 175, 80, 0.3)',
                     boxShadow: index % 2 === 0 
                       ? '0 8px 32px rgba(0, 0, 0, 0.3)' 
-                      : '0 8px 32px rgba(76, 175, 80, 0.2)',
+                      : '0 8px 32px rgba(76, 175, 80, 0.3)',
                     color: '#ffffff',
                     minHeight: '300px',
                     display: 'flex',
