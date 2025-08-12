@@ -206,8 +206,6 @@ const Services = (): JSX.Element => {
           spacing={3} 
           sx={{ 
             marginTop: 2, 
-            maxWidth: '1000px', 
-            margin: '2rem auto 0 auto',
             justifyContent: 'center',
             alignItems: 'stretch'
           }}
