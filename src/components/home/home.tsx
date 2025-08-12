@@ -61,7 +61,7 @@ const Home = (): JSX.Element => {
       <section className={styles.heroSection}>
         <div className={styles.logoContainer}>
           <img 
-            src="/IMG_2688.png" 
+            src={`${import.meta.env.BASE_URL}IMG_2688.png`}
             alt="Ironworks Investigations Logo" 
             className={styles.heroLogo}
           />
