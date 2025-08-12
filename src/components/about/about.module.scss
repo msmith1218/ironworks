@@ -1,0 +1,15 @@
+.aboutContainer {
+  min-height: 100vh;
+  padding-bottom: 2rem;
+}
+
+@media (max-width: 768px) {
+  .aboutContainer {
+    padding: 1rem 0;
+    
+    .experienceCard,
+    .valueCard {
+      margin-bottom: 1rem;
+    }
+  }
+}

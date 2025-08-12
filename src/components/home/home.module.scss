@@ -1,0 +1,265 @@
+.homeContainer {
+  min-height: 100vh;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+.heroSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem 1rem;
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  box-sizing: border-box;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(ellipse at center, rgba(255,255,255,0.1) 0%, transparent 70%);
+    pointer-events: none;
+  }
+}
+
+.logoContainer {
+  top: 45%;
+  left: 50%;
+  pointer-events: none;
+}
+
+.heroLogo {
+  max-width: 500px;
+  max-height: 500px;
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.3));
+}
+
+.heroContent {
+  position: relative;
+  z-index: 1;
+  max-width: 800px;
+  margin: 0 auto;
+  width: 100%;
+  padding: 0 1rem;
+  box-sizing: border-box;
+}
+
+.servicesSection {
+  padding: 2rem 1rem;
+  text-align: center;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.carouselContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin: 2rem 0;
+  max-width: 100%;
+  width: 100%;
+  padding: 0 1rem;
+  box-sizing: border-box;
+}
+
+.carouselButton {
+  background: rgba(255, 255, 255, 0.1) !important;
+  color: #ffffff !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  border-radius: 50% !important;
+  min-width: 40px !important;
+  width: 40px !important;
+  height: 40px !important;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease !important;
+  flex-shrink: 0;
+  
+  &:hover {
+    background: rgba(255, 255, 255, 0.2) !important;
+    transform: scale(1.1);
+  }
+}
+
+.serviceCard {
+  flex: 1;
+  max-width: 100%;
+  min-width: 0;
+  transition: transform 0.3s ease;
+  width: 100%;
+  
+  &:hover {
+    transform: translateY(-5px);
+  }
+}
+
+.carouselIndicators {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 2rem;
+  padding: 0 1rem;
+}
+
+.indicator {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  
+  &.active {
+    background: #64b5f6;
+    transform: scale(1.2);
+  }
+  
+  &:hover {
+    background: rgba(255, 255, 255, 0.6);
+  }
+}
+
+.contactSection {
+  padding: 2rem 1rem;
+  max-width: 800px;
+  margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.contactForm {
+  margin-top: 2rem;
+  animation: fadeInUp 0.6s ease;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .homeContainer {
+    overflow-x: hidden;
+  }
+
+  .heroSection {
+    min-height: 60vh;
+    padding: 1rem 0.5rem;
+  }
+
+  .heroContent {
+    padding: 0 0.5rem;
+  }
+
+  .heroLogo {
+    max-width: 300px;
+    max-height: 300px;
+  }
+  
+  .servicesSection {
+    padding: 1.5rem 0.5rem;
+  }
+  
+  .contactSection {
+    padding: 1.5rem 0.5rem;
+  }
+
+  .carouselContainer {
+    flex-direction: column;
+    gap: 1rem;
+    padding: 0 0.5rem;
+    margin: 1rem 0;
+  }
+  
+  .carouselButton {
+    min-width: 40px !important;
+    width: 40px !important;
+    height: 40px !important;
+    
+    &:first-child {
+      order: 1;
+    }
+    
+    &:last-child {
+      order: 3;
+    }
+  }
+  
+  .serviceCard {
+    order: 2;
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+  }
+
+  .carouselIndicators {
+    padding: 0 0.5rem;
+    order: 4;
+  }
+
+  .contactForm {
+    padding: 0;
+    margin: 1rem 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .heroSection {
+    padding: 0.5rem;
+    min-height: 50vh;
+  }
+
+  .heroContent {
+    padding: 0;
+  }
+
+  .heroLogo {
+    max-width: 250px;
+    max-height: 250px;
+  }
+  
+  .servicesSection,
+  .contactSection {
+    padding: 1rem 0.5rem;
+  }
+
+  .carouselContainer {
+    padding: 0;
+    gap: 0.5rem;
+  }
+
+  .carouselButton {
+    min-width: 35px !important;
+    width: 35px !important;
+    height: 35px !important;
+  }
+
+  .contactForm {
+    padding: 0;
+    margin: 1rem 0;
+    width: 100%;
+  }
+}

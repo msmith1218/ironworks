@@ -17,15 +17,15 @@ function App() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (location.pathname === "/budget") setValue(0);
-    if (location.pathname === "/income") setValue(1);
-    if (location.pathname === "/bills") setValue(2);
+    if (location.pathname === "/" || location.pathname === "/home") setValue(0);
+    if (location.pathname === "/services") setValue(1);
+    if (location.pathname === "/about") setValue(2);
   }, [location.pathname]);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-    if (newValue === 0) navigate("/budget");
-    if (newValue === 1) navigate("/income");
-    if (newValue === 2) navigate("/bills");
+    if (newValue === 0) navigate("/home");
+    if (newValue === 1) navigate("/services");
+    if (newValue === 2) navigate("/about");
     setValue(newValue);
   };
 
@@ -36,16 +36,27 @@ function App() {
           <Box
             sx={{
               borderBottom: 1,
-              borderColor: "divider",
+              borderColor: "rgba(255, 255, 255, 0.2)",
               position: "sticky",
               padding: "0px",
               top: 0,
               zIndex: 1000,
+              background: "rgba(26, 26, 46, 0.9)",
+              backdropFilter: "blur(10px)",
             }}
           >
             <Tabs
               sx={{
-                bgcolor: "background.paper",
+                bgcolor: "transparent",
+                '& .MuiTab-root': {
+                  color: 'rgba(255, 255, 255, 0.7)',
+                  '&.Mui-selected': {
+                    color: '#64b5f6',
+                  },
+                },
+                '& .MuiTabs-indicator': {
+                  backgroundColor: '#64b5f6',
+                },
               }}
               value={value}
               onChange={handleChange}
@@ -56,7 +67,7 @@ function App() {
                   fontFamily: "helvetica",
                   fontWeight: "900",
                 }}
-                label="Budgets"
+                label="Home"
                 {...a11yProps(0)}
               />
               <Tab
@@ -64,26 +75,18 @@ function App() {
                   fontFamily: "helvetica",
                   fontWeight: "900",
                 }}
-                label="Income"
+                label="Services"
                 {...a11yProps(1)}
               />
               <Tab
-                data-qa={"budget-tab"}
+                data-qa={"about-tab"}
                 sx={{
                   fontFamily: "helvetica",
                   fontWeight: "900",
                 }}
-                label="Bills"
+                label="About"
                 {...a11yProps(2)}
               />
-              {/* <Tab
-                sx={{
-                  fontFamily: "helvetica",
-                  fontWeight: "900",
-                }}
-                label="Payoff"
-                {...a11yProps(3)}
-              /> */}
             </Tabs>
           </Box>
           <Outlet />
