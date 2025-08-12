@@ -201,33 +201,112 @@ const Services = (): JSX.Element => {
         >
           Why Choose Ironworks Investigations?
         </Typography>
-        <Grid container spacing={3} sx={{ marginTop: 2, maxWidth: '1000px', margin: '2rem auto 0 auto' }}>
-          <Grid item xs={12} md={4}>
-            <Box sx={{ textAlign: 'center' }}>
-              <Typography variant="h6" sx={{ fontWeight: 'bold', marginBottom: 1, color: '#64b5f6' }}>
+        <Grid 
+          container 
+          spacing={3} 
+          sx={{ 
+            marginTop: 2, 
+            maxWidth: '1000px', 
+            margin: '2rem auto 0 auto',
+            justifyContent: 'center',
+            alignItems: 'stretch'
+          }}
+        >
+          <Grid item xs={12} sm={6} md={4}>
+            <Box sx={{ 
+              textAlign: 'center', 
+              height: '100%',
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'flex-start',
+              alignItems: 'center',
+              padding: { xs: 2, sm: 3 }
+            }}>
+              <Typography 
+                variant="h6" 
+                sx={{ 
+                  fontWeight: 'bold', 
+                  marginBottom: 2, 
+                  color: '#64b5f6',
+                  textAlign: 'center'
+                }}
+              >
                 Licensed & Experienced
               </Typography>
-              <Typography variant="body1" sx={{ color: '#bbdefb' }}>
+              <Typography 
+                variant="body1" 
+                sx={{ 
+                  color: '#bbdefb',
+                  textAlign: 'center',
+                  lineHeight: 1.6
+                }}
+              >
                 Fully licensed investigators with years of experience in law enforcement and private investigation.
               </Typography>
             </Box>
           </Grid>
-          <Grid item xs={12} md={4}>
-            <Box sx={{ textAlign: 'center' }}>
-              <Typography variant="h6" sx={{ fontWeight: 'bold', marginBottom: 1, color: '#81c784' }}>
+          <Grid item xs={12} sm={6} md={4}>
+            <Box sx={{ 
+              textAlign: 'center', 
+              height: '100%',
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'flex-start',
+              alignItems: 'center',
+              padding: { xs: 2, sm: 3 }
+            }}>
+              <Typography 
+                variant="h6" 
+                sx={{ 
+                  fontWeight: 'bold', 
+                  marginBottom: 2, 
+                  color: '#81c784',
+                  textAlign: 'center'
+                }}
+              >
                 Confidential & Discreet
               </Typography>
-              <Typography variant="body1" sx={{ color: '#bbdefb' }}>
+              <Typography 
+                variant="body1" 
+                sx={{ 
+                  color: '#bbdefb',
+                  textAlign: 'center',
+                  lineHeight: 1.6
+                }}
+              >
                 Complete confidentiality guaranteed. All investigations conducted with the utmost discretion.
               </Typography>
             </Box>
           </Grid>
-          <Grid item xs={12} md={4}>
-            <Box sx={{ textAlign: 'center' }}>
-              <Typography variant="h6" sx={{ fontWeight: 'bold', marginBottom: 1, color: '#f06292' }}>
+          <Grid item xs={12} sm={6} md={4}>
+            <Box sx={{ 
+              textAlign: 'center', 
+              height: '100%',
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'flex-start',
+              alignItems: 'center',
+              padding: { xs: 2, sm: 3 }
+            }}>
+              <Typography 
+                variant="h6" 
+                sx={{ 
+                  fontWeight: 'bold', 
+                  marginBottom: 2, 
+                  color: '#f06292',
+                  textAlign: 'center'
+                }}
+              >
                 Detailed Reporting
               </Typography>
-              <Typography variant="body1" sx={{ color: '#bbdefb' }}>
+              <Typography 
+                variant="body1" 
+                sx={{ 
+                  color: '#bbdefb',
+                  textAlign: 'center',
+                  lineHeight: 1.6
+                }}
+              >
                 Comprehensive reports with documented evidence, photographs, and professional analysis.
               </Typography>
             </Box>
