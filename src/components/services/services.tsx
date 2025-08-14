@@ -1,330 +1,252 @@
-import { Typography, Grid, Box } from "@mui/material";
-import { Card, CardContent } from "@mui/joy";
-import styles from "./services.module.scss";
+import React from "react";
+import {
+  Box,
+  Typography,
+  Container,
+  Grid,
+  Paper,
+  IconButton,
+} from "@mui/material";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import SearchIcon from '@mui/icons-material/Search';
 import BusinessIcon from '@mui/icons-material/Business';
-import FavoriteIcon from '@mui/icons-material/Favorite';
 import SecurityIcon from '@mui/icons-material/Security';
-import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
-import InsuranceIcon from '@mui/icons-material/Security';
+import PersonSearchIcon from "@mui/icons-material/PersonSearch";
+import CameraAltIcon from "@mui/icons-material/CameraAlt";
+import AssignmentIcon from "@mui/icons-material/Assignment";
+import GavelIcon from "@mui/icons-material/Gavel";
+import PhoneIcon from "@mui/icons-material/Phone";
+import ComputerIcon from "@mui/icons-material/Computer";
 
-const Services = (): JSX.Element => {
-  
-  const services = [
-    {
-      title: "Background Investigations",
-      description: "Comprehensive background checks for employment screening, tenant verification, and personal relationships. We verify education, employment history, criminal records, and provide detailed character assessments.",
-      icon: <SearchIcon sx={{ fontSize: 48, color: '#64b5f6' }} />,
-      features: [
-        "Criminal history verification",
-        "Employment and education verification",
-        "Credit and financial background",
-        "Reference interviews",
-        "Social media investigation"
-      ]
-    },
-    {
-      title: "Business Investigations",
-      description: "Corporate due diligence, fraud detection, and competitive intelligence services to protect your business interests and make informed decisions.",
-      icon: <BusinessIcon sx={{ fontSize: 48, color: '#81c784' }} />,
-      features: [
-        "Due diligence investigations",
-        "Corporate fraud detection",
-        "Asset verification",
-        "Competitive intelligence",
-        "Internal theft investigations"
-      ]
-    },
-    {
-      title: "Infidelity Investigations",
-      description: "Discreet marital and relationship investigations providing clarity and peace of mind. Professional surveillance with complete confidentiality guaranteed.",
-      icon: <FavoriteIcon sx={{ fontSize: 48, color: '#f06292' }} />,
-      features: [
-        "Discrete surveillance operations",
-        "Digital forensics",
-        "Activity documentation",
-        "Photographic evidence",
-        "Detailed reporting"
-      ]
-    },
-    {
-      title: "Asset Investigations",
-      description: "Locate and verify assets for legal proceedings, divorce cases, or debt collection. Comprehensive asset searches and verification services.",
-      icon: <AccountBalanceIcon sx={{ fontSize: 48, color: '#ffb74d' }} />,
-      features: [
-        "Real estate asset searches",
-        "Bank account location",
-        "Vehicle and boat searches",
-        "Business ownership verification",
-        "Hidden asset discovery"
-      ]
-    },
-    {
-      title: "Insurance Investigations",
-      description: "Fraud detection and claim verification services for insurance companies. Thorough investigations to protect against fraudulent claims.",
-      icon: <InsuranceIcon sx={{ fontSize: 48, color: '#ba68c8' }} />,
-      features: [
-        "Workers' compensation fraud",
-        "Disability claim verification",
-        "Auto accident investigations",
-        "Property damage assessments",
-        "Surveillance documentation"
-      ]
-    },
-    {
-      title: "Personal Security",
-      description: "Risk assessment and personal protection services for high-profile individuals, executives, and families requiring enhanced security measures.",
-      icon: <SecurityIcon sx={{ fontSize: 48, color: '#e57373' }} />,
-      features: [
-        "Threat assessment",
-        "Executive protection",
-        "Home security evaluation",
-        "Travel security planning",
-        "Personal safety training"
-      ]
-    }
-  ];
+interface ServicesProps {
+  onBack: () => void;
+}
 
+const servicesData = [
+  {
+    title: "Corporate Investigations",
+    description: "Comprehensive background checks, due diligence investigations, and corporate fraud detection for businesses.",
+    icon: <BusinessIcon sx={{ fontSize: 40, color: "#171A20" }} />,
+  },
+  {
+    title: "Personal Security",
+    description: "Personal protection services, threat assessment, and security consulting for high-profile individuals.",
+    icon: <SecurityIcon sx={{ fontSize: 40, color: "#171A20" }} />,
+  },
+  {
+    title: "Missing Persons",
+    description: "Professional locate services for missing persons, lost family members, and witnesses.",
+    icon: <PersonSearchIcon sx={{ fontSize: 40, color: "#171A20" }} />,
+  },
+  {
+    title: "Asset Investigations",
+    description: "Asset searches, financial investigations, and recovery services for legal and personal matters.",
+    icon: <SearchIcon sx={{ fontSize: 40, color: "#171A20" }} />,
+  },
+  {
+    title: "Surveillance Services",
+    description: "Discrete surveillance operations, evidence gathering, and monitoring services with advanced technology.",
+    icon: <CameraAltIcon sx={{ fontSize: 40, color: "#171A20" }} />,
+  },
+  {
+    title: "Digital Forensics",
+    description: "Computer forensics, data recovery, and cyber investigation services for legal and corporate clients.",
+    icon: <ComputerIcon sx={{ fontSize: 40, color: "#171A20" }} />,
+  },
+  {
+    title: "Legal Support",
+    description: "Process serving, court document preparation, and litigation support for attorneys and law firms.",
+    icon: <GavelIcon sx={{ fontSize: 40, color: "#171A20" }} />,
+  },
+  {
+    title: "Background Checks",
+    description: "Comprehensive employment screening, tenant verification, and personal background investigations.",
+    icon: <AssignmentIcon sx={{ fontSize: 40, color: "#171A20" }} />,
+  },
+  {
+    title: "24/7 Emergency Response",
+    description: "Round-the-clock emergency investigation services for urgent matters requiring immediate attention.",
+    icon: <PhoneIcon sx={{ fontSize: 40, color: "#171A20" }} />,
+  },
+];
+
+const Services = ({ onBack }: ServicesProps): JSX.Element => {
   return (
-    <div className={styles.servicesContainer}>
-      <Box sx={{ padding: '2rem', textAlign: 'center' }}>
-        <Typography
-          variant="h3"
-          component="h1"
-          sx={{
-            fontWeight: 'bold',
-            marginBottom: 2,
-            color: '#ffffff',
-            textShadow: '2px 2px 4px rgba(0,0,0,0.5)'
-          }}
-        >
-          Our Investigation Services
-        </Typography>
-        <Typography
-          variant="h6"
-          component="p"
-          sx={{
-            color: '#bbdefb',
-            maxWidth: '800px',
-            margin: '0 auto 3rem auto',
-            lineHeight: 1.6
-          }}
-        >
-          Ironworks Investigations provides comprehensive private investigation services 
-          with the highest standards of professionalism, discretion, and integrity. 
-          Our licensed investigators deliver results you can trust.
+    <Box sx={{ minHeight: "100vh", bgcolor: "#fff" }}>
+      {/* Header with back button */}
+      <Box
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          p: 2,
+          borderBottom: "1px solid #e0e0e0",
+        }}
+      >
+        <IconButton onClick={onBack} sx={{ mr: 2, color: "#171A20" }}>
+          <ArrowBackIcon />
+        </IconButton>
+        <Typography variant="h6" sx={{ fontWeight: 700, color: "#171A20" }}>
+          Our Services
         </Typography>
       </Box>
 
-      <Box sx={{ 
-        display: 'flex', 
-        flexWrap: 'wrap', 
-        gap: 3, 
-        padding: '0 2rem 2rem 2rem',
-        justifyContent: 'center',
-        maxWidth: '1200px',
-        margin: '0 auto'
-      }}>
-        {services.map((service, index) => (
-          <Card
-            key={index}
-            className={styles.serviceCard}
-            sx={{
-              background: 'rgba(255, 255, 255, 0.1)',
-              backdropFilter: 'blur(10px)',
-              border: '1px solid rgba(255, 255, 255, 0.2)',
-              boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3)',
-              color: '#ffffff',
-              flex: '1 1 300px',
-              maxWidth: '350px',
-              minWidth: '280px',
-              transition: 'transform 0.3s ease, box-shadow 0.3s ease',
-              cursor: 'pointer',
-              '&:hover': {
-                transform: 'translateY(-8px)',
-                boxShadow: '0 12px 40px rgba(0, 0, 0, 0.4)',
-              }
-            }}
-          >
-            <CardContent sx={{ padding: 3, height: '100%', display: 'flex', flexDirection: 'column' }}>
-              <Box sx={{ textAlign: 'center', marginBottom: 2 }}>
-                {service.icon}
-              </Box>
-              <Typography
-                variant="h5"
-                component="h3"
-                sx={{ 
-                  marginBottom: 2, 
-                  fontWeight: 'bold',
-                  textAlign: 'center',
-                  color: '#ffffff'
+      {/* Hero Section */}
+      <Box
+        sx={{
+          minHeight: "40vh",
+          background: "linear-gradient(180deg, #e3e3e3 0%, #fff 100%)",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+          textAlign: "center",
+          py: 6,
+          px: 2,
+        }}
+      >
+        <Typography
+          variant="h2"
+          sx={{
+            fontWeight: 700,
+            fontSize: "clamp(2rem, 5vw, 3rem)",
+            letterSpacing: "-1px",
+            color: "#171A20",
+            mb: 2,
+          }}
+        >
+          Professional Investigation Services
+        </Typography>
+        <Typography
+          variant="h5"
+          sx={{
+            fontWeight: 400,
+            fontSize: "clamp(1.2rem, 3vw, 1.5rem)",
+            color: "#666",
+            mb: 4,
+            maxWidth: "800px",
+          }}
+        >
+          Comprehensive solutions for corporate, legal, and personal investigation needs with cutting-edge technology and expert analysis.
+        </Typography>
+      </Box>
+
+      <Container maxWidth="lg" sx={{ py: 6 }}>
+        {/* Services Grid */}
+        <Grid container spacing={4}>
+          {servicesData.map((service, index) => (
+            <Grid item xs={12} sm={6} md={4} key={index}>
+              <Paper
+                elevation={2}
+                sx={{
+                  p: 4,
+                  borderRadius: 4,
+                  height: "100%",
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  textAlign: "center",
+                  bgcolor: "#fff",
+                  border: "1px solid #f0f0f0",
+                  transition: "all 0.3s ease",
+                  "&:hover": {
+                    transform: "translateY(-4px)",
+                    boxShadow: "0 8px 32px rgba(0,0,0,0.12)",
+                  },
                 }}
               >
-                {service.title}
-              </Typography>
-              <Typography 
-                variant="body1" 
-                sx={{ 
-                  marginBottom: 2, 
-                  lineHeight: 1.6,
-                  color: '#e3f2fd',
-                  flexGrow: 1
-                }}
-              >
-                {service.description}
-              </Typography>
-              <Box>
-                <Typography 
-                  variant="subtitle2" 
-                  sx={{ 
-                    fontWeight: 'bold', 
-                    marginBottom: 1,
-                    color: '#64b5f6'
+                {/* Icon */}
+                <Box
+                  sx={{
+                    width: 80,
+                    height: 80,
+                    borderRadius: "50%",
+                    bgcolor: "#f5f5f5",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    mb: 3,
                   }}
                 >
-                  Key Services:
-                </Typography>
-                <ul className={styles.featureList}>
-                  {service.features.map((feature, featureIndex) => (
-                    <li key={featureIndex}>
-                      <Typography variant="body2" sx={{ color: '#bbdefb' }}>
-                        {feature}
-                      </Typography>
-                    </li>
-                  ))}
-                </ul>
-              </Box>
-            </CardContent>
-          </Card>
-        ))}
-      </Box>
+                  {service.icon}
+                </Box>
 
-      <Box sx={{ padding: '2rem', textAlign: 'center', marginTop: '2rem' }}>
-        <Typography
-          variant="h4"
-          component="h2"
-          sx={{
-            fontWeight: 'bold',
-            marginBottom: 2,
-            color: '#ffffff'
-          }}
-        >
-          Why Choose Ironworks Investigations?
-        </Typography>
-        <Grid 
-          container 
-          spacing={4} 
-          sx={{ 
-            marginTop: 2, 
-            justifyContent: 'center',
-            alignItems: 'stretch',
-            '& .MuiGrid-item': {
-              marginBottom: { xs: 3, sm: 4 }
-            }
-          }}
-        >
-          <Grid item xs={12} sm={6} md={4}>
-            <Box sx={{ 
-              textAlign: 'center', 
-              height: '100%',
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'flex-start',
-              alignItems: 'center',
-              padding: { xs: 2, sm: 3 }
-            }}>
-              <Typography 
-                variant="h6" 
-                sx={{ 
-                  fontWeight: 'bold', 
-                  marginBottom: 2, 
-                  color: '#64b5f6',
-                  textAlign: 'center'
-                }}
-              >
-                Licensed & Experienced
-              </Typography>
-              <Typography 
-                variant="body1" 
-                sx={{ 
-                  color: '#bbdefb',
-                  textAlign: 'center',
-                  lineHeight: 1.6
-                }}
-              >
-                Fully licensed investigators with years of experience in law enforcement and private investigation.
-              </Typography>
-            </Box>
-          </Grid>
-          <Grid item xs={12} sm={6} md={4}>
-            <Box sx={{ 
-              textAlign: 'center', 
-              height: '100%',
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'flex-start',
-              alignItems: 'center',
-              padding: { xs: 2, sm: 3 }
-            }}>
-              <Typography 
-                variant="h6" 
-                sx={{ 
-                  fontWeight: 'bold', 
-                  marginBottom: 2, 
-                  color: '#81c784',
-                  textAlign: 'center'
-                }}
-              >
-                Confidential & Discreet
-              </Typography>
-              <Typography 
-                variant="body1" 
-                sx={{ 
-                  color: '#bbdefb',
-                  textAlign: 'center',
-                  lineHeight: 1.6
-                }}
-              >
-                Complete confidentiality guaranteed. All investigations conducted with the utmost discretion.
-              </Typography>
-            </Box>
-          </Grid>
-          <Grid item xs={12} sm={6} md={4}>
-            <Box sx={{ 
-              textAlign: 'center', 
-              height: '100%',
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'flex-start',
-              alignItems: 'center',
-              padding: { xs: 2, sm: 3 }
-            }}>
-              <Typography 
-                variant="h6" 
-                sx={{ 
-                  fontWeight: 'bold', 
-                  marginBottom: 2, 
-                  color: '#f06292',
-                  textAlign: 'center'
-                }}
-              >
-                Detailed Reporting
-              </Typography>
-              <Typography 
-                variant="body1" 
-                sx={{ 
-                  color: '#bbdefb',
-                  textAlign: 'center',
-                  lineHeight: 1.6
-                }}
-              >
-                Comprehensive reports with documented evidence, photographs, and professional analysis.
-              </Typography>
-            </Box>
-          </Grid>
+                {/* Title */}
+                <Typography
+                  variant="h6"
+                  sx={{
+                    fontWeight: 600,
+                    color: "#171A20",
+                    mb: 2,
+                    minHeight: "2.5rem",
+                    display: "flex",
+                    alignItems: "center",
+                  }}
+                >
+                  {service.title}
+                </Typography>
+
+                {/* Description */}
+                <Typography
+                  variant="body2"
+                  color="text.secondary"
+                  sx={{
+                    lineHeight: 1.6,
+                    flexGrow: 1,
+                  }}
+                >
+                  {service.description}
+                </Typography>
+              </Paper>
+            </Grid>
+          ))}
         </Grid>
-      </Box>
-    </div>
+
+        {/* Call to Action Section */}
+        <Box
+          sx={{
+            mt: 8,
+            p: 6,
+            borderRadius: 4,
+            background: "linear-gradient(180deg, #f9f9f9 0%, #fff 100%)",
+            textAlign: "center",
+            border: "1px solid #e0e0e0",
+          }}
+        >
+          <Typography
+            variant="h4"
+            sx={{
+              fontWeight: 700,
+              color: "#171A20",
+              mb: 2,
+            }}
+          >
+            Need a Custom Investigation?
+          </Typography>
+          <Typography
+            variant="body1"
+            color="text.secondary"
+            sx={{
+              mb: 4,
+              maxWidth: "600px",
+              mx: "auto",
+              lineHeight: 1.6,
+            }}
+          >
+            Every case is unique. Our experienced team can develop customized investigation strategies 
+            tailored to your specific needs and requirements.
+          </Typography>
+          <Typography
+            variant="h6"
+            sx={{
+              color: "#171A20",
+              fontWeight: 600,
+            }}
+          >
+            Contact us today for a confidential consultation
+          </Typography>
+        </Box>
+      </Container>
+    </Box>
   );
 };
 

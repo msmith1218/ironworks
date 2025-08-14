@@ -17,6 +17,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Outlet, useLocation, useNavigate } from "react-router";
 import Contact from "./components/contact/contact";
+import Services from "./components/services/services";
 
 const theme = createTheme({
   palette: {
@@ -44,9 +45,9 @@ const theme = createTheme({
   },
 });
 
-const navItems = ["Contact", "Serices", "About"];
+const navItems = ["Contact", "Services", "About"];
 
-function Header({ setShowContact }: { setShowContact: () => void }) {
+function Header({ setShowContact, setShowServices }: { setShowContact: () => void, setShowServices: () => void }) {
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const handleMenuClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -61,7 +62,7 @@ function Header({ setShowContact }: { setShowContact: () => void }) {
         setShowContact();
         break;
       case "Services":
-        // Handle Services click
+        setShowServices();
         break;
       case "About":
         // Handle About click
@@ -69,6 +70,7 @@ function Header({ setShowContact }: { setShowContact: () => void }) {
       default:
         break;
     }
+    handleMenuClose();
   }
   return (
     <AppBar position="static" color="primary" elevation={0}>
@@ -106,7 +108,7 @@ function HeroSection({ onOrderNow }: { onOrderNow: () => void }) {
     <Box
       sx={{
         minHeight: { xs: "60vh", md: "80vh" },
-        background: "linear-gradient(180deg, #e3e3e3 0%, #fff 100%)",
+        background: "linear-gradient(180deg, #e3e3e3 20%, #fff 100%)",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
@@ -123,7 +125,7 @@ function HeroSection({ onOrderNow }: { onOrderNow: () => void }) {
         style={{  maxWidth: 700, maxHeight: "50vh", borderRadius: 16, }}
       />
       <Typography variant="h2" color="primary">
-        Experience the Future
+        Private Investigative Services
       </Typography>
       <Typography variant="h5" color="primary" sx={{ mt: 2, mb: 4 }}>
         Clean. Modern. Electric.
@@ -160,6 +162,7 @@ function Footer() {
 
 function App() {
   const [showContact, setShowContact] = useState(false);
+  const [showServices, setShowServices] = useState(false);
 
   const handleOrderNow = () => {
     setShowContact(true);
@@ -169,8 +172,13 @@ function App() {
     setShowContact(true);
   }
 
+  const handleShowServices = () => {
+    setShowServices(true);
+  }
+
   const handleBackToMain = () => {
     setShowContact(false);
+    setShowServices(false);
   };
 
   if (showContact) {
@@ -182,10 +190,19 @@ function App() {
     );
   }
 
+  if (showServices) {
+    return (
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <Services onBack={handleBackToMain} />
+      </ThemeProvider>
+    );
+  }
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Header setShowContact={handleShowContact} />
+      <Header setShowContact={handleShowContact} setShowServices={handleShowServices} />
       <HeroSection onOrderNow={handleOrderNow} />
       <Container maxWidth="lg" sx={{ paddingTop: "1em" }}>
         {/* Placeholder for additional sections (About, Services, etc.) */}
