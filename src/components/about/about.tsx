@@ -7,6 +7,7 @@ import {
   Paper,
   IconButton,
   Chip,
+  Button,
 } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import SchoolIcon from '@mui/icons-material/School';
@@ -18,9 +19,10 @@ import BadgeIcon from '@mui/icons-material/Badge';
 
 interface AboutProps {
   onBack: () => void;
+  onContact: () => void;
 }
 
-const About = ({ onBack }: AboutProps): JSX.Element => {
+const About = ({ onBack, onContact }: AboutProps): JSX.Element => {
 
   // Scroll to top when component mounts
     useEffect(() => {
@@ -405,10 +407,29 @@ const About = ({ onBack }: AboutProps): JSX.Element => {
             sx={{
               color: "#171A20",
               fontWeight: 600,
+              mb: 4,
             }}
           >
             Available 24/7 for Emergency Cases
           </Typography>
+          <Button
+            variant="contained"
+            size="large"
+            onClick={onContact}
+            sx={{
+              bgcolor: "#171A20",
+              borderRadius: 2,
+              px: 4,
+              py: 1.5,
+              fontSize: "1rem",
+              fontWeight: 600,
+              "&:hover": {
+                bgcolor: "#2c2f36",
+              },
+            }}
+          >
+            Contact Us
+          </Button>
         </Box>
       </Container>
     </Box>

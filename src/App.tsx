@@ -205,7 +205,7 @@ function App() {
     return (
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <About onBack={handleBackToMain} />
+        <About onBack={handleBackToMain} onContact={handleShowContact} />
       </ThemeProvider>
     );
   }
