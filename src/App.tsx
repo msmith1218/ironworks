@@ -18,6 +18,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Outlet, useLocation, useNavigate } from "react-router";
 import Contact from "./components/contact/contact";
 import Services from "./components/services/services";
+import About from "./components/about/about";
 
 const theme = createTheme({
   palette: {
@@ -47,7 +48,7 @@ const theme = createTheme({
 
 const navItems = ["Contact", "Services", "About"];
 
-function Header({ setShowContact, setShowServices }: { setShowContact: () => void, setShowServices: () => void }) {
+function Header({ setShowContact, setShowServices, setShowAbout }: { setShowContact: () => void, setShowServices: () => void, setShowAbout: () => void }) {
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const handleMenuClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -65,7 +66,7 @@ function Header({ setShowContact, setShowServices }: { setShowContact: () => voi
         setShowServices();
         break;
       case "About":
-        // Handle About click
+        setShowAbout();
         break;
       default:
         break;
@@ -163,6 +164,7 @@ function Footer() {
 function App() {
   const [showContact, setShowContact] = useState(false);
   const [showServices, setShowServices] = useState(false);
+  const [showAbout, setShowAbout] = useState(false);
 
   const handleOrderNow = () => {
     setShowContact(true);
@@ -176,9 +178,14 @@ function App() {
     setShowServices(true);
   }
 
+  const handleShowAbout = () => {
+    setShowAbout(true);
+  }
+
   const handleBackToMain = () => {
     setShowContact(false);
     setShowServices(false);
+    setShowAbout(false);
   };
 
   if (showContact) {
@@ -199,10 +206,19 @@ function App() {
     );
   }
 
+  if (showAbout) {
+    return (
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <About onBack={handleBackToMain} />
+      </ThemeProvider>
+    );
+  }
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Header setShowContact={handleShowContact} setShowServices={handleShowServices} />
+      <Header setShowContact={handleShowContact} setShowServices={handleShowServices} setShowAbout={handleShowAbout} />
       <HeroSection onOrderNow={handleOrderNow} />
       <Container maxWidth="lg" sx={{ paddingTop: "1em" }}>
         {/* Placeholder for additional sections (About, Services, etc.) */}
