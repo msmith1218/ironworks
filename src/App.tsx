@@ -16,6 +16,7 @@ import {
 import MenuIcon from "@mui/icons-material/Menu";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Outlet, useLocation, useNavigate } from "react-router";
+import Contact from "./components/contact/contact";
 
 const theme = createTheme({
   palette: {
@@ -43,9 +44,9 @@ const theme = createTheme({
   },
 });
 
-const navItems = ["Model S", "Model 3", "Model X", "Model Y", "Solar Roof", "Solar Panels"];
+const navItems = ["Contact", "Serices", "About"];
 
-function Header() {
+function Header({ setShowContact }: { setShowContact: () => void }) {
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const handleMenuClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -54,10 +55,25 @@ function Header() {
   const handleMenuClose = () => {
     setAnchorEl(null);
   };
+  const onNavItemClick = (item:string) => {
+    switch (item) {
+      case "Contact":
+        setShowContact();
+        break;
+      case "Services":
+        // Handle Services click
+        break;
+      case "About":
+        // Handle About click
+        break;
+      default:
+        break;
+    }
+  }
   return (
     <AppBar position="static" color="primary" elevation={0}>
       <Toolbar sx={{ justifyContent: "space-between" }}>
-        <Typography variant="h6" color="secondary" sx={{ fontWeight: 700, letterSpacing: 2 }}>
+        <Typography variant="h6" color="secondary" sx={{ fontWeight: 500, letterSpacing: 2 }}>
           IRONWORKS
         </Typography>
         {isMobile ? (
@@ -67,14 +83,14 @@ function Header() {
             </IconButton>
             <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleMenuClose}>
               {navItems.map((item) => (
-                <MenuItem key={item} onClick={handleMenuClose}>{item}</MenuItem>
+                <MenuItem key={item} onClick={() => onNavItemClick(item)}>{item}</MenuItem>
               ))}
             </Menu>
           </>
         ) : (
           <Box sx={{ display: "flex", gap: 2 }}>
             {navItems.map((item) => (
-              <Button key={item} color="secondary" sx={{ fontWeight: 500 }}>
+              <Button onClick={() => onNavItemClick(item)} key={item} color="secondary" sx={{ fontWeight: 500 }}>
                 {item}
               </Button>
             ))}
@@ -85,7 +101,7 @@ function Header() {
   );
 }
 
-function HeroSection() {
+function HeroSection({ onOrderNow }: { onOrderNow: () => void }) {
   return (
     <Box
       sx={{
@@ -103,17 +119,23 @@ function HeroSection() {
     >
       <img
         src={`${import.meta.env.BASE_URL}IMG_2688.png`}
-        alt="Tesla Car Placeholder"
+        alt="Logo Placeholder"
         style={{  maxWidth: 700, maxHeight: "50vh", borderRadius: 16, }}
       />
-      <Typography variant="h2" color="primary" sx={{ mt: 4 }}>
+      <Typography variant="h2" color="primary">
         Experience the Future
       </Typography>
       <Typography variant="h5" color="primary" sx={{ mt: 2, mb: 4 }}>
         Clean. Modern. Electric.
       </Typography>
       <Box sx={{ display: "flex", gap: 2, justifyContent: "center", paddingBottom: "2em" }}>
-        <Button variant="contained" color="primary" size="large" sx={{ borderRadius: 8 }}>
+        <Button 
+          variant="contained" 
+          color="primary" 
+          size="large" 
+          sx={{ borderRadius: 8 }}
+          onClick={onOrderNow}
+        >
           Order Now
         </Button>
         <Button variant="outlined" color="primary" size="large" sx={{ borderRadius: 8 }}>
@@ -137,17 +159,40 @@ function Footer() {
 
 
 function App() {
+  const [showContact, setShowContact] = useState(false);
+
+  const handleOrderNow = () => {
+    setShowContact(true);
+  };
+
+  const handleShowContact = () => {
+    setShowContact(true);
+  }
+
+  const handleBackToMain = () => {
+    setShowContact(false);
+  };
+
+  if (showContact) {
+    return (
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <Contact onBack={handleBackToMain} />
+      </ThemeProvider>
+    );
+  }
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Header />
-      <HeroSection />
+      <Header setShowContact={handleShowContact} />
+      <HeroSection onOrderNow={handleOrderNow} />
       <Container maxWidth="lg" sx={{ paddingTop: "1em" }}>
         {/* Placeholder for additional sections (About, Services, etc.) */}
-        <Typography variant="h4" sx={{ mb: 2, fontWeight: 700 }}>
+        <Typography color="secondary" variant="h4" sx={{ mb: 2, fontWeight: 700 }}>
           Discover Our Services
         </Typography>
-        <Typography variant="body1" color="text.secondary" sx={{ mb: 4 }}>
+        <Typography  variant="body1" color="secondary" sx={{ mb: 4 }}>
           Explore cutting-edge electric vehicles and energy solutions. This demo uses Material Design for a clean, modern, and accessible experience.
         </Typography>
         <Box sx={{ display: "flex", flexWrap: "wrap", gap: 4, justifyContent: "center" }}>
