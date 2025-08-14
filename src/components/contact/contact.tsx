@@ -235,7 +235,7 @@ function Contact({ onBack }: ContactProps) {
                       Phone
                     </Typography>
                     <Typography variant="body1" color="text.secondary">
-                      +1 (555) 123-4567
+                      +1 (555) 555-5555
                     </Typography>
                   </Box>
                 </Box>

@@ -26,47 +26,47 @@ const servicesData = [
   {
     title: "Corporate Investigations",
     description: "Comprehensive background checks, due diligence investigations, and corporate fraud detection for businesses.",
-    icon: <BusinessIcon sx={{ fontSize: 40, color: "#171A20" }} />,
+    icon: <BusinessIcon sx={{ fontSize: 40, color: "#2E7D32" }} />, // Green for business/growth
   },
   {
     title: "Personal Security",
     description: "Personal protection services, threat assessment, and security consulting for high-profile individuals.",
-    icon: <SecurityIcon sx={{ fontSize: 40, color: "#171A20" }} />,
+    icon: <SecurityIcon sx={{ fontSize: 40, color: "#D32F2F" }} />, // Red for security/protection
   },
   {
     title: "Missing Persons",
     description: "Professional locate services for missing persons, lost family members, and witnesses.",
-    icon: <PersonSearchIcon sx={{ fontSize: 40, color: "#171A20" }} />,
+    icon: <PersonSearchIcon sx={{ fontSize: 40, color: "#FF9800" }} />, // Orange for searching/finding
   },
   {
     title: "Asset Investigations",
     description: "Asset searches, financial investigations, and recovery services for legal and personal matters.",
-    icon: <SearchIcon sx={{ fontSize: 40, color: "#171A20" }} />,
+    icon: <SearchIcon sx={{ fontSize: 40, color: "#1976D2" }} />, // Blue for investigation/search
   },
   {
     title: "Surveillance Services",
     description: "Discrete surveillance operations, evidence gathering, and monitoring services with advanced technology.",
-    icon: <CameraAltIcon sx={{ fontSize: 40, color: "#171A20" }} />,
+    icon: <CameraAltIcon sx={{ fontSize: 40, color: "#7B1FA2" }} />, // Purple for surveillance/technology
   },
   {
     title: "Digital Forensics",
     description: "Computer forensics, data recovery, and cyber investigation services for legal and corporate clients.",
-    icon: <ComputerIcon sx={{ fontSize: 40, color: "#171A20" }} />,
+    icon: <ComputerIcon sx={{ fontSize: 40, color: "#00796B" }} />, // Teal for digital/technology
   },
   {
     title: "Legal Support",
     description: "Process serving, court document preparation, and litigation support for attorneys and law firms.",
-    icon: <GavelIcon sx={{ fontSize: 40, color: "#171A20" }} />,
+    icon: <GavelIcon sx={{ fontSize: 40, color: "#5D4037" }} />, // Brown for legal/authority
   },
   {
     title: "Background Checks",
     description: "Comprehensive employment screening, tenant verification, and personal background investigations.",
-    icon: <AssignmentIcon sx={{ fontSize: 40, color: "#171A20" }} />,
+    icon: <AssignmentIcon sx={{ fontSize: 40, color: "#303F9F" }} />, // Indigo for documentation/verification
   },
   {
     title: "24/7 Emergency Response",
     description: "Round-the-clock emergency investigation services for urgent matters requiring immediate attention.",
-    icon: <PhoneIcon sx={{ fontSize: 40, color: "#171A20" }} />,
+    icon: <PhoneIcon sx={{ fontSize: 40, color: "#E53935" }} />, // Bright red for emergency/urgency
   },
 ];
 

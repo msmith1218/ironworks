@@ -1,5 +1,4 @@
-import styles from "./App.module.scss";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   AppBar,
   Toolbar,
@@ -15,7 +14,6 @@ import {
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { Outlet, useLocation, useNavigate } from "react-router";
 import Contact from "./components/contact/contact";
 import Services from "./components/services/services";
 import About from "./components/about/about";
@@ -26,10 +24,7 @@ const theme = createTheme({
       main: "#171A20",
     },
     secondary: {
-      main: "#fff",
-    },
-    background: {
-      default: "#fff",
+      main: "#ffffff",
     },
   },
   typography: {
@@ -104,7 +99,7 @@ function Header({ setShowContact, setShowServices, setShowAbout }: { setShowCont
   );
 }
 
-function HeroSection({ onOrderNow }: { onOrderNow: () => void }) {
+function HeroSection({ onOrderNow, onOurServices }: { onOrderNow: () => void; onOurServices: () => void }) {
   return (
     <Box
       sx={{
@@ -129,7 +124,7 @@ function HeroSection({ onOrderNow }: { onOrderNow: () => void }) {
         Private Investigative Services
       </Typography>
       <Typography variant="h5" color="primary" sx={{ mt: 2, mb: 4 }}>
-        Clean. Modern. Electric.
+        Integrity. Professionalism. Discretion.
       </Typography>
       <Box sx={{ display: "flex", gap: 2, justifyContent: "center", paddingBottom: "2em" }}>
         <Button 
@@ -139,10 +134,10 @@ function HeroSection({ onOrderNow }: { onOrderNow: () => void }) {
           sx={{ borderRadius: 8 }}
           onClick={onOrderNow}
         >
-          Order Now
+          Contact Us
         </Button>
-        <Button variant="outlined" color="primary" size="large" sx={{ borderRadius: 8 }}>
-          Demo Drive
+        <Button onClick={onOrderNow} variant="outlined" color="primary" size="large" sx={{ borderRadius: 8 }}>
+          Our Services
         </Button>
       </Box>
     </Box>
@@ -219,26 +214,26 @@ function App() {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Header setShowContact={handleShowContact} setShowServices={handleShowServices} setShowAbout={handleShowAbout} />
-      <HeroSection onOrderNow={handleOrderNow} />
+      <HeroSection onOrderNow={handleOrderNow} onOurServices={handleShowServices}/>
       <Container maxWidth="lg" sx={{ paddingTop: "1em" }}>
         {/* Placeholder for additional sections (About, Services, etc.) */}
         <Typography color="secondary" variant="h4" sx={{ mb: 2, fontWeight: 700 }}>
           Discover Our Services
         </Typography>
         <Typography  variant="body1" color="secondary" sx={{ mb: 4 }}>
-          Explore cutting-edge electric vehicles and energy solutions. This demo uses Material Design for a clean, modern, and accessible experience.
+          Comprehensive solutions for corporate, legal, and personal investigation needs
         </Typography>
         <Box sx={{ display: "flex", flexWrap: "wrap", gap: 4, justifyContent: "center" }}>
-          <Box sx={{ width: 280, bgcolor: "#fff", boxShadow: 2, borderRadius: 4, p: 3 }}>
-            <Typography variant="h6" sx={{ fontWeight: 600 }}>Performance</Typography>
-            <Typography variant="body2" color="text.secondary">Instant torque, smooth acceleration, and a quiet ride.</Typography>
+          <Box sx={{ width: 280, bgcolor: "white", boxShadow: 2, borderRadius: 4, p: 3 }}>
+            <Typography variant="h6" sx={{ fontWeight: 600, color: "#171A20" }}>Corporate</Typography>
+            <Typography variant="body2" color="text.secondary">Comprehensive background checks and due diligence investigations.</Typography>
           </Box>
-          <Box sx={{ width: 280, bgcolor: "#fff", boxShadow: 2, borderRadius: 4, p: 3 }}>
-            <Typography variant="h6" sx={{ fontWeight: 600 }}>Design</Typography>
+          <Box sx={{ width: 280, bgcolor: "white", boxShadow: 2, borderRadius: 4, p: 3 }}>
+            <Typography variant="h6" sx={{ fontWeight: 600, color: "#171A20" }}>Personal</Typography>
             <Typography variant="body2" color="text.secondary">Minimalist interiors, advanced technology, and premium materials.</Typography>
           </Box>
-          <Box sx={{ width: 280, bgcolor: "#fff", boxShadow: 2, borderRadius: 4, p: 3 }}>
-            <Typography variant="h6" sx={{ fontWeight: 600 }}>Sustainability</Typography>
+          <Box sx={{ width: 280, bgcolor: "white", boxShadow: 2, borderRadius: 4, p: 3 }}>
+            <Typography variant="h6" sx={{ fontWeight: 600, color: "#171A20" }}>Background</Typography>
             <Typography variant="body2" color="text.secondary">Zero emissions, renewable energy, and eco-friendly solutions.</Typography>
           </Box>
         </Box>

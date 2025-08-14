@@ -35,19 +35,19 @@ const About = ({ onBack }: AboutProps): JSX.Element => {
       title: "Law Enforcement Background",
       years: "15+ Years",
       description: "Extensive experience in criminal investigations, surveillance operations, and evidence collection with local and federal law enforcement agencies.",
-      icon: <BadgeIcon sx={{ fontSize: 40, color: "#171A20" }} />
+      icon: <BadgeIcon sx={{ fontSize: 40, color: "#1565C0" }} /> // Blue for law enforcement/authority
     },
     {
       title: "Private Investigation",
       years: "10+ Years",
       description: "Specialized expertise in corporate investigations, background checks, and domestic relations cases with a proven track record of successful outcomes.",
-      icon: <WorkIcon sx={{ fontSize: 40, color: "#171A20" }} />
+      icon: <WorkIcon sx={{ fontSize: 40, color: "#E65100" }} /> // Orange for professional work/career
     },
     {
       title: "Corporate Security",
       years: "8+ Years",
       description: "Comprehensive experience in corporate fraud detection, internal investigations, and risk assessment for Fortune 500 companies.",
-      icon: <SecurityIcon sx={{ fontSize: 40, color: "#171A20" }} />
+      icon: <SecurityIcon sx={{ fontSize: 40, color: "#C62828" }} /> // Red for security/protection
     }
   ];
 
@@ -55,22 +55,22 @@ const About = ({ onBack }: AboutProps): JSX.Element => {
     {
       title: "Integrity",
       description: "We conduct all investigations with the highest ethical standards and complete honesty in our reporting.",
-      icon: <VerifiedUserIcon sx={{ fontSize: 40, color: "#171A20" }} />
+      icon: <VerifiedUserIcon sx={{ fontSize: 40, color: "#2E7D32" }} /> // Green for trust/verification
     },
     {
       title: "Discretion",
       description: "Absolute confidentiality is maintained throughout every investigation. Your privacy is our priority.",
-      icon: <StarIcon sx={{ fontSize: 40, color: "#171A20" }} />
+      icon: <StarIcon sx={{ fontSize: 40, color: "#F57C00" }} /> // Amber for excellence/premium service
     },
     {
       title: "Professionalism",
       description: "Licensed, bonded, and insured investigators delivering results with the highest professional standards.",
-      icon: <SchoolIcon sx={{ fontSize: 40, color: "#171A20" }} />
+      icon: <SchoolIcon sx={{ fontSize: 40, color: "#5E35B1" }} /> // Purple for education/expertise
     }
   ];
 
   return (
-    <Box sx={{ minHeight: "100vh", bgcolor: "#fff" }}>
+    <Box sx={{ minHeight: "100vh", bgcolor: "#f8f9fa" }}>
       {/* Header with back button */}
       <Box
         sx={{
