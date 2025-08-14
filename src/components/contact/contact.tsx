@@ -73,7 +73,7 @@ function Contact({ onBack }: ContactProps) {
               mb: 4,
             }}
           >
-            Ready to experience the future? Let's connect.
+            Ready to kick-start your investigation? Let's connect.
           </Typography>
         </Box>
 
