@@ -230,11 +230,11 @@ function App() {
           </Box>
           <Box sx={{ width: 280, bgcolor: "white", boxShadow: 2, borderRadius: 4, p: 3 }}>
             <Typography variant="h6" sx={{ fontWeight: 600, color: "#171A20" }}>Personal</Typography>
-            <Typography variant="body2" color="text.secondary">Minimalist interiors, advanced technology, and premium materials.</Typography>
+            <Typography variant="body2" color="text.secondary">Personal protection services, threat assessment.</Typography>
           </Box>
           <Box sx={{ width: 280, bgcolor: "white", boxShadow: 2, borderRadius: 4, p: 3 }}>
-            <Typography variant="h6" sx={{ fontWeight: 600, color: "#171A20" }}>Background</Typography>
-            <Typography variant="body2" color="text.secondary">Zero emissions, renewable energy, and eco-friendly solutions.</Typography>
+            <Typography variant="h6" sx={{ fontWeight: 600, color: "#171A20" }}>Surveillance</Typography>
+            <Typography variant="body2" color="text.secondary">Discrete surveillance operations, evidence gathering, and monitoring.</Typography>
           </Box>
         </Box>
       </Container>
