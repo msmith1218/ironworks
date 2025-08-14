@@ -136,7 +136,7 @@ function HeroSection({ onOrderNow, onOurServices }: { onOrderNow: () => void; on
         >
           Contact Us
         </Button>
-        <Button onClick={onOrderNow} variant="outlined" color="primary" size="large" sx={{ borderRadius: 8 }}>
+        <Button onClick={onOurServices} variant="outlined" color="primary" size="large" sx={{ borderRadius: 8 }}>
           Our Services
         </Button>
       </Box>

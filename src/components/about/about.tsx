@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Box,
   Typography,
@@ -21,6 +21,11 @@ interface AboutProps {
 }
 
 const About = ({ onBack }: AboutProps): JSX.Element => {
+
+  // Scroll to top when component mounts
+    useEffect(() => {
+      window.scrollTo(0, 0);
+    }, []);
   const credentials = [
     "Licensed Private Investigator",
     "Former Law Enforcement",

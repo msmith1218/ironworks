@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Box,
   Typography,
@@ -71,6 +71,11 @@ const servicesData = [
 ];
 
 const Services = ({ onBack }: ServicesProps): JSX.Element => {
+  // Scroll to top when component mounts
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <Box sx={{ minHeight: "100vh", bgcolor: "#fff" }}>
       {/* Header with back button */}

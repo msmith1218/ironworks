@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Box,
   Typography,
@@ -24,6 +24,11 @@ function Contact({ onBack }: ContactProps) {
     // Handle form submission here
     console.log("Form submitted");
   };
+
+  // Scroll to top when component mounts
+    useEffect(() => {
+      window.scrollTo(0, 0);
+    }, []);
 
   return (
     <Box sx={{ minHeight: "100vh", bgcolor: "#fff" }}>
