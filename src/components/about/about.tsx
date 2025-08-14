@@ -1,12 +1,26 @@
-import { Typography, Grid, Box, Chip } from "@mui/material";
-import { Card, CardContent } from "@mui/joy";
-import styles from "./about.module.scss";
+import React from "react";
+import {
+  Box,
+  Typography,
+  Container,
+  Grid,
+  Paper,
+  IconButton,
+  Chip,
+} from "@mui/material";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import SchoolIcon from '@mui/icons-material/School';
 import WorkIcon from '@mui/icons-material/Work';
 import VerifiedUserIcon from '@mui/icons-material/VerifiedUser';
 import StarIcon from '@mui/icons-material/Star';
+import SecurityIcon from '@mui/icons-material/Security';
+import BadgeIcon from '@mui/icons-material/Badge';
 
-const About = (): JSX.Element => {
+interface AboutProps {
+  onBack: () => void;
+}
+
+const About = ({ onBack }: AboutProps): JSX.Element => {
   const credentials = [
     "Licensed Private Investigator",
     "Former Law Enforcement",
@@ -20,17 +34,20 @@ const About = (): JSX.Element => {
     {
       title: "Law Enforcement Background",
       years: "15+ Years",
-      description: "Extensive experience in criminal investigations, surveillance operations, and evidence collection with local and federal law enforcement agencies."
+      description: "Extensive experience in criminal investigations, surveillance operations, and evidence collection with local and federal law enforcement agencies.",
+      icon: <BadgeIcon sx={{ fontSize: 40, color: "#171A20" }} />
     },
     {
       title: "Private Investigation",
       years: "10+ Years",
-      description: "Specialized expertise in corporate investigations, background checks, and domestic relations cases with a proven track record of successful outcomes."
+      description: "Specialized expertise in corporate investigations, background checks, and domestic relations cases with a proven track record of successful outcomes.",
+      icon: <WorkIcon sx={{ fontSize: 40, color: "#171A20" }} />
     },
     {
       title: "Corporate Security",
       years: "8+ Years",
-      description: "Comprehensive experience in corporate fraud detection, internal investigations, and risk assessment for Fortune 500 companies."
+      description: "Comprehensive experience in corporate fraud detection, internal investigations, and risk assessment for Fortune 500 companies.",
+      icon: <SecurityIcon sx={{ fontSize: 40, color: "#171A20" }} />
     }
   ];
 
@@ -38,323 +55,358 @@ const About = (): JSX.Element => {
     {
       title: "Integrity",
       description: "We conduct all investigations with the highest ethical standards and complete honesty in our reporting.",
-      icon: <VerifiedUserIcon sx={{ fontSize: 40, color: '#64b5f6' }} />
+      icon: <VerifiedUserIcon sx={{ fontSize: 40, color: "#171A20" }} />
     },
     {
       title: "Discretion",
       description: "Absolute confidentiality is maintained throughout every investigation. Your privacy is our priority.",
-      icon: <StarIcon sx={{ fontSize: 40, color: '#81c784' }} />
+      icon: <StarIcon sx={{ fontSize: 40, color: "#171A20" }} />
     },
     {
       title: "Professionalism",
       description: "Licensed, bonded, and insured investigators delivering results with the highest professional standards.",
-      icon: <SchoolIcon sx={{ fontSize: 40, color: '#f06292' }} />
+      icon: <SchoolIcon sx={{ fontSize: 40, color: "#171A20" }} />
     }
   ];
 
   return (
-    <div className={styles.aboutContainer}>
+    <Box sx={{ minHeight: "100vh", bgcolor: "#fff" }}>
+      {/* Header with back button */}
+      <Box
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          p: 2,
+          borderBottom: "1px solid #e0e0e0",
+        }}
+      >
+        <IconButton onClick={onBack} sx={{ mr: 2, color: "#171A20" }}>
+          <ArrowBackIcon />
+        </IconButton>
+        <Typography variant="h6" sx={{ fontWeight: 700, color: "#171A20" }}>
+          About Us
+        </Typography>
+      </Box>
+
       {/* Hero Section */}
-      <Box sx={{ padding: '3rem 2rem', textAlign: 'center' }}>
+      <Box
+        sx={{
+          minHeight: "40vh",
+          background: "linear-gradient(180deg, #e3e3e3 0%, #fff 100%)",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+          textAlign: "center",
+          py: 6,
+          px: 2,
+        }}
+      >
         <Typography
-          variant="h3"
-          component="h1"
+          variant="h2"
           sx={{
-            fontWeight: 'bold',
-            marginBottom: 2,
-            color: '#ffffff',
-            textShadow: '2px 2px 4px rgba(0,0,0,0.5)'
+            fontWeight: 700,
+            fontSize: "clamp(2rem, 5vw, 3rem)",
+            letterSpacing: "-1px",
+            color: "#171A20",
+            mb: 2,
           }}
         >
           About Ironworks Investigations
         </Typography>
         <Typography
-          variant="h6"
-          component="p"
+          variant="h5"
           sx={{
-            color: '#bbdefb',
-            maxWidth: '800px',
-            margin: '0 auto',
-            lineHeight: 1.6
+            fontWeight: 400,
+            fontSize: "clamp(1.2rem, 3vw, 1.5rem)",
+            color: "#666",
+            mb: 4,
+            maxWidth: "800px",
           }}
         >
-          Founded on principles of integrity, discretion, and excellence, Ironworks Investigations 
-          is your trusted partner for professional private investigation services. With decades of 
-          combined experience in law enforcement and private investigation, we deliver results you can count on.
+          Founded on principles of integrity, discretion, and excellence. Your trusted partner for professional private investigation services.
         </Typography>
       </Box>
 
-      {/* Company Story */}
-      <Box sx={{ padding: '0 2rem 3rem 2rem' }}>
-        <Card
+      <Container maxWidth="lg" sx={{ py: 6 }}>
+        {/* Company Story */}
+        <Paper
+          elevation={2}
           sx={{
-            background: 'rgba(255, 255, 255, 0.1)',
-            backdropFilter: 'blur(10px)',
-            border: '1px solid rgba(255, 255, 255, 0.2)',
-            boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3)',
-            color: '#ffffff',
-            maxWidth: '1000px',
-            margin: '0 auto'
+            p: 6,
+            borderRadius: 4,
+            background: "linear-gradient(180deg, #f9f9f9 0%, #fff 100%)",
+            mb: 6,
+            border: "1px solid #e0e0e0",
           }}
         >
-          <CardContent sx={{ padding: 4 }}>
-            <Typography
-              variant="h4"
-              component="h2"
-              sx={{
-                fontWeight: 'bold',
-                marginBottom: 3,
-                textAlign: 'center',
-                color: '#ffffff'
-              }}
-            >
-              Our Story
-            </Typography>
-            <Typography
-              variant="body1"
-              sx={{
-                color: '#e3f2fd',
-                lineHeight: 1.8,
-                marginBottom: 2,
-                fontSize: '1.1rem'
-              }}
-            >
-              Ironworks Investigations was established with a clear mission: to provide uncompromising 
-              investigative services built on a foundation of integrity and expertise. Our name reflects 
-              our commitment to strength, reliability, and the solid foundation of trust we build with every client.
-            </Typography>
-            <Typography
-              variant="body1"
-              sx={{
-                color: '#e3f2fd',
-                lineHeight: 1.8,
-                marginBottom: 2,
-                fontSize: '1.1rem'
-              }}
-            >
-              Led by experienced investigators with extensive backgrounds in law enforcement and corporate security, 
-              we understand the sensitive nature of investigative work and the importance of discretion, accuracy, 
-              and ethical conduct in every case we handle.
-            </Typography>
-            <Typography
-              variant="body1"
-              sx={{
-                color: '#e3f2fd',
-                lineHeight: 1.8,
-                fontSize: '1.1rem'
-              }}
-            >
-              Whether you're an individual seeking peace of mind, a business protecting its interests, or an 
-              attorney building a case, Ironworks Investigations has the experience, resources, and dedication 
-              to deliver the truth you need.
-            </Typography>
-          </CardContent>
-        </Card>
-      </Box>
+          <Typography
+            variant="h4"
+            sx={{
+              fontWeight: 700,
+              color: "#171A20",
+              mb: 4,
+              textAlign: "center",
+            }}
+          >
+            Our Story
+          </Typography>
+          <Typography
+            variant="body1"
+            sx={{
+              color: "#666",
+              lineHeight: 1.8,
+              mb: 3,
+              fontSize: "1.1rem",
+            }}
+          >
+            Ironworks Investigations was established with a clear mission: to provide uncompromising 
+            investigative services built on a foundation of integrity and expertise. Our name reflects 
+            our commitment to strength, reliability, and the solid foundation of trust we build with every client.
+          </Typography>
+          <Typography
+            variant="body1"
+            sx={{
+              color: "#666",
+              lineHeight: 1.8,
+              mb: 3,
+              fontSize: "1.1rem",
+            }}
+          >
+            Led by experienced investigators with extensive backgrounds in law enforcement and corporate security, 
+            we understand the sensitive nature of investigative work and the importance of discretion, accuracy, 
+            and ethical conduct in every case we handle.
+          </Typography>
+          <Typography
+            variant="body1"
+            sx={{
+              color: "#666",
+              lineHeight: 1.8,
+              fontSize: "1.1rem",
+            }}
+          >
+            Whether you're an individual seeking peace of mind, a business protecting its interests, or an 
+            attorney building a case, Ironworks Investigations has the experience, resources, and dedication 
+            to deliver the truth you need.
+          </Typography>
+        </Paper>
 
-      {/* Experience Section */}
-      <Box sx={{ padding: '0 2rem 3rem 2rem' }}>
+        {/* Experience Section */}
         <Typography
           variant="h4"
-          component="h2"
           sx={{
-            fontWeight: 'bold',
-            marginBottom: 3,
-            textAlign: 'center',
-            color: '#ffffff'
+            fontWeight: 700,
+            color: "#171A20",
+            mb: 4,
+            textAlign: "center",
           }}
         >
           Our Experience
         </Typography>
-        <Box sx={{ 
-          display: 'flex', 
-          flexWrap: 'wrap', 
-          gap: 3, 
-          justifyContent: 'center',
-          maxWidth: '1200px',
-          margin: '0 auto'
-        }}>
+        <Grid container spacing={4} sx={{ mb: 6 }}>
           {experience.map((exp, index) => (
-            <Card
-              key={index}
-              className={styles.experienceCard}
-              sx={{
-                background: 'rgba(255, 255, 255, 0.1)',
-                backdropFilter: 'blur(10px)',
-                border: '1px solid rgba(255, 255, 255, 0.2)',
-                boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3)',
-                color: '#ffffff',
-                flex: '1 1 300px',
-                maxWidth: '350px',
-                minWidth: '280px',
-                transition: 'transform 0.3s ease',
-                '&:hover': {
-                  transform: 'translateY(-5px)',
-                }
-              }}
-            >
-              <CardContent sx={{ padding: 3, textAlign: 'center' }}>
-                <Box sx={{ marginBottom: 2 }}>
-                  <WorkIcon sx={{ fontSize: 48, color: '#64b5f6' }} />
+            <Grid item xs={12} md={4} key={index}>
+              <Paper
+                elevation={2}
+                sx={{
+                  p: 4,
+                  borderRadius: 4,
+                  height: "100%",
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  textAlign: "center",
+                  bgcolor: "#fff",
+                  border: "1px solid #f0f0f0",
+                  transition: "all 0.3s ease",
+                  "&:hover": {
+                    transform: "translateY(-4px)",
+                    boxShadow: "0 8px 32px rgba(0,0,0,0.12)",
+                  },
+                }}
+              >
+                <Box
+                  sx={{
+                    width: 80,
+                    height: 80,
+                    borderRadius: "50%",
+                    bgcolor: "#f5f5f5",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    mb: 3,
+                  }}
+                >
+                  {exp.icon}
                 </Box>
                 <Typography
                   variant="h6"
-                  sx={{ fontWeight: 'bold', marginBottom: 1, color: '#64b5f6' }}
+                  sx={{ fontWeight: 600, color: "#171A20", mb: 1 }}
                 >
                   {exp.title}
                 </Typography>
                 <Typography
                   variant="h5"
-                  sx={{ fontWeight: 'bold', marginBottom: 2, color: '#ffffff' }}
+                  sx={{ fontWeight: 700, color: "#171A20", mb: 2 }}
                 >
                   {exp.years}
                 </Typography>
                 <Typography
                   variant="body2"
-                  sx={{ color: '#bbdefb', lineHeight: 1.6 }}
+                  color="text.secondary"
+                  sx={{ lineHeight: 1.6, flexGrow: 1 }}
                 >
                   {exp.description}
                 </Typography>
-              </CardContent>
-            </Card>
+              </Paper>
+            </Grid>
           ))}
-        </Box>
-      </Box>
+        </Grid>
 
-      {/* Credentials */}
-      <Box sx={{ padding: '0 2rem 3rem 2rem' }}>
+        {/* Credentials */}
         <Typography
           variant="h4"
-          component="h2"
           sx={{
-            fontWeight: 'bold',
-            marginBottom: 3,
-            textAlign: 'center',
-            color: '#ffffff'
+            fontWeight: 700,
+            color: "#171A20",
+            mb: 4,
+            textAlign: "center",
           }}
         >
           Credentials & Certifications
         </Typography>
-        <Box sx={{ textAlign: 'center', maxWidth: '800px', margin: '0 auto' }}>
-          <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1, justifyContent: 'center' }}>
+        <Box sx={{ textAlign: "center", mb: 6 }}>
+          <Box sx={{ display: "flex", flexWrap: "wrap", gap: 2, justifyContent: "center" }}>
             {credentials.map((credential, index) => (
               <Chip
                 key={index}
                 label={credential}
                 sx={{
-                  background: 'rgba(100, 181, 246, 0.2)',
-                  color: '#64b5f6',
-                  border: '1px solid rgba(100, 181, 246, 0.3)',
-                  fontWeight: 'bold',
-                  padding: '0.5rem',
-                  margin: '0.25rem'
+                  bgcolor: "#f5f5f5",
+                  color: "#171A20",
+                  border: "1px solid #e0e0e0",
+                  fontWeight: 600,
+                  py: 1,
+                  px: 2,
+                  fontSize: "0.9rem",
                 }}
               />
             ))}
           </Box>
         </Box>
-      </Box>
 
-      {/* Values */}
-      <Box sx={{ padding: '0 2rem 3rem 2rem' }}>
+        {/* Values */}
         <Typography
           variant="h4"
-          component="h2"
           sx={{
-            fontWeight: 'bold',
-            marginBottom: 3,
-            textAlign: 'center',
-            color: '#ffffff'
+            fontWeight: 700,
+            color: "#171A20",
+            mb: 4,
+            textAlign: "center",
           }}
         >
           Our Core Values
         </Typography>
-        <Box sx={{ 
-          display: 'flex', 
-          flexWrap: 'wrap', 
-          gap: 3, 
-          justifyContent: 'center',
-          maxWidth: '1200px',
-          margin: '0 auto'
-        }}>
+        <Grid container spacing={4} sx={{ mb: 6 }}>
           {values.map((value, index) => (
-            <Card
-              key={index}
-              className={styles.valueCard}
-              sx={{
-                background: 'rgba(255, 255, 255, 0.1)',
-                backdropFilter: 'blur(10px)',
-                border: '1px solid rgba(255, 255, 255, 0.2)',
-                boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3)',
-                color: '#ffffff',
-                flex: '1 1 300px',
-                maxWidth: '350px',
-                minWidth: '280px',
-                transition: 'transform 0.3s ease',
-                '&:hover': {
-                  transform: 'translateY(-5px)',
-                }
-              }}
-            >
-              <CardContent sx={{ padding: 3, textAlign: 'center' }}>
-                <Box sx={{ marginBottom: 2 }}>
+            <Grid item xs={12} md={4} key={index}>
+              <Paper
+                elevation={2}
+                sx={{
+                  p: 4,
+                  borderRadius: 4,
+                  height: "100%",
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  textAlign: "center",
+                  bgcolor: "#fff",
+                  border: "1px solid #f0f0f0",
+                  transition: "all 0.3s ease",
+                  "&:hover": {
+                    transform: "translateY(-4px)",
+                    boxShadow: "0 8px 32px rgba(0,0,0,0.12)",
+                  },
+                }}
+              >
+                <Box
+                  sx={{
+                    width: 80,
+                    height: 80,
+                    borderRadius: "50%",
+                    bgcolor: "#f5f5f5",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    mb: 3,
+                  }}
+                >
                   {value.icon}
                 </Box>
                 <Typography
                   variant="h5"
-                  sx={{ fontWeight: 'bold', marginBottom: 2, color: '#ffffff' }}
+                  sx={{ fontWeight: 600, color: "#171A20", mb: 2 }}
                 >
                   {value.title}
                 </Typography>
                 <Typography
                   variant="body1"
-                  sx={{ color: '#bbdefb', lineHeight: 1.6 }}
+                  color="text.secondary"
+                  sx={{ lineHeight: 1.6, flexGrow: 1 }}
                 >
                   {value.description}
                 </Typography>
-              </CardContent>
-            </Card>
+              </Paper>
+            </Grid>
           ))}
-        </Box>
-      </Box>
+        </Grid>
 
-      {/* Contact CTA */}
-      <Box sx={{ padding: '2rem', textAlign: 'center' }}>
-        <Card
+        {/* Contact CTA */}
+        <Box
           sx={{
-            background: 'rgba(100, 181, 246, 0.1)',
-            backdropFilter: 'blur(10px)',
-            border: '1px solid rgba(100, 181, 246, 0.2)',
-            boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3)',
-            color: '#ffffff',
-            maxWidth: '600px',
-            margin: '0 auto'
+            p: 6,
+            borderRadius: 4,
+            background: "linear-gradient(180deg, #f9f9f9 0%, #fff 100%)",
+            textAlign: "center",
+            border: "1px solid #e0e0e0",
           }}
         >
-          <CardContent sx={{ padding: 4 }}>
-            <Typography
-              variant="h5"
-              sx={{ fontWeight: 'bold', marginBottom: 2, color: '#ffffff' }}
-            >
-              Ready to Get Started?
-            </Typography>
-            <Typography
-              variant="body1"
-              sx={{ color: '#bbdefb', marginBottom: 2, lineHeight: 1.6 }}
-            >
-              Contact us today for a confidential consultation. We're here to help you uncover the truth 
-              with professionalism, discretion, and integrity.
-            </Typography>
-            <Typography
-              variant="h6"
-              sx={{ color: '#64b5f6', fontWeight: 'bold' }}
-            >
-              Available 24/7 for Emergency Cases
-            </Typography>
-          </CardContent>
-        </Card>
-      </Box>
-    </div>
+          <Typography
+            variant="h4"
+            sx={{
+              fontWeight: 700,
+              color: "#171A20",
+              mb: 2,
+            }}
+          >
+            Ready to Get Started?
+          </Typography>
+          <Typography
+            variant="body1"
+            color="text.secondary"
+            sx={{
+              mb: 4,
+              maxWidth: "600px",
+              mx: "auto",
+              lineHeight: 1.6,
+              fontSize: "1.1rem",
+            }}
+          >
+            Contact us today for a confidential consultation. We're here to help you uncover the truth 
+            with professionalism, discretion, and integrity.
+          </Typography>
+          <Typography
+            variant="h6"
+            sx={{
+              color: "#171A20",
+              fontWeight: 600,
+            }}
+          >
+            Available 24/7 for Emergency Cases
+          </Typography>
+        </Box>
+      </Container>
+    </Box>
   );
 };
 
