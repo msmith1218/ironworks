@@ -6,6 +6,7 @@ import {
   Grid,
   Paper,
   IconButton,
+  Button,
 } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import SearchIcon from '@mui/icons-material/Search';
@@ -20,6 +21,7 @@ import ComputerIcon from "@mui/icons-material/Computer";
 
 interface ServicesProps {
   onBack: () => void;
+  onContact: () => void;
 }
 
 const servicesData = [
@@ -70,7 +72,7 @@ const servicesData = [
   },
 ];
 
-const Services = ({ onBack }: ServicesProps): JSX.Element => {
+const Services = ({ onBack, onContact }: ServicesProps): JSX.Element => {
   // Scroll to top when component mounts
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -245,10 +247,29 @@ const Services = ({ onBack }: ServicesProps): JSX.Element => {
             sx={{
               color: "#171A20",
               fontWeight: 600,
+              mb: 4,
             }}
           >
             Contact us today for a confidential consultation
           </Typography>
+          <Button
+            variant="contained"
+            size="large"
+            onClick={onContact}
+            sx={{
+              bgcolor: "#171A20",
+              borderRadius: 2,
+              px: 4,
+              py: 1.5,
+              fontSize: "1rem",
+              fontWeight: 600,
+              "&:hover": {
+                bgcolor: "#2c2f36",
+              },
+            }}
+          >
+            Contact Us
+          </Button>
         </Box>
       </Container>
     </Box>

@@ -196,7 +196,7 @@ function App() {
     return (
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <Services onBack={handleBackToMain} />
+        <Services onBack={handleBackToMain} onContact={handleShowContact} />
       </ThemeProvider>
     );
   }
