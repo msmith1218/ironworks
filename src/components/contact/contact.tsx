@@ -172,7 +172,7 @@ function Contact({ onBack }: ContactProps) {
                 </Box>
                 <Box>
                   <Typography variant="h6" sx={{ fontWeight: 600, color: "#171A20" }}>
-                    Address
+                    Mailing Address
                   </Typography>
                   <Typography variant="body1" color="text.secondary" sx={{minWidth: "250px" }}>
                     P.O. Box 135<br />
