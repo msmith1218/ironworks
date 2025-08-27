@@ -11,11 +11,19 @@ import {
   Menu,
   MenuItem,
   CssBaseline,
+  Grid,
+  Paper,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
+import BusinessIcon from '@mui/icons-material/Business';
+import SecurityIcon from '@mui/icons-material/Security';
+import CameraAltIcon from "@mui/icons-material/CameraAlt";
+import SearchIcon from '@mui/icons-material/Search';
+import GavelIcon from "@mui/icons-material/Gavel";
+import AssignmentIcon from "@mui/icons-material/Assignment";
+import PersonSearchIcon from "@mui/icons-material/PersonSearch";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Contact from "./components/contact/contact";
-import Services from "./components/services/services";
 import About from "./components/about/about";
 
 const theme = createTheme({
@@ -41,9 +49,47 @@ const theme = createTheme({
   },
 });
 
-const navItems = ["Contact", "Services", "About"];
+const servicesData = [
+  {
+    title: "Corporate Investigations",
+    description: "Comprehensive background checks and due diligence investigations.",
+    icon: <BusinessIcon sx={{ fontSize: 40, color: "#2E7D32" }} />,
+  },
+  {
+    title: "Personal Security",
+    description: "Home security assessments, Infidelity cases",
+    icon: <SecurityIcon sx={{ fontSize: 40, color: "#D32F2F" }} />,
+  },
+  {
+    title: "Surveillance Services",
+    description: "Discrete surveillance operations, evidence gathering, and monitoring services with advanced technology.",
+    icon: <CameraAltIcon sx={{ fontSize: 40, color: "#7B1FA2" }} />,
+  },
+  {
+    title: "Asset Investigations",
+    description: "Asset searches, financial investigations",
+    icon: <SearchIcon sx={{ fontSize: 40, color: "#1976D2" }} />,
+  },
+  {
+    title: "Legal Support",
+    description: "Criminal case review, police procedure review",
+    icon: <GavelIcon sx={{ fontSize: 40, color: "#5D4037" }} />,
+  },
+  {
+    title: "Background Checks",
+    description: "Employment screening, certified public safety background reports",
+    icon: <AssignmentIcon sx={{ fontSize: 40, color: "#303F9F" }} />,
+  },
+  {
+    title: "3rd Party Internal Affairs/EEO Investigations",
+    description: "Who Should Investigate Police Misconduct? Can law enforcement objectively investigate itself? Under most circumstances, 'Yes'. But there comes a time when the answer is a resounding 'No'. Too many potential conflicts of interest… Independent EEO investigations for small businesses.",
+    icon: <PersonSearchIcon sx={{ fontSize: 40, color: "#FF9800" }} />,
+  },
+];
 
-function Header({ setShowContact, setShowServices, setShowAbout }: { setShowContact: () => void, setShowServices: () => void, setShowAbout: () => void }) {
+const navItems = ["Contact", "About"];
+
+function Header({ setShowContact, setShowAbout }: { setShowContact: () => void, setShowAbout: () => void }) {
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const handleMenuClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -56,9 +102,6 @@ function Header({ setShowContact, setShowServices, setShowAbout }: { setShowCont
     switch (item) {
       case "Contact":
         setShowContact();
-        break;
-      case "Services":
-        setShowServices();
         break;
       case "About":
         setShowAbout();
@@ -99,7 +142,7 @@ function Header({ setShowContact, setShowServices, setShowAbout }: { setShowCont
   );
 }
 
-function HeroSection({ onOrderNow, onOurServices }: { onOrderNow: () => void; onOurServices: () => void }) {
+function HeroSection({ onOrderNow }: { onOrderNow: () => void }) {
   return (
     <Box
       sx={{
@@ -123,10 +166,7 @@ function HeroSection({ onOrderNow, onOurServices }: { onOrderNow: () => void; on
       <Typography variant="h2" color="primary">
         Private Investigative Services
       </Typography>
-      <Typography variant="h5" color="primary" sx={{ mt: 2, mb: 4 }}>
-        Integrity. Professionalism. Discretion.
-      </Typography>
-      <Box sx={{ display: "flex", gap: 2, justifyContent: "center", paddingBottom: "2em" }}>
+      <Box sx={{ display: "flex", gap: 2, justifyContent: "center", paddingBottom: "2em", marginTop: "2em" }}>
         <Button 
           variant="contained" 
           color="primary" 
@@ -136,10 +176,42 @@ function HeroSection({ onOrderNow, onOurServices }: { onOrderNow: () => void; on
         >
           Contact Us
         </Button>
-        <Button onClick={onOurServices} variant="outlined" color="primary" size="large" sx={{ borderRadius: 8 }}>
-          Our Services
-        </Button>
       </Box>
+      <Container maxWidth="md" sx={{ mt: 4, mb: 4, px: { xs: 3, sm: 4 } }}>
+        <Paper
+          elevation={1}
+          sx={{
+            p: { xs: 3, sm: 4 },
+            borderRadius: 3,
+            background: "linear-gradient(180deg, #f9f9f9 0%, #fff 100%)",
+            border: "1px solid #e0e0e0",
+          }}
+        >
+          <Typography 
+            variant="body1" 
+            sx={{ 
+              color: "#555",
+              lineHeight: 1.7,
+              fontSize: { xs: "1rem", sm: "1.1rem" },
+              textAlign: "center",
+              mb: 2
+            }}
+          >
+            At Ironworks Investigations, our team brings years of proven expertise from a law enforcement background. We don't just investigate – we dig deep, uncovering the truth with precision and professionalism.
+          </Typography>
+          <Typography 
+            variant="body1" 
+            sx={{ 
+              color: "#555",
+              lineHeight: 1.7,
+              fontSize: { xs: "1rem", sm: "1.1rem" },
+              textAlign: "center"
+            }}
+          >
+            From straightforward fact-finding to advanced, highly technical cases, we tailor our approach to your unique needs. Whether you need a fresh investigation or a second look at a previously closed matter, we're ready to deliver results you can trust.
+          </Typography>
+        </Paper>
+      </Container>
     </Box>
   );
 }
@@ -158,7 +230,6 @@ function Footer() {
 
 function App() {
   const [showContact, setShowContact] = useState(false);
-  const [showServices, setShowServices] = useState(false);
   const [showAbout, setShowAbout] = useState(false);
 
   const handleOrderNow = () => {
@@ -169,17 +240,12 @@ function App() {
     setShowContact(true);
   }
 
-  const handleShowServices = () => {
-    setShowServices(true);
-  }
-
   const handleShowAbout = () => {
     setShowAbout(true);
   }
 
   const handleBackToMain = () => {
     setShowContact(false);
-    setShowServices(false);
     setShowAbout(false);
   };
 
@@ -188,15 +254,6 @@ function App() {
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <Contact onBack={handleBackToMain} />
-      </ThemeProvider>
-    );
-  }
-
-  if (showServices) {
-    return (
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <Services onBack={handleBackToMain} onContact={handleShowContact} />
       </ThemeProvider>
     );
   }
@@ -213,30 +270,81 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Header setShowContact={handleShowContact} setShowServices={handleShowServices} setShowAbout={handleShowAbout} />
-      <HeroSection onOrderNow={handleOrderNow} onOurServices={handleShowServices}/>
+      <Header setShowContact={handleShowContact} setShowAbout={handleShowAbout} />
+      <HeroSection onOrderNow={handleOrderNow} />
       <Container maxWidth="lg" sx={{ paddingTop: "1em" }}>
-        {/* Placeholder for additional sections (About, Services, etc.) */}
-        <Typography color="secondary" variant="h4" sx={{ mb: 2, fontWeight: 700 }}>
+        {/* Services Section */}
+        <Typography color="secondary" variant="h4" sx={{ mb: 2, fontWeight: 700, textAlign: "center" }}>
           Discover Our Services
         </Typography>
-        <Typography  variant="body1" color="secondary" sx={{ mb: 4 }}>
-          Comprehensive solutions for corporate, legal, and personal investigation needs
-        </Typography>
-        <Box sx={{ display: "flex", flexWrap: "wrap", gap: 4, justifyContent: "center" }}>
-          <Box sx={{ width: 280, bgcolor: "white", boxShadow: 2, borderRadius: 4, p: 3 }}>
-            <Typography variant="h6" sx={{ fontWeight: 600, color: "#171A20" }}>Corporate</Typography>
-            <Typography variant="body2" color="text.secondary">Comprehensive background checks and due diligence investigations.</Typography>
-          </Box>
-          <Box sx={{ width: 280, bgcolor: "white", boxShadow: 2, borderRadius: 4, p: 3 }}>
-            <Typography variant="h6" sx={{ fontWeight: 600, color: "#171A20" }}>Personal</Typography>
-            <Typography variant="body2" color="text.secondary">Personal protection services, threat assessment.</Typography>
-          </Box>
-          <Box sx={{ width: 280, bgcolor: "white", boxShadow: 2, borderRadius: 4, p: 3 }}>
-            <Typography variant="h6" sx={{ fontWeight: 600, color: "#171A20" }}>Surveillance</Typography>
-            <Typography variant="body2" color="text.secondary">Discrete surveillance operations, evidence gathering, and monitoring.</Typography>
-          </Box>
-        </Box>
+        <Grid container spacing={4} sx={{ mb: 6 }}>
+          {servicesData.map((service, index) => (
+            <Grid item xs={12} sm={6} md={4} key={index}>
+              <Paper
+                elevation={2}
+                sx={{
+                  p: 4,
+                  borderRadius: 4,
+                  height: "100%",
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  textAlign: "center",
+                  bgcolor: "#fff",
+                  border: "1px solid #f0f0f0",
+                  transition: "all 0.3s ease",
+                  "&:hover": {
+                    transform: "translateY(-4px)",
+                    boxShadow: "0 8px 32px rgba(0,0,0,0.12)",
+                  },
+                }}
+              >
+                {/* Icon */}
+                <Box
+                  sx={{
+                    width: 80,
+                    height: 80,
+                    borderRadius: "50%",
+                    bgcolor: "#f5f5f5",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    mb: 3,
+                  }}
+                >
+                  {service.icon}
+                </Box>
+
+                {/* Title */}
+                <Typography
+                  variant="h6"
+                  sx={{
+                    fontWeight: 600,
+                    color: "#171A20",
+                    mb: 2,
+                    minHeight: "3rem",
+                    display: "flex",
+                    alignItems: "center",
+                  }}
+                >
+                  {service.title}
+                </Typography>
+
+                {/* Description */}
+                <Typography
+                  variant="body2"
+                  color="text.secondary"
+                  sx={{
+                    lineHeight: 1.6,
+                    flexGrow: 1,
+                  }}
+                >
+                  {service.description}
+                </Typography>
+              </Paper>
+            </Grid>
+          ))}
+        </Grid>
       </Container>
       <Footer />
     </ThemeProvider>

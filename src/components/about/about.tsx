@@ -11,11 +11,8 @@ import {
 } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import SchoolIcon from '@mui/icons-material/School';
-import WorkIcon from '@mui/icons-material/Work';
 import VerifiedUserIcon from '@mui/icons-material/VerifiedUser';
 import StarIcon from '@mui/icons-material/Star';
-import SecurityIcon from '@mui/icons-material/Security';
-import BadgeIcon from '@mui/icons-material/Badge';
 
 interface AboutProps {
   onBack: () => void;
@@ -28,34 +25,12 @@ const About = ({ onBack, onContact }: AboutProps): JSX.Element => {
     useEffect(() => {
       window.scrollTo(0, 0);
     }, []);
+    
   const credentials = [
     "Licensed Private Investigator",
     "Former Law Enforcement",
-    "Certified Fraud Examiner",
     "Background Screening Specialist",
-    "Court Testimony Expert",
-    "Digital Forensics Certified"
-  ];
-
-  const experience = [
-    {
-      title: "Law Enforcement Background",
-      years: "15+ Years",
-      description: "Extensive experience in criminal investigations, surveillance operations, and evidence collection with local and federal law enforcement agencies.",
-      icon: <BadgeIcon sx={{ fontSize: 40, color: "#1565C0" }} /> // Blue for law enforcement/authority
-    },
-    {
-      title: "Private Investigation",
-      years: "10+ Years",
-      description: "Specialized expertise in corporate investigations, background checks, and domestic relations cases with a proven track record of successful outcomes.",
-      icon: <WorkIcon sx={{ fontSize: 40, color: "#E65100" }} /> // Orange for professional work/career
-    },
-    {
-      title: "Corporate Security",
-      years: "8+ Years",
-      description: "Comprehensive experience in corporate fraud detection, internal investigations, and risk assessment for Fortune 500 companies.",
-      icon: <SecurityIcon sx={{ fontSize: 40, color: "#C62828" }} /> // Red for security/protection
-    }
+    "Court Testimony Expert"
   ];
 
   const values = [
@@ -156,7 +131,7 @@ const About = ({ onBack, onContact }: AboutProps): JSX.Element => {
               textAlign: "center",
             }}
           >
-            Our Story
+            About Me
           </Typography>
           <Typography
             variant="body1"
@@ -167,9 +142,7 @@ const About = ({ onBack, onContact }: AboutProps): JSX.Element => {
               fontSize: "1.1rem",
             }}
           >
-            Ironworks Investigations was established with a clear mission: to provide uncompromising 
-            investigative services built on a foundation of integrity and expertise. Our name reflects 
-            our commitment to strength, reliability, and the solid foundation of trust we build with every client.
+            I am a retired Police Sergeant with nearly 30 years of dedicated service in law enforcement. Throughout my career, I focused on public safety, community engagement, and creating innovative programs that built stronger relationships and trust between law enforcement and the community. Above all, I have always been committed to ensuring people are treated with fairness, respect, and given the opportunity to be heard.
           </Typography>
           <Typography
             variant="body1"
@@ -180,9 +153,18 @@ const About = ({ onBack, onContact }: AboutProps): JSX.Element => {
               fontSize: "1.1rem",
             }}
           >
-            Led by experienced investigators with extensive backgrounds in law enforcement and corporate security, 
-            we understand the sensitive nature of investigative work and the importance of discretion, accuracy, 
-            and ethical conduct in every case we handle.
+            My experience spans from frontline patrol – responding to countless emergencies – to serving as a detective investigating crimes against persons, including sex crimes, child abuse, domestic violence, assaults, homicides, and death investigations.
+          </Typography>
+          <Typography
+            variant="body1"
+            sx={{
+              color: "#666",
+              lineHeight: 1.8,
+              mb: 3,
+              fontSize: "1.1rem",
+            }}
+          >
+            As a Sergeant, I oversaw patrol operations, jail management, and multiple specialty programs such as the Peer Support/Trauma Support Team and SWAT Crisis Negotiations. I also led the Professional Standards Unit, where I supervised internal affairs investigations, reviewed all use-of-force incidents and citizen complaints, directed recruitment and background investigations, and coordinated department-wide training.
           </Typography>
           <Typography
             variant="body1"
@@ -192,83 +174,25 @@ const About = ({ onBack, onContact }: AboutProps): JSX.Element => {
               fontSize: "1.1rem",
             }}
           >
-            Whether you're an individual seeking peace of mind, a business protecting its interests, or an 
-            attorney building a case, Ironworks Investigations has the experience, resources, and dedication 
-            to deliver the truth you need.
+            This breadth of experience allows me to bring a unique blend of investigative skill, leadership, and integrity to every case I take on with Ironworks Investigations.
           </Typography>
+          <Box sx={{ textAlign: "center", mt: 4 }}>
+            <img
+              src={`${import.meta.env.BASE_URL}about-picture.jpg`}
+              alt="Img Placeholder"
+              style={{  
+                width: "100%",
+                maxWidth: "700px", 
+                height: "auto",
+                maxHeight: "50vh", 
+                borderRadius: 16,
+                objectFit: "cover"
+              }}
+            />
+          </Box>
         </Paper>
 
-        {/* Experience Section */}
-        <Typography
-          variant="h4"
-          sx={{
-            fontWeight: 700,
-            color: "#171A20",
-            mb: 4,
-            textAlign: "center",
-          }}
-        >
-          Our Experience
-        </Typography>
-        <Grid container spacing={4} sx={{ mb: 6 }}>
-          {experience.map((exp, index) => (
-            <Grid item xs={12} md={4} key={index}>
-              <Paper
-                elevation={2}
-                sx={{
-                  p: 4,
-                  borderRadius: 4,
-                  height: "100%",
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                  textAlign: "center",
-                  bgcolor: "#fff",
-                  border: "1px solid #f0f0f0",
-                  transition: "all 0.3s ease",
-                  "&:hover": {
-                    transform: "translateY(-4px)",
-                    boxShadow: "0 8px 32px rgba(0,0,0,0.12)",
-                  },
-                }}
-              >
-                <Box
-                  sx={{
-                    width: 80,
-                    height: 80,
-                    borderRadius: "50%",
-                    bgcolor: "#f5f5f5",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    mb: 3,
-                  }}
-                >
-                  {exp.icon}
-                </Box>
-                <Typography
-                  variant="h6"
-                  sx={{ fontWeight: 600, color: "#171A20", mb: 1 }}
-                >
-                  {exp.title}
-                </Typography>
-                <Typography
-                  variant="h5"
-                  sx={{ fontWeight: 700, color: "#171A20", mb: 2 }}
-                >
-                  {exp.years}
-                </Typography>
-                <Typography
-                  variant="body2"
-                  color="text.secondary"
-                  sx={{ lineHeight: 1.6, flexGrow: 1 }}
-                >
-                  {exp.description}
-                </Typography>
-              </Paper>
-            </Grid>
-          ))}
-        </Grid>
+              
 
         {/* Credentials */}
         <Typography
@@ -401,16 +325,6 @@ const About = ({ onBack, onContact }: AboutProps): JSX.Element => {
           >
             Contact us today for a confidential consultation. We're here to help you uncover the truth 
             with professionalism, discretion, and integrity.
-          </Typography>
-          <Typography
-            variant="h6"
-            sx={{
-              color: "#171A20",
-              fontWeight: 600,
-              mb: 4,
-            }}
-          >
-            Available 24/7 for Emergency Cases
           </Typography>
           <Button
             variant="contained"
