@@ -115,7 +115,7 @@ const About = ({ onBack, onContact }: AboutProps): JSX.Element => {
         <Paper
           elevation={2}
           sx={{
-            p: 6,
+            p: "1em",
             borderRadius: 4,
             background: "linear-gradient(180deg, #f9f9f9 0%, #fff 100%)",
             mb: 6,
