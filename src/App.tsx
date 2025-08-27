@@ -345,6 +345,19 @@ function App() {
             </Grid>
           ))}
         </Grid>
+        
+        {/* Bottom Contact Us Button */}
+        <Box sx={{ textAlign: "center", mt: 6, mb: 4 }}>
+          <Button 
+            variant="contained" 
+            color="primary" 
+            size="large" 
+            sx={{ borderRadius: 8 }}
+            onClick={handleOrderNow}
+          >
+            Contact Us
+          </Button>
+        </Box>
       </Container>
       <Footer />
     </ThemeProvider>
