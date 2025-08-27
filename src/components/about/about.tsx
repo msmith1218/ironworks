@@ -140,6 +140,7 @@ const About = ({ onBack, onContact }: AboutProps): JSX.Element => {
               lineHeight: 1.8,
               mb: 3,
               fontSize: "1.1rem",
+              textIndent: "2rem",
             }}
           >
             I am a retired Police Sergeant with nearly 30 years of dedicated service in law enforcement. Throughout my career, I focused on public safety, community engagement, and creating innovative programs that built stronger relationships and trust between law enforcement and the community. Above all, I have always been committed to ensuring people are treated with fairness, respect, and given the opportunity to be heard.
@@ -151,6 +152,7 @@ const About = ({ onBack, onContact }: AboutProps): JSX.Element => {
               lineHeight: 1.8,
               mb: 3,
               fontSize: "1.1rem",
+              textIndent: "2rem",
             }}
           >
             My experience spans from frontline patrol – responding to countless emergencies – to serving as a detective investigating crimes against persons, including sex crimes, child abuse, domestic violence, assaults, homicides, and death investigations.
@@ -162,6 +164,7 @@ const About = ({ onBack, onContact }: AboutProps): JSX.Element => {
               lineHeight: 1.8,
               mb: 3,
               fontSize: "1.1rem",
+              textIndent: "2rem",
             }}
           >
             As a Sergeant, I oversaw patrol operations, jail management, and multiple specialty programs such as the Peer Support/Trauma Support Team and SWAT Crisis Negotiations. I also led the Professional Standards Unit, where I supervised internal affairs investigations, reviewed all use-of-force incidents and citizen complaints, directed recruitment and background investigations, and coordinated department-wide training.
@@ -172,6 +175,7 @@ const About = ({ onBack, onContact }: AboutProps): JSX.Element => {
               color: "#666",
               lineHeight: 1.8,
               fontSize: "1.1rem",
+              textIndent: "2rem",
             }}
           >
             This breadth of experience allows me to bring a unique blend of investigative skill, leadership, and integrity to every case I take on with Ironworks Investigations.
