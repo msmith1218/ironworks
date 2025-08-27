@@ -9,6 +9,7 @@ import {
   Link,
 } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import EmailIcon from "@mui/icons-material/Email";
 import PhoneIcon from "@mui/icons-material/Phone";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 
@@ -91,6 +92,44 @@ function Contact({ onBack }: ContactProps) {
                     mr: 3,
                   }}
                 >
+                  <EmailIcon sx={{ color: "#171A20" }} />
+                </Box>
+                <Box>
+                  <Typography variant="h6" sx={{ fontWeight: 600, color: "#171A20" }}>
+                    Email
+                  </Typography>
+                  <Link 
+                    href="mailto:info@ironworksinvestigations.com"
+                    sx={{ 
+                      textDecoration: "none",
+                      color: "text.secondary",
+                      "&:hover": {
+                        textDecoration: "underline",
+                        color: "#171A20",
+                      },
+                      cursor: "pointer"
+                    }}
+                  >
+                    <Typography variant="body1" sx={{ minWidth: "250px" }}>
+                      info@ironworksinvestigations.com
+                    </Typography>
+                  </Link>
+                </Box>
+              </Box>
+
+              <Box sx={{ display: "flex", alignItems: "center", mb: 3, justifyContent: "center" }}>
+                <Box
+                  sx={{
+                    width: 50,
+                    height: 50,
+                    borderRadius: "50%",
+                    bgcolor: "#f5f5f5",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    mr: 3,
+                  }}
+                >
                   <PhoneIcon sx={{ color: "#171A20" }} />
                 </Box>
                 <Box>
@@ -109,7 +148,7 @@ function Contact({ onBack }: ContactProps) {
                       cursor: "pointer"
                     }}
                   >
-                    <Typography variant="body1" sx={{ minWidth: "150px" }}>
+                    <Typography variant="body1" sx={{ minWidth: "250px" }}>
                       385-283-1222
                     </Typography>
                   </Link>
@@ -135,7 +174,7 @@ function Contact({ onBack }: ContactProps) {
                   <Typography variant="h6" sx={{ fontWeight: 600, color: "#171A20" }}>
                     Address
                   </Typography>
-                  <Typography variant="body1" color="text.secondary" sx={{minWidth: "150px" }}>
+                  <Typography variant="body1" color="text.secondary" sx={{minWidth: "250px" }}>
                     P.O. Box 135<br />
                     Springville, UT 84663
                   </Typography>
