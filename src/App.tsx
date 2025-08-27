@@ -51,17 +51,17 @@ const theme = createTheme({
 
 const servicesData = [
   {
-    title: "Corporate Investigations",
+    title: "Corporate",
     description: "Comprehensive background checks and due diligence investigations.",
     icon: <BusinessIcon sx={{ fontSize: 40, color: "#2E7D32" }} />,
   },
   {
-    title: "Personal Security",
+    title: "Personal",
     description: "Home security assessments, Infidelity cases",
     icon: <SecurityIcon sx={{ fontSize: 40, color: "#D32F2F" }} />,
   },
   {
-    title: "Surveillance Services",
+    title: "Surveillance",
     description: "Discrete surveillance operations, evidence gathering, and monitoring services with advanced technology.",
     icon: <CameraAltIcon sx={{ fontSize: 40, color: "#7B1FA2" }} />,
   },
