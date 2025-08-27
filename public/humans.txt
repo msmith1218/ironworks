@@ -1,0 +1,21 @@
+# humanstxt.org
+
+/* TEAM */
+Founder & Lead Investigator: Retired Police Sergeant
+Contact: info@ironworksinvestigations.com
+Location: Springville, Utah, USA
+
+/* SITE */
+Last update: 2025/08/27
+Language: English
+Standards: HTML5, CSS3, ES6
+Components: React, Material-UI, TypeScript
+Software: VS Code, Vite
+
+/* SERVICES */
+Private Investigation Services
+Corporate Investigations  
+Background Checks
+Surveillance Operations
+Legal Support
+Asset Investigations

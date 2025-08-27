@@ -24,6 +24,60 @@ const About = ({ onBack, onContact }: AboutProps): JSX.Element => {
   // Scroll to top when component mounts
     useEffect(() => {
       window.scrollTo(0, 0);
+      
+      // Add page-specific SEO meta tags
+      document.title = "About Us - Ironworks Investigations | Retired Police Sergeant";
+      const metaDescription = document.querySelector('meta[name="description"]');
+      if (metaDescription) {
+        metaDescription.setAttribute('content', 'Meet our retired Police Sergeant with nearly 30 years law enforcement experience. Licensed private investigator specializing in corporate investigations, surveillance, and legal support in Utah.');
+      }
+      
+      // Add structured data for AboutPage and Person
+      const aboutPageData = {
+        "@context": "https://schema.org",
+        "@type": "AboutPage",
+        "name": "About Ironworks Investigations",
+        "description": "Learn about our experienced team and professional private investigation services",
+        "url": "https://msmith1218.github.io/ironworks/#about",
+        "mainEntity": {
+          "@type": "Person",
+          "name": "Retired Police Sergeant",
+          "description": "Retired Police Sergeant with nearly 30 years of dedicated service in law enforcement",
+          "jobTitle": "Private Investigator",
+          "worksFor": {
+            "@type": "Organization",
+            "name": "Ironworks Investigations"
+          },
+          "hasCredential": [
+            "Licensed Private Investigator",
+            "Former Law Enforcement",
+            "Background Screening Specialist",
+            "Court Testimony Expert"
+          ],
+          "knowsAbout": [
+            "Criminal Investigation",
+            "Corporate Security",
+            "Background Checks", 
+            "Surveillance Operations",
+            "Legal Support",
+            "Asset Investigation"
+          ]
+        }
+      };
+      
+      const script = document.createElement('script');
+      script.type = 'application/ld+json';
+      script.textContent = JSON.stringify(aboutPageData);
+      document.head.appendChild(script);
+      
+      return () => {
+        // Cleanup: restore original title and meta description
+        document.title = "Ironworks Investigations - Professional Private Investigation Services";
+        if (metaDescription) {
+          metaDescription.setAttribute('content', 'Licensed private investigator with 30 years law enforcement experience. Corporate investigations, background checks, surveillance, legal support, and asset investigations in Utah.');
+        }
+        document.head.removeChild(script);
+      };
     }, []);
     
   const credentials = [

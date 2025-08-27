@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   AppBar,
   Toolbar,
@@ -226,6 +226,182 @@ function Footer() {
   );
 }
 
+// SEO Structured Data Component
+function StructuredData() {
+  useEffect(() => {
+    // Business structured data
+    const businessData = {
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      "name": "Ironworks Investigations",
+      "description": "Licensed private investigator with 30 years law enforcement experience providing corporate investigations, background checks, surveillance, legal support, and asset investigations.",
+      "url": "https://msmith1218.github.io/ironworks/",
+      "telephone": "+1-385-283-1222",
+      "email": "info@ironworksinvestigations.com",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "P.O. Box 135",
+        "addressLocality": "Springville",
+        "addressRegion": "UT",
+        "postalCode": "84663",
+        "addressCountry": "US"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": "40.1652",
+        "longitude": "-111.6108"
+      },
+      "serviceArea": {
+        "@type": "State",
+        "name": "Utah"
+      },
+      "priceRange": "$$",
+      "paymentAccepted": ["Cash", "Credit Card", "Check"],
+      "currenciesAccepted": "USD",
+      "openingHours": "Mo-Fr 09:00-17:00",
+      "founder": {
+        "@type": "Person",
+        "name": "Retired Police Sergeant",
+        "description": "Retired Police Sergeant with nearly 30 years of dedicated service in law enforcement"
+      },
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Investigation Services",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Corporate Investigations",
+              "description": "Comprehensive background checks and due diligence investigations"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Personal Investigations",
+              "description": "Home security assessments, Infidelity cases"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Surveillance",
+              "description": "Discrete surveillance operations, evidence gathering, and monitoring services"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Asset Investigations",
+              "description": "Asset searches, financial investigations"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Legal Support",
+              "description": "Criminal case review, police procedure review"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Background Checks",
+              "description": "Employment screening, certified public safety background reports"
+            }
+          }
+        ]
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "5.0",
+        "reviewCount": "1"
+      }
+    };
+
+    // Local business structured data
+    const localBusinessData = {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "Ironworks Investigations",
+      "image": "https://msmith1218.github.io/ironworks/IMG_2688.png",
+      "telephone": "+1-385-283-1222",
+      "email": "info@ironworksinvestigations.com",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "P.O. Box 135",
+        "addressLocality": "Springville",
+        "addressRegion": "UT",
+        "postalCode": "84663",
+        "addressCountry": "US"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": "40.1652",
+        "longitude": "-111.6108"
+      },
+      "url": "https://msmith1218.github.io/ironworks/",
+      "priceRange": "$$",
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+          "Monday",
+          "Tuesday", 
+          "Wednesday",
+          "Thursday",
+          "Friday"
+        ],
+        "opens": "09:00",
+        "closes": "17:00"
+      }
+    };
+
+    // WebSite structured data
+    const websiteData = {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Ironworks Investigations",
+      "url": "https://msmith1218.github.io/ironworks/",
+      "description": "Professional private investigation services in Utah",
+      "publisher": {
+        "@type": "Organization",
+        "name": "Ironworks Investigations"
+      }
+    };
+
+    // Create and append structured data scripts
+    const script1 = document.createElement('script');
+    script1.type = 'application/ld+json';
+    script1.textContent = JSON.stringify(businessData);
+    document.head.appendChild(script1);
+
+    const script2 = document.createElement('script');
+    script2.type = 'application/ld+json';
+    script2.textContent = JSON.stringify(localBusinessData);
+    document.head.appendChild(script2);
+
+    const script3 = document.createElement('script');
+    script3.type = 'application/ld+json';
+    script3.textContent = JSON.stringify(websiteData);
+    document.head.appendChild(script3);
+
+    // Cleanup function to remove scripts when component unmounts
+    return () => {
+      document.head.removeChild(script1);
+      document.head.removeChild(script2);
+      document.head.removeChild(script3);
+    };
+  }, []);
+
+  return null;
+}
+
 
 
 function App() {
@@ -270,6 +446,7 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
+      <StructuredData />
       <Header setShowContact={handleShowContact} setShowAbout={handleShowAbout} />
       <HeroSection onOrderNow={handleOrderNow} />
       <Container maxWidth="lg" sx={{ paddingTop: "1em" }}>

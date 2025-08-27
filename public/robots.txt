@@ -1,0 +1,12 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://msmith1218.github.io/ironworks/sitemap.xml
+
+# Block access to source files
+Disallow: /src/
+Disallow: /*.ts
+Disallow: /*.tsx
+Disallow: /*.js.map
+Disallow: /*.css.map

@@ -21,6 +21,50 @@ function Contact({ onBack }: ContactProps) {
   // Scroll to top when component mounts
     useEffect(() => {
       window.scrollTo(0, 0);
+      
+      // Add page-specific SEO meta tags
+      document.title = "Contact Us - Ironworks Investigations";
+      const metaDescription = document.querySelector('meta[name="description"]');
+      if (metaDescription) {
+        metaDescription.setAttribute('content', 'Contact Ironworks Investigations for professional private investigation services. Licensed investigator with 30 years law enforcement experience. Call 385-283-1222 or email info@ironworksinvestigations.com');
+      }
+      
+      // Add structured data for ContactPage
+      const contactPageData = {
+        "@context": "https://schema.org",
+        "@type": "ContactPage",
+        "name": "Contact Ironworks Investigations",
+        "description": "Contact information for Ironworks Investigations private investigation services",
+        "url": "https://msmith1218.github.io/ironworks/#contact",
+        "mainEntity": {
+          "@type": "ProfessionalService",
+          "name": "Ironworks Investigations",
+          "telephone": "+1-385-283-1222",
+          "email": "info@ironworksinvestigations.com",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "P.O. Box 135",
+            "addressLocality": "Springville",
+            "addressRegion": "UT",
+            "postalCode": "84663",
+            "addressCountry": "US"
+          }
+        }
+      };
+      
+      const script = document.createElement('script');
+      script.type = 'application/ld+json';
+      script.textContent = JSON.stringify(contactPageData);
+      document.head.appendChild(script);
+      
+      return () => {
+        // Cleanup: restore original title and meta description
+        document.title = "Ironworks Investigations - Professional Private Investigation Services";
+        if (metaDescription) {
+          metaDescription.setAttribute('content', 'Licensed private investigator with 30 years law enforcement experience. Corporate investigations, background checks, surveillance, legal support, and asset investigations in Utah.');
+        }
+        document.head.removeChild(script);
+      };
     }, []);
 
   return (
